@@ -1,0 +1,2 @@
+AgendaDTO:
+  $ref: "agendaDTO.yaml"

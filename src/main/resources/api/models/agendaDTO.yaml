@@ -1,0 +1,34 @@
+description: This is the DTO for the agenda
+type: object
+properties:
+  id:
+    type: integer
+    format: int64
+  name:
+    type: string
+  user:
+    type: object
+    $ref: "./light/userLightDTO.yaml"
+  team:
+    type: object
+    $ref: './light/teamLightDTO.yaml'
+  events:
+    type: array
+    items:
+      $ref: './light/eventLightDTO.yaml'
+  schedules:
+    type: array
+    items:
+      $ref: './light/scheduleLightDTO.yaml'
+  sharedEvents:
+    type: array
+    items:
+      $ref: './light/eventLightDTO.yaml'
+  sharedUsers:
+    type: array
+    items:
+      $ref: './light/userLightDTO.yaml'
+  sharedTeams:
+    type: array
+    items:
+      $ref: './light/teamLightDTO.yaml'
