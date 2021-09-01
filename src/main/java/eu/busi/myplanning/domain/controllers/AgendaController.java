@@ -3,15 +3,12 @@ package eu.busi.myplanning.domain.controllers;
 import eu.busi.myplanning.api.AgendaApi;
 import eu.busi.myplanning.domain.services.impl.AgendaServiceImpl;
 import eu.busi.myplanning.models.AgendaDTO;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
 public class AgendaController implements AgendaApi {
     private final AgendaServiceImpl agendaService;
 
@@ -20,22 +17,22 @@ public class AgendaController implements AgendaApi {
     }
 
     @Override
-    public ResponseEntity<Boolean> delete(Long id) {
+    public ResponseEntity<Boolean> deleteAgenda(Long id) {
         return null;
     }
 
     @Override
-    public ResponseEntity<List<AgendaDTO>> find() {
-        return new ResponseEntity<>(this.agendaService.findAll(), HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity<AgendaDTO> findById(Long id) {
+    public ResponseEntity<AgendaDTO> findAgenda(Long id) {
         return null;
     }
 
     @Override
-    public ResponseEntity<List<AgendaDTO>> findByUser(Long id) {
+    public ResponseEntity<List<AgendaDTO>> findAgendas() {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<List<AgendaDTO>> findAgendasByUser(Long id) {
         return null;
     }
 
@@ -45,7 +42,7 @@ public class AgendaController implements AgendaApi {
     }
 
     @Override
-    public ResponseEntity<AgendaDTO> save(AgendaDTO body) {
+    public ResponseEntity<AgendaDTO> saveAgenda(AgendaDTO body) {
         return null;
     }
 }

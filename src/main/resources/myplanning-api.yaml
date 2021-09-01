@@ -1,192 +1,1629 @@
-openapi: 3.0.3
+openapi: 3.0.1
 
 info:
-  title: MyPlanning API
-  description: Voiçi l'API pour l'application MyPlanning
-  version: 1.0.0
+  title: MyPlanning
+  version: 0.0.1
 
 servers:
-  - url: https://localhost:8081/
-    description: where you can use the api
+  - url: http://localhost:8081
+    description: Generated server url
 
 tags:
-  - name: "Agenda API"
   - name: "Auth API"
+  - name: "Agenda API"
+  - name: "User API"
+  - name: "Team API"
+  - name: "Schedule API"
+  - name: "Role API"
+  - name: "Event API"
+  - name: "Comment API"
+  - name: "Card API"
+  - name: "Authority API"
 
 paths:
-
-  /agenda:
+  /user/{id}:
     get:
       tags:
-        - "Agenda API"
-      summary: Get all agendas
-      description: This returns all the agendas
-      operationId: find
+        - "User API"
+      operationId: findUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
-          description: returned a value
+          description: OK
           content:
-            application/json:
+            '*/*':
               schema:
-                type: array
-                items:
-                  $ref: "./api/models/agendaDTO.yaml"
-        "400":
-          description: BAD_REQUEST
-        "401":
-          description: UNAUTHORIZE
-    post:
+                $ref: '#/components/schemas/UserDTO'
+    put:
       tags:
-        - "Agenda API"
-      summary: Create an agenda
-      description: This returns the created agenda
-      operationId: save
+        - "User API"
+      operationId: updateUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "./api/models/agendaDTO.yaml"
+              $ref: '#/components/schemas/UserDTO'
+        required: true
       responses:
         "200":
-          description: returned a value
+          description: OK
           content:
-            application/json:
+            '*/*':
               schema:
-                $ref: "./api/models/agendaDTO.yaml"
-        "400":
-          description: BAD_REQUEST
-        "401":
-          description: UNAUTHORIZE
-
-  /agenda/{id}:
-    get:
-      tags:
-        - "Agenda API"
-      summary: Get agenda
-      description: This returns an agenda from an id
-      operationId: findById
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-            format: int64
-          required: true
-          description: Numeric ID of the user to get
-      responses:
-        "200":
-          description: returned a value
-          content:
-            application/json:
-              schema:
-                $ref: "./api/models/agendaDTO.yaml"
-        "400":
-          description: BAD_REQUEST
-        "401":
-          description: UNAUTHORIZE
+                $ref: '#/components/schemas/UserDTO'
     delete:
       tags:
-        - "Agenda API"
-      summary: Delete an agenda
-      description: This returns true or false if the agenda has been deleted
-      operationId: delete
+        - "User API"
+      operationId: deleteUser
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
+          required: true
           schema:
             type: integer
             format: int64
-          required: true
-          description: Numeric ID of the user to get
       responses:
         "200":
-          description: returned a value
+          description: OK
           content:
-            application/json:
+            '*/*':
               schema:
                 type: boolean
-        "400":
-          description: BAD_REQUEST
-        "401":
-          description: UNAUTHORIZE
-
-  /agenda/user/{id}:
+  /team/{id}:
     get:
       tags:
-        - "Agenda API"
-      summary: Get agendas by user
-      description: This returns an agenda from an id
-      operationId: findByUser
+        - "Team API"
+      operationId: findTeam
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
+          required: true
           schema:
             type: integer
             format: int64
-          required: true
-          description: Numeric ID of the user to get
       responses:
         "200":
-          description: returned a value
+          description: OK
           content:
-            application/json:
+            '*/*':
               schema:
-                type: array
-                items:
-                  $ref: "./api/models/agendaDTO.yaml"
-        "400":
-          description: BAD_REQUEST
-        "401":
-          description: UNAUTHORIZE
-
-  /agenda/shared/user/{id}:
-    get:
+                $ref: '#/components/schemas/TeamDTO'
+    put:
       tags:
-        - "Agenda API"
-      summary: Get sharedAgendas by user
-      description: This returns shared agendas from a user id
-      operationId: findSharedAgendasByUser
+        - "Team API"
+      operationId: updateTeam
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
+          required: true
           schema:
             type: integer
             format: int64
-          required: true
-          description: Numeric ID of the user to get
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamDTO'
+        required: true
       responses:
         "200":
-          description: returned a value
+          description: OK
           content:
-            application/json:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TeamDTO'
+    delete:
+      tags:
+        - "Team API"
+      operationId: deleteTeam
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /schedule/{id}:
+    get:
+      tags:
+        - "Schedule API"
+      operationId: findSchedule
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ScheduleDTO'
+    put:
+      tags:
+        - "Schedule API"
+      operationId: updateSchedule
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ScheduleDTO'
+    delete:
+      tags:
+        - "Schedule API"
+      operationId: deleteSchedule
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /role/{id}:
+    get:
+      tags:
+        - "Role API"
+      operationId: findRole
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RoleDTO'
+    put:
+      tags:
+        - "Role API"
+      operationId: updateRole
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RoleDTO'
+    delete:
+      tags:
+        - "Role API"
+      operationId: deleteRole
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /event/{id}:
+    get:
+      tags:
+        - "Event API"
+      operationId: findEvent
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EventDTO'
+    put:
+      tags:
+        - "Event API"
+      operationId: updateEvent
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EventDTO'
+    delete:
+      tags:
+        - "Event API"
+      operationId: deleteEvent
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /comment/{id}:
+    get:
+      tags:
+        - "Comment API"
+      operationId: findComment
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommentDTO'
+    put:
+      tags:
+        - "Comment API"
+      operationId: updateComment
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommentDTO'
+    delete:
+      tags:
+        - "Comment API"
+      operationId: deleteComment
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /card/{id}:
+    get:
+      tags:
+        - "Card API"
+      operationId: findCard
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CardDTO'
+    put:
+      tags:
+        - "Card API"
+      operationId: updateCard
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CardDTO'
+    delete:
+      tags:
+        - "Card API"
+      operationId: deleteCard
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /authority/{id}:
+    get:
+      tags:
+        - "Authority API"
+      operationId: findAuthority
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthorityDTO'
+    put:
+      tags:
+        - "Authority API"
+      operationId: updateAuthority
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorityDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthorityDTO'
+    delete:
+      tags:
+        - "Authority API"
+      operationId: deleteAuthority
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /user:
+    get:
+      tags:
+        - "User API"
+      operationId: listUsers
+      parameters:
+        - name: pageable
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageUserDTO'
+    post:
+      tags:
+        - "User API"
+      operationId: saveUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDTO'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+  /team:
+    get:
+      tags:
+        - "Team API"
+      operationId: listTeams
+      parameters:
+        - name: pageable
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageTeamDTO'
+    post:
+      tags:
+        - "Team API"
+      operationId: saveTeam
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamDTO'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TeamDTO'
+  /schedule:
+    get:
+      tags:
+        - "Schedule API"
+      operationId: listSchedules
+      parameters:
+        - name: pageable
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageScheduleDTO'
+    post:
+      tags:
+        - "Schedule API"
+      operationId: saveSchedule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleDTO'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ScheduleDTO'
+  /role:
+    get:
+      tags:
+        - "Role API"
+      operationId: listRoles
+      parameters:
+        - name: pageable
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageRoleDTO'
+    post:
+      tags:
+        - "Role API"
+      operationId: saveRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleDTO'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RoleDTO'
+  /event:
+    get:
+      tags:
+        - "Event API"
+      operationId: listEvents
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: startDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
               schema:
                 type: array
                 items:
-                  $ref: "./api/models/agendaDTO.yaml"
-        "400":
-          description: BAD_REQUEST
-        "401":
-          description: UNAUTHORIZE
-
+                  $ref: '#/components/schemas/EventDTO'
+    post:
+      tags:
+        - "Event API"
+      operationId: saveEvent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventDTO'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EventDTO'
+  /comment:
+    get:
+      tags:
+        - "Comment API"
+      operationId: listComments
+      parameters:
+        - name: pageable
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageCommentDTO'
+    post:
+      tags:
+        - "Comment API"
+      operationId: saveComment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentDTO'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommentDTO'
+  /card:
+    get:
+      tags:
+        - "Card API"
+      operationId: listCards
+      parameters:
+        - name: pageable
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageCardDTO'
+    post:
+      tags:
+        - "Card API"
+      operationId: aveCard
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardDTO'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CardDTO'
+  /authority:
+    get:
+      tags:
+        - "Authority API"
+      operationId: listAuthorities
+      parameters:
+        - name: pageable
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageAuthorityDTO'
+    post:
+      tags:
+        - "Authority API"
+      operationId: saveAuthority
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorityDTO'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthorityDTO'
+  /auth/register:
+    post:
+      tags:
+        - "Auth API"
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
   /auth/login:
     post:
       tags:
         - "Auth API"
-      summary: Login
-      description: This will connect the user and generate a jwt token
-      operationId: login
+      operationId: authenticateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JwtAuthenticationRequest'
+        required: true
       responses:
         "200":
-          description: returned a value
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /agenda:
+    get:
+      tags:
+        - "Agenda API"
+      operationId: findAgendas
+      responses:
+        "200":
+          description: OK
           content:
             application/json:
               schema:
-                type: string
-        "400":
-          description: BAD_REQUEST
-        "401":
-          description: UNAUTHORIZE
+                type: array
+                items:
+                  $ref: '#/components/schemas/AgendaDTO'
+    post:
+      tags:
+        - "Agenda API"
+      operationId: saveAgenda
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgendaDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgendaDTO'
+  /card/user/{id}:
+    get:
+      tags:
+        - "Card API"
+      operationId: findCardsByUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CardDTO'
+  /card/incoming:
+    get:
+      tags:
+        - "Card API"
+      operationId: findCardContent
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: type
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - MEETING
+              - APPOINTMENT
+        - name: start
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: end
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventDTO'
+  /agenda/{id}:
+    get:
+      tags:
+        - "Agenda API"
+      operationId: findAgenda
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgendaDTO'
+    delete:
+      tags:
+        - "Agenda API"
+      operationId: deleteAgenda
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /agenda/user/{id}:
+    get:
+      tags:
+        - "Agenda API"
+      operationId: findAgendasByUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AgendaDTO'
+  /agenda/shared/user/{id}:
+    get:
+      tags:
+        - "Agenda API"
+      operationId: findSharedAgendasByUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AgendaDTO'
 
 components:
   schemas:
-    $ref: "./api/models/_schema.yaml"
+    AgendaDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        user:
+          $ref: '#/components/schemas/UserLightDTO'
+        team:
+          $ref: '#/components/schemas/TeamLightDTO'
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventLightDTO'
+        sharedEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventLightDTO'
+        sharedUsers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserLightDTO'
+        sharedTeams:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamLightDTO'
+    AuthorityDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleLightDTO'
+    CardDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        recap:
+          type: boolean
+        type:
+          type: string
+          enum:
+            - MEETING
+            - APPOINTMENT
+        size:
+          type: string
+          enum:
+            - tiny
+            - small
+            - medium
+            - large
+            - giant
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserLightDTO'
+    CommentDTO:
+      required:
+        - content
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          format: int64
+        content:
+          type: string
+        user:
+          $ref: '#/components/schemas/UserLightDTO'
+        event:
+          $ref: '#/components/schemas/EventLightDTO'
+    EventDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        name:
+          type: string
+        statusDisplayed:
+          type: string
+          enum:
+            - BUSY
+            - FREE
+            - AWAY
+        eventType:
+          type: string
+          enum:
+            - MEETING
+            - APPOINTMENT
+            - PRIVATE
+            - DAYOFF
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        meetingUrl:
+          type: string
+        report:
+          type: string
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommentDTO'
+        agenda:
+          $ref: '#/components/schemas/AgendaDTO'
+        sharedAgendas:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgendaLightDTO'
+        private:
+          type: boolean
+        adayOff:
+          type: boolean
+    RoleDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserLightDTO'
+        authorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorityLightDTO'
+    ScheduleDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        day:
+          type: integer
+        startHour:
+          type: string
+          format: date-time
+        endHour:
+          type: string
+          format: date-time
+        hasBreak:
+          type: boolean
+        startBreak:
+          type: string
+          format: date-time
+        endBreak:
+          type: string
+          format: date-time
+        agenda:
+          $ref: '#/components/schemas/AgendaLightDTO'
+    TeamDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserLightDTO'
+        agendas:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgendaLightDTO'
+        sharedAgendas:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgendaLightDTO'
+    UserDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        role:
+          $ref: '#/components/schemas/RoleLightDTO'
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommentLightDTO'
+        agendas:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgendaLightDTO'
+        teams:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamLightDTO'
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/CardLightDTO'
+        sharedAgendas:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgendaLightDTO'
+    AgendaLightDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    AuthorityLightDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    CardLightDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        recap:
+          type: boolean
+        type:
+          type: string
+          enum:
+            - MEETING
+            - APPOINTMENT
+        size:
+          type: string
+          enum:
+            - tiny
+            - small
+            - medium
+            - large
+            - giant
+    CommentLightDTO:
+      required:
+        - content
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        content:
+          type: string
+    EventLightDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        name:
+          type: string
+        statusDisplayed:
+          type: string
+          enum:
+            - BUSY
+            - FREE
+            - AWAY
+        eventType:
+          type: string
+          enum:
+            - MEETING
+            - APPOINTMENT
+            - PRIVATE
+            - DAYOFF
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        meetingUrl:
+          type: string
+        report:
+          type: string
+        private:
+          type: boolean
+        adayOff:
+          type: boolean
+    RoleLightDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        authorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorityLightDTO'
+    ScheduleLightDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        day:
+          type: integer
+        startHour:
+          type: string
+          format: date-time
+        endHour:
+          type: string
+          format: date-time
+        hasBreak:
+          type: boolean
+        startBreak:
+          type: string
+          format: date-time
+        endBreak:
+          type: string
+          format: date-time
+    TeamLightDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    UserLightDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+
+    JwtAuthenticationRequest:
+      type: object
+      properties:
+        usernameOrEmail:
+          type: string
+        password:
+          type: string
+
+    Pageable:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+        sort:
+          $ref: '#/components/schemas/Sort'
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        unpaged:
+          type: boolean
+        paged:
+          type: boolean
+    Sort:
+      type: object
+      properties:
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+        empty:
+          type: boolean
+    PageUserDTO:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDTO'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        numberOfElements:
+          type: integer
+          format: int32
+        first:
+          type: boolean
+        last:
+          type: boolean
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        empty:
+          type: boolean
+    PageTeamDTO:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamDTO'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        numberOfElements:
+          type: integer
+          format: int32
+        first:
+          type: boolean
+        last:
+          type: boolean
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        empty:
+          type: boolean
+    PageScheduleDTO:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduleDTO'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        numberOfElements:
+          type: integer
+          format: int32
+        first:
+          type: boolean
+        last:
+          type: boolean
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        empty:
+          type: boolean
+    PageRoleDTO:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleDTO'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        numberOfElements:
+          type: integer
+          format: int32
+        first:
+          type: boolean
+        last:
+          type: boolean
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        empty:
+          type: boolean
+    PageCommentDTO:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommentDTO'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        numberOfElements:
+          type: integer
+          format: int32
+        first:
+          type: boolean
+        last:
+          type: boolean
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        empty:
+          type: boolean
+    PageCardDTO:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/CardDTO'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        numberOfElements:
+          type: integer
+          format: int32
+        first:
+          type: boolean
+        last:
+          type: boolean
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        empty:
+          type: boolean
+    PageAuthorityDTO:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorityDTO'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        numberOfElements:
+          type: integer
+          format: int32
+        first:
+          type: boolean
+        last:
+          type: boolean
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        empty:
+          type: boolean
