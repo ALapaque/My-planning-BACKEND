@@ -7,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import eu.busi.myplanning.domain.mappers.UserMapper;
 import eu.busi.myplanning.domain.models.UserEntity;
 import eu.busi.myplanning.domain.repositories.UserRepository;
+import eu.busi.myplanning.models.UserDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -25,13 +26,18 @@ import java.util.function.Function;
  */
 @Service
 public class JwtUtil {
-    @Autowired
-    private UserRepository _userRepository;
+    private final UserRepository _userRepository;
 
     /**
      * secret key of the token
      */
     private final String SECRET_KEY = "secret";
+    private final ObjectMapper objectMapper;
+
+    public JwtUtil(UserRepository _userRepository, ObjectMapper objectMapper) {
+        this._userRepository = _userRepository;
+        this.objectMapper = objectMapper;
+    }
 
     /**
      * this method will extract the username contained in the token
@@ -88,9 +94,9 @@ public class JwtUtil {
         Optional<UserEntity> user = _userRepository.findByUsername(userDetails.getUsername());
 
         if (user.isPresent()) {
-            // Object userDTO = UserMapper.INSTANCE.asDTO(user.get());
-            // claims.put("user", this.objectMapper.writeValueAsString(userDTO));
-            // claims.put("authorities", userDTO.getRole().getAuthorities().toArray());
+            UserDTO userDTO = UserMapper.INSTANCE.asDTO(user.get());
+            claims.put("user", this.objectMapper.writeValueAsString(userDTO));
+            claims.put("authorities", userDTO.getRole().getAuthorities().toArray());
         }
 
         return createToken(claims, userDetails.getUsername());
