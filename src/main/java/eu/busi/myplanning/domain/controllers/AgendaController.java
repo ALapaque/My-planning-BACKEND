@@ -1,7 +1,6 @@
-package eu.busi.myplanning.controllers;
+package eu.busi.myplanning.domain.controllers;
 
 import eu.busi.myplanning.api.AgendaApi;
-import eu.busi.myplanning.domain.mappers.AgendaMapper;
 import eu.busi.myplanning.domain.services.impl.AgendaServiceImpl;
 import eu.busi.myplanning.models.AgendaDTO;
 import org.springframework.http.HttpStatus;

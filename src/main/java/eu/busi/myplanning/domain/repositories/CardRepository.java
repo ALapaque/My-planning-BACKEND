@@ -1,6 +1,6 @@
 package eu.busi.myplanning.domain.repositories;
 
-import eu.busi.myplanning.domain.models.Agenda;
+import eu.busi.myplanning.domain.models.Card;
 import eu.busi.myplanning.domain.models.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -8,16 +8,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * The interface Agenda repository.
+ * The interface Card repository.
  */
 @Repository
-public interface AgendaRepository extends JpaRepository<Agenda, Long> {
+public interface CardRepository extends JpaRepository<Card, Long> {
     /**
-     * Find agenda by user list.
+     * Find cards by users list.
      *
      * @param user the user
      * @return the list
      */
-    List<Agenda> findAgendaByUser(UserEntity user);
-    List<Agenda> findAgendaBySharedUsersIsIn(List<UserEntity> users);
+    List<Card> findCardsByUsers(UserEntity user);
 }

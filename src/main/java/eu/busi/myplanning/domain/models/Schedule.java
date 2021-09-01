@@ -11,9 +11,7 @@ import java.sql.Time;
  * The type Schedule.
  */
 @Table(name = "schedules")
-public class Schedule implements AbstractEntity<Long>, Serializable {
-    private static final long serialVersionUID = 1L;
-
+public class Schedule implements AbstractEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -103,19 +101,5 @@ public class Schedule implements AbstractEntity<Long>, Serializable {
 
     public void setAgenda(Agenda agenda) {
         this.agenda = agenda;
-    }
-
-    @Override
-    public String toString() {
-        return "Schedule{" +
-                "id=" + id +
-                ", day=" + day +
-                ", startHour=" + startHour +
-                ", endHour=" + endHour +
-                ", hasBreak=" + hasBreak +
-                ", startBreak=" + startBreak +
-                ", endBreak=" + endBreak +
-                ", agenda=" + agenda +
-                '}';
     }
 }

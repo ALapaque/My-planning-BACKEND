@@ -32,6 +32,13 @@
             <artifactId>spring-data-rest-hal-explorer</artifactId>
         </dependency>
 
+        <!-- EXCEPTIONS -->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-tools</artifactId>
+            <version>2.0</version>
+        </dependency>
+
         <!-- SECURITY includes Bcrypt -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -45,12 +52,21 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- HIBERNATE -->
-        <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+        <!-- For Working with Json Web Tokens (JWT) -->
         <dependency>
-            <groupId>org.hibernate.validator</groupId>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>7.0.1.Final</version>
+            <version>6.0.13.Final</version>
         </dependency>
 
         <!-- MYSQL -->
