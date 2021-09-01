@@ -105,11 +105,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/v2/api-docs",
+                .antMatchers("/v3/api-docs",
                         "/configuration/ui",
                         "/swagger-resources/**",
                         "/configuration/security",
+                        "/myplanning-doc/**",
                         "/swagger-ui.html",
+                        "/swagger-ui/**",
                         "/webjars/**",
                         "/auth/**")
                 .permitAll()
