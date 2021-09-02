@@ -22,7 +22,6 @@ public class Agenda implements AbstractEntity<Long>, Serializable {
     @Column(length = 60)
     private String name;
 
-    @Column(length = 10)
     private String color;
 
     /**

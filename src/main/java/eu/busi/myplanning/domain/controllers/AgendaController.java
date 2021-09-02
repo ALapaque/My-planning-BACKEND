@@ -1,5 +1,6 @@
 package eu.busi.myplanning.domain.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.busi.myplanning.api.AgendaApi;
 import eu.busi.myplanning.domain.services.impl.AgendaServiceImpl;
 import eu.busi.myplanning.models.AgendaDTO;
@@ -7,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class AgendaController implements AgendaApi {
@@ -15,10 +18,21 @@ public class AgendaController implements AgendaApi {
 
     /**
      * Instanciation of the repository providing the service
+     *
      * @param agendaService
      */
     public AgendaController(AgendaServiceImpl agendaService) {
         this.agendaService = agendaService;
+    }
+
+    @Override
+    public Optional<ObjectMapper> getObjectMapper() {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<HttpServletRequest> getRequest() {
+        return Optional.empty();
     }
 
     @Override

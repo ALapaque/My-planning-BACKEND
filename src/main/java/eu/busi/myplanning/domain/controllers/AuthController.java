@@ -1,6 +1,7 @@
 package eu.busi.myplanning.domain.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.busi.myplanning.api.AuthApi;
 import eu.busi.myplanning.domain.mappers.UserMapper;
 import eu.busi.myplanning.domain.services.impl.AuthService;
@@ -17,6 +18,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
+
 /**
  * The type Auth controller.
  */
@@ -32,6 +36,16 @@ public class AuthController implements AuthApi {
         this._authService = _authService;
         this.myUserDetailService = _myUserDetailService;
         this.jwtUtils = _jwtUtils;
+    }
+
+    @Override
+    public Optional<ObjectMapper> getObjectMapper() {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<HttpServletRequest> getRequest() {
+        return Optional.empty();
     }
 
     @Override

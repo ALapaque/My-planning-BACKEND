@@ -1,8 +1,0 @@
-description: This is the DTO for the agenda
-type: object
-properties:
-  id:
-    type: integer
-    format: int64
-  name:
-    type: string

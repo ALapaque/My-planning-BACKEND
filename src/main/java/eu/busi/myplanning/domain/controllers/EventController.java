@@ -1,17 +1,28 @@
 package eu.busi.myplanning.domain.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.busi.myplanning.api.EventApi;
 import eu.busi.myplanning.models.EventDTO;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.threeten.bp.OffsetDateTime;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Instant;
+import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class EventController implements EventApi {
+
+    @Override
+    public Optional<ObjectMapper> getObjectMapper() {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<HttpServletRequest> getRequest() {
+        return Optional.empty();
+    }
 
     @Override
     public ResponseEntity<Void> deleteEvent(Long id) {
@@ -24,7 +35,7 @@ public class EventController implements EventApi {
     }
 
     @Override
-    public ResponseEntity<List<EventDTO>> listEvents(Long userId, OffsetDateTime startDate, OffsetDateTime endDate) {
+    public ResponseEntity<List<EventDTO>> listEvents(Long userId, LocalDateTime startDate, LocalDateTime endDate) {
         return null;
     }
 

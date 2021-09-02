@@ -7,15 +7,25 @@ import eu.busi.myplanning.models.EventDTO;
 import eu.busi.myplanning.models.PageCardDTO;
 import eu.busi.myplanning.models.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.threeten.bp.OffsetDateTime;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class CardController implements CardApi {
+
+    @Override
+    public Optional<ObjectMapper> getObjectMapper() {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<HttpServletRequest> getRequest() {
+        return Optional.empty();
+    }
 
     @Override
     public ResponseEntity<Void> deleteCard(Long id) {
@@ -28,7 +38,7 @@ public class CardController implements CardApi {
     }
 
     @Override
-    public ResponseEntity<List<EventDTO>> findCardContent(Long userId, String type, OffsetDateTime start, OffsetDateTime end) {
+    public ResponseEntity<List<EventDTO>> findCardContent(Long userId, String type, LocalDateTime start, LocalDateTime end) {
         return null;
     }
 

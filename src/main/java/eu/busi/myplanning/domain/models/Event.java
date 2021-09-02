@@ -1,14 +1,11 @@
 package eu.busi.myplanning.domain.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import eu.busi.myplanning.domain.enumerations.EventStatus;
-import eu.busi.myplanning.domain.enumerations.EventType;
 import eu.busi.myplanning.models.EventDTO;
-import org.threeten.bp.OffsetDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -43,10 +40,10 @@ public class Event extends DateAudit implements AbstractEntity<Long>, Serializab
     private EventDTO.EventTypeEnum eventType;
 
     @Column(nullable = false)
-    private OffsetDateTime startDate;
+    private LocalDateTime startDate;
 
     @Column(nullable = false)
-    private OffsetDateTime endDate;
+    private LocalDateTime endDate;
 
     private String meetingUrl;
 
@@ -168,19 +165,19 @@ public class Event extends DateAudit implements AbstractEntity<Long>, Serializab
         this.eventType = eventType;
     }
 
-    public OffsetDateTime getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(OffsetDateTime startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public OffsetDateTime getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(OffsetDateTime endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 

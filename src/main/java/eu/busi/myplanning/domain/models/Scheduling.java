@@ -2,17 +2,15 @@ package eu.busi.myplanning.domain.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.threeten.bp.OffsetDateTime;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.sql.Time;
+import java.time.LocalDateTime;
 
 /**
  * The type Schedule.
  */
 @Table(name = "schedules")
-public class Schedule implements AbstractEntity<Long> {
+public class Scheduling implements AbstractEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,24 +19,24 @@ public class Schedule implements AbstractEntity<Long> {
     private Integer day;
 
     @Column(nullable = false)
-    private OffsetDateTime startHour;
+    private LocalDateTime startHour;
 
     @Column(nullable = false)
-    private OffsetDateTime endHour;
+    private LocalDateTime endHour;
 
     @Column(nullable = false)
     private Boolean hasBreak;
 
-    private OffsetDateTime startBreak;
+    private LocalDateTime startBreak;
 
-    private OffsetDateTime endBreak;
+    private LocalDateTime endBreak;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idAgenda", referencedColumnName = "id")
     @JsonIgnoreProperties({"schedules"})
     private Agenda agenda;
 
-    public Schedule() {
+    public Scheduling() {
     }
 
     @Override
@@ -59,19 +57,19 @@ public class Schedule implements AbstractEntity<Long> {
         this.day = day;
     }
 
-    public OffsetDateTime getStartHour() {
+    public LocalDateTime getStartHour() {
         return startHour;
     }
 
-    public void setStartHour(OffsetDateTime startHour) {
+    public void setStartHour(LocalDateTime startHour) {
         this.startHour = startHour;
     }
 
-    public OffsetDateTime getEndHour() {
+    public LocalDateTime getEndHour() {
         return endHour;
     }
 
-    public void setEndHour(OffsetDateTime endHour) {
+    public void setEndHour(LocalDateTime endHour) {
         this.endHour = endHour;
     }
 
@@ -83,19 +81,19 @@ public class Schedule implements AbstractEntity<Long> {
         this.hasBreak = hasBreak;
     }
 
-    public OffsetDateTime getStartBreak() {
+    public LocalDateTime getStartBreak() {
         return startBreak;
     }
 
-    public void setStartBreak(OffsetDateTime startBreak) {
+    public void setStartBreak(LocalDateTime startBreak) {
         this.startBreak = startBreak;
     }
 
-    public OffsetDateTime getEndBreak() {
+    public LocalDateTime getEndBreak() {
         return endBreak;
     }
 
-    public void setEndBreak(OffsetDateTime endBreak) {
+    public void setEndBreak(LocalDateTime endBreak) {
         this.endBreak = endBreak;
     }
 
