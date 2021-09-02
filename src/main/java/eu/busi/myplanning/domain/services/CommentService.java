@@ -1,6 +1,6 @@
 package eu.busi.myplanning.domain.services;
 
-import eu.busi.myplanning.domain.models.Comment;
+import eu.busi.myplanning.models.CommentDTO;
 
-public interface CommentService extends GenericService<Comment, Long> {
+public interface CommentService extends GenericService<CommentDTO, Long> {
 }

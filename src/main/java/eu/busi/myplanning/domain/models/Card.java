@@ -3,6 +3,7 @@ package eu.busi.myplanning.domain.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import eu.busi.myplanning.domain.enumerations.CardSize;
 import eu.busi.myplanning.domain.enumerations.CardType;
+import eu.busi.myplanning.models.CardDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,10 +26,10 @@ public class Card implements AbstractEntity<Long>, Serializable {
     private boolean recap;
 
     @Enumerated(EnumType.STRING)
-    private CardType type;
+    private CardDTO.TypeEnum type;
 
     @Enumerated(EnumType.STRING)
-    private CardSize size;
+    private CardDTO.SizeEnum size;
 
     /**
      * user linked to dashboard's cards
@@ -76,39 +77,19 @@ public class Card implements AbstractEntity<Long>, Serializable {
         this.recap = recap;
     }
 
-    /**
-     * Gets type.
-     *
-     * @return the type
-     */
-    public CardType getType() {
+    public CardDTO.TypeEnum getType() {
         return type;
     }
 
-    /**
-     * Sets type.
-     *
-     * @param type the type
-     */
-    public void setType(CardType type) {
+    public void setType(CardDTO.TypeEnum type) {
         this.type = type;
     }
 
-    /**
-     * Gets size.
-     *
-     * @return the size
-     */
-    public CardSize getSize() {
+    public CardDTO.SizeEnum getSize() {
         return size;
     }
 
-    /**
-     * Sets size.
-     *
-     * @param size the size
-     */
-    public void setSize(CardSize size) {
+    public void setSize(CardDTO.SizeEnum size) {
         this.size = size;
     }
 

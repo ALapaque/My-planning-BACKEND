@@ -995,6 +995,8 @@ components:
           format: int64
         name:
           type: string
+        color:
+          type: string
         user:
           $ref: '#/components/schemas/UserLightDTO'
         team:
@@ -1228,6 +1230,8 @@ components:
           type: integer
           format: int64
         name:
+          type: string
+        color:
           type: string
     AuthorityLightDTO:
       type: object

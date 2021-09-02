@@ -3,7 +3,6 @@ package eu.busi.myplanning.domain.controllers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import eu.busi.myplanning.api.AuthApi;
 import eu.busi.myplanning.domain.mappers.UserMapper;
-import eu.busi.myplanning.domain.models.UserEntity;
 import eu.busi.myplanning.domain.services.impl.AuthService;
 import eu.busi.myplanning.domain.services.impl.MyUserDetailService;
 import eu.busi.myplanning.models.JwtAuthenticationRequest;
@@ -64,7 +63,7 @@ public class AuthController implements AuthApi {
 
         try {
             _responseEntity = new ResponseEntity<Object>(
-                    UserMapper.INSTANCE.asDTO(_authService.register(UserMapper.INSTANCE.asEntity(body))),
+                    UserMapper.INSTANCE.asDTO(_authService.register(UserMapper.INSTANCE.fromDtoToEntity(body))),
                     HttpStatus.CREATED
             );
         } catch (Exception e) {

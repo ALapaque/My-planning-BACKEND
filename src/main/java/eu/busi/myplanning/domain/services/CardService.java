@@ -1,9 +1,10 @@
 package eu.busi.myplanning.domain.services;
 
-import eu.busi.myplanning.domain.models.Card;
+import eu.busi.myplanning.exceptions.NotFoundException;
+import eu.busi.myplanning.models.CardDTO;
 
 import java.util.List;
 
-public interface CardService extends GenericService<Card, Long> {
-    List<Card> findCardsByUserId(Long userId);
+public interface CardService extends GenericService<CardDTO, Long> {
+    List<CardDTO> findCardsByUserId(Long userId) throws NotFoundException;
 }
