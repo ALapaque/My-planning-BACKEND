@@ -37,6 +37,9 @@ public class Team implements AbstractEntity<Long>, Serializable {
     @JsonIgnoreProperties({"team", "sharedTeams"})
     private List<Agenda> sharedAgendas = new ArrayList<>();
 
+    public Team() {
+    }
+
     /**
      * Gets id.
      *

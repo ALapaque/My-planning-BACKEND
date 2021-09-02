@@ -1,6 +1,9 @@
 package eu.busi.myplanning.domain.services.impl;
 
 import eu.busi.myplanning.domain.enumerations.EventType;
+import eu.busi.myplanning.domain.mappers.AgendaMapper;
+import eu.busi.myplanning.domain.mappers.CommentMapper;
+import eu.busi.myplanning.domain.mappers.EventMapper;
 import eu.busi.myplanning.domain.models.Agenda;
 import eu.busi.myplanning.domain.models.Event;
 import eu.busi.myplanning.domain.models.UserEntity;
@@ -8,17 +11,24 @@ import eu.busi.myplanning.domain.repositories.AgendaRepository;
 import eu.busi.myplanning.domain.repositories.EventRepository;
 import eu.busi.myplanning.domain.repositories.UserRepository;
 import eu.busi.myplanning.domain.services.EventService;
+import eu.busi.myplanning.exceptions.NotDeletedException;
+import eu.busi.myplanning.exceptions.NotFoundException;
+import eu.busi.myplanning.exceptions.NotSavedException;
+import eu.busi.myplanning.exceptions.NotUpdatedException;
+import eu.busi.myplanning.models.EventDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
 
 import javax.transaction.Transactional;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -36,76 +46,170 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event save(Event entity) {
-        return repository.save(entity);
+    public EventDTO save(EventDTO entity) throws NotSavedException {
+        try {
+            return EventMapper
+                    .INSTANCE
+                    .asDTO(repository
+                            .save(EventMapper
+                                    .INSTANCE
+                                    .fromDtoToEntity(entity)));
+        } catch (Exception e) {
+            throw new NotSavedException();
+        }
     }
 
     @Override
-    public List<Event> save(List<Event> entities) {
-        return (List<Event>) repository.saveAll(entities);
+    public List<EventDTO> save(List<EventDTO> entities) throws NotSavedException {
+        try {
+            List<Event> events = entities
+                    .stream()
+                    .map(EventMapper.INSTANCE::fromDtoToEntity)
+                    .collect(Collectors.toList());
+
+            return repository
+                    .saveAll(events)
+                    .stream()
+                    .map(EventMapper.INSTANCE::asDTO)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new NotSavedException();
+        }
     }
 
     @Override
-    public boolean deleteById(Long id) {
-        repository.deleteById(id);
+    public boolean deleteById(Long id) throws NotDeletedException {
+        try {
+            repository.deleteById(id);
 
-        return !repository.existsById(id);
+            return !repository.existsById(id);
+        } catch (Exception e) {
+            throw new NotDeletedException();
+        }
     }
 
     @Override
-    public Event findById(Long id) {
-        return repository.getById(id);
+    public Optional<EventDTO> findById(Long id) throws NotFoundException {
+        try {
+            return repository
+                    .findById(id)
+                    .map(EventMapper.INSTANCE::asDTO);
+        } catch (Exception e) {
+            throw new NotFoundException();
+        }
     }
 
     @Override
-    public List<Event> findAll() {
-        return (List<Event>) repository.findAll();
+    public List<EventDTO> findAll() throws NotFoundException {
+        try {
+            return repository
+                    .findAll()
+                    .stream()
+                    .map(EventMapper.INSTANCE::asDTO)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new NotFoundException();
+        }
     }
 
     @Override
-    public Page<Event> findAll(Pageable pageable) {
-        Page<Event> entityPage = repository.findAll(pageable);
-        List<Event> entities = entityPage.getContent();
-        return new PageImpl<>(entities, pageable, entityPage.getTotalElements());
+    public Page<EventDTO> findAll(Pageable pageable) throws NotFoundException {
+        try {
+            Page<Event> entityPage = repository.findAll(pageable);
+            List<EventDTO> entities = entityPage
+                    .getContent()
+                    .stream()
+                    .map(EventMapper.INSTANCE::asDTO)
+                    .collect(Collectors.toList());
+
+            return new PageImpl<>(entities, pageable, entityPage.getTotalElements());
+        } catch (Exception e) {
+            throw new NotFoundException();
+        }
     }
 
     @Override
-    public Event update(Event entity, Long id) {
-        Event event = findById(id);
+    public EventDTO update(EventDTO entity, Long id) throws NotUpdatedException {
+        try {
+            Optional<EventDTO> optional = findById(id);
 
-        event.setName(entity.getName());
-        event.setADayOff(entity.isADayOff());
-        event.setPrivate(entity.isPrivate());
-        event.setStatusDisplayed(entity.getStatusDisplayed());
-        event.setEventType(entity.getEventType());
-        event.setStartDate(entity.getStartDate());
-        event.setEndDate(entity.getEndDate());
-        event.setMeetingUrl(entity.getMeetingUrl());
-        event.setReport(entity.getReport());
-        event.setComments(entity.getComments());
-        event.setAgenda(entity.getAgenda());
-        event.setSharedAgendas(entity.getSharedAgendas());
-        return repository.save(event);
+            if (optional.isPresent()) {
+                Event event = EventMapper.INSTANCE.fromDtoToEntity(optional.get());
+
+                event.setName(entity.getName());
+                event.setADayOff(entity.isAdayOff());
+                event.setPrivate(entity.isPrivate());
+                event.setStatusDisplayed(entity.getStatusDisplayed());
+                event.setEventType(entity.getEventType());
+                event.setStartDate(entity.getStartDate());
+                event.setEndDate(entity.getEndDate());
+                event.setMeetingUrl(entity.getMeetingUrl());
+                event.setReport(entity.getReport());
+                event.setComments(entity
+                        .getComments()
+                        .stream()
+                        .map(CommentMapper.INSTANCE::fromDtoToEntity)
+                        .collect(Collectors.toList()));
+                event.setAgenda(AgendaMapper.INSTANCE.fromDtoToEntity(entity.getAgenda()));
+                event.setSharedAgendas(entity
+                        .getSharedAgendas()
+                        .stream()
+                        .map(AgendaMapper.INSTANCE::fromLightDtoToEntity)
+                        .collect(Collectors.toList()));
+
+                return save(EventMapper.INSTANCE.asDTO(repository.save(event)));
+
+            } else {
+                throw new Exception("Ressource not found...");
+            }
+        } catch (Exception e) {
+            throw new NotUpdatedException();
+        }
     }
 
     @Override
-    public List<Event> findEventsByUserAndTypeAndStartAndEnd(Long id, EventType type, Instant start, Instant end) {
-        UserEntity user = userRepository.getById(id);
-        List<Agenda> agendas = agendaRepository.findAgendaByUser(user);
+    public List<EventDTO> findEventsByUserAndTypeAndStartAndEnd(Long id, EventType type, OffsetDateTime start, OffsetDateTime end) throws NotFoundException {
+        try {
+            Optional<UserEntity> optional = userRepository.findById(id);
 
-        return repository.findEventsOfTheDayIncoming(
-                agendas,
-                type.toString(),
-                start,
-                LocalDateTime.ofInstant(end, this.zoneId).format(DateTimeFormatter.ISO_LOCAL_DATE)
-        );
+            if (optional.isPresent()) {
+                List<Agenda> agendas = agendaRepository.findAgendaByUser(optional.get());
+
+                return repository
+                        .findEventsOfTheDayIncoming(
+                                agendas,
+                                type.toString(),
+                                start,
+                                end.toLocalDateTime().format(DateTimeFormatter.ISO_LOCAL_DATE))
+                        .stream()
+                        .map(EventMapper.INSTANCE::asDTO)
+                        .collect(Collectors.toList());
+            } else {
+                throw new Exception("Ressource not found...");
+            }
+        } catch (Exception e) {
+            throw new NotFoundException();
+        }
     }
 
     @Override
-    public List<Event> findEventsByUserAndStartAndEnd(Long id, Instant startDate, Instant endDate) {
-        UserEntity user = userRepository.getById(id);
-        List<Agenda> agendas = agendaRepository.findAgendaByUser(user);
+    public List<EventDTO> findEventsByUserAndStartAndEnd(Long id, OffsetDateTime startDate, OffsetDateTime endDate) {
+        try {
+            Optional<UserEntity> optional = userRepository.findById(id);
 
-        return repository.findDistinctByAgendaInAndStartDateIsBetweenOrEndDateIsBetween(agendas, startDate, endDate, startDate, endDate);
+            if (optional.isPresent()) {
+                List<Agenda> agendas = agendaRepository.findAgendaByUser(optional.get());
+
+                return repository
+                        .findDistinctByAgendaInAndStartDateIsBetweenOrEndDateIsBetween(agendas, startDate, endDate, startDate, endDate)
+                        .stream()
+                        .map(EventMapper.INSTANCE::asDTO)
+                        .collect(Collectors.toList());
+            } else {
+                throw new Exception("Ressource not found...");
+            }
+        } catch (Exception e) {
+            throw new NotFoundException();
+        }
     }
 }

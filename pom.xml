@@ -142,6 +142,7 @@
                             <modelPackage>eu.busi.myplanning.models</modelPackage>
                             <configOptions>
                                 <interfaceOnly>true</interfaceOnly>
+                                <defaultInterfaces>false</defaultInterfaces>
                             </configOptions>
                         </configuration>
                     </execution>

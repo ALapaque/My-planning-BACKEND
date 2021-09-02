@@ -3,6 +3,7 @@ package eu.busi.myplanning.domain.models;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.threeten.bp.OffsetDateTime;
 
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
@@ -16,24 +17,24 @@ import java.time.Instant;
 public abstract class DateAudit {
 
     @CreatedDate
-    private Instant createdAt;
+    private OffsetDateTime createdAt;
 
     @LastModifiedDate
-    private Instant updatedAt;
+    private OffsetDateTime updatedAt;
 
-    public Instant getCreatedAt() {
+    public OffsetDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Instant createdAt) {
+    public void setCreatedAt(OffsetDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Instant getUpdatedAt() {
+    public OffsetDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Instant updatedAt) {
+    public void setUpdatedAt(OffsetDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

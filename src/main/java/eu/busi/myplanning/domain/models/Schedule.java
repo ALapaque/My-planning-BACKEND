@@ -2,6 +2,7 @@ package eu.busi.myplanning.domain.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.threeten.bp.OffsetDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,22 +21,25 @@ public class Schedule implements AbstractEntity<Long> {
     private Integer day;
 
     @Column(nullable = false)
-    private Time startHour;
+    private OffsetDateTime startHour;
 
     @Column(nullable = false)
-    private Time endHour;
+    private OffsetDateTime endHour;
 
     @Column(nullable = false)
     private Boolean hasBreak;
 
-    private Time startBreak;
+    private OffsetDateTime startBreak;
 
-    private Time endBreak;
+    private OffsetDateTime endBreak;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idAgenda", referencedColumnName = "id")
     @JsonIgnoreProperties({"schedules"})
     private Agenda agenda;
+
+    public Schedule() {
+    }
 
     @Override
     public Long getId() {
@@ -55,19 +59,19 @@ public class Schedule implements AbstractEntity<Long> {
         this.day = day;
     }
 
-    public Time getStartHour() {
+    public OffsetDateTime getStartHour() {
         return startHour;
     }
 
-    public void setStartHour(Time startHour) {
+    public void setStartHour(OffsetDateTime startHour) {
         this.startHour = startHour;
     }
 
-    public Time getEndHour() {
+    public OffsetDateTime getEndHour() {
         return endHour;
     }
 
-    public void setEndHour(Time endHour) {
+    public void setEndHour(OffsetDateTime endHour) {
         this.endHour = endHour;
     }
 
@@ -79,19 +83,19 @@ public class Schedule implements AbstractEntity<Long> {
         this.hasBreak = hasBreak;
     }
 
-    public Time getStartBreak() {
+    public OffsetDateTime getStartBreak() {
         return startBreak;
     }
 
-    public void setStartBreak(Time startBreak) {
+    public void setStartBreak(OffsetDateTime startBreak) {
         this.startBreak = startBreak;
     }
 
-    public Time getEndBreak() {
+    public OffsetDateTime getEndBreak() {
         return endBreak;
     }
 
-    public void setEndBreak(Time endBreak) {
+    public void setEndBreak(OffsetDateTime endBreak) {
         this.endBreak = endBreak;
     }
 

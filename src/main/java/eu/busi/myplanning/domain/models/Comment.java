@@ -32,6 +32,9 @@ public class Comment extends DateAudit implements AbstractEntity<Long>, Serializ
     @JsonIgnoreProperties("events")
     private Event event;
 
+    public Comment() {
+    }
+
     /**
      * Gets id.
      *

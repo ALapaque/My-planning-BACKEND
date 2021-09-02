@@ -33,6 +33,9 @@ public class Role implements AbstractEntity<Long>, Serializable {
     @JsonIgnoreProperties("roles")
     private List<Authority> authorities = new ArrayList<>();
 
+    public Role() {
+    }
+
     /**
      * Gets id.
      *

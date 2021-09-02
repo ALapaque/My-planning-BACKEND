@@ -3,6 +3,8 @@ package eu.busi.myplanning.domain.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import eu.busi.myplanning.domain.enumerations.EventStatus;
 import eu.busi.myplanning.domain.enumerations.EventType;
+import eu.busi.myplanning.models.EventDTO;
+import org.threeten.bp.OffsetDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -34,17 +36,17 @@ public class Event extends DateAudit implements AbstractEntity<Long>, Serializab
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private EventStatus statusDisplayed;
+    private EventDTO.StatusDisplayedEnum statusDisplayed;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private EventType eventType;
+    private EventDTO.EventTypeEnum eventType;
 
     @Column(nullable = false)
-    private Instant startDate;
+    private OffsetDateTime startDate;
 
     @Column(nullable = false)
-    private Instant endDate;
+    private OffsetDateTime endDate;
 
     private String meetingUrl;
 
@@ -73,7 +75,10 @@ public class Event extends DateAudit implements AbstractEntity<Long>, Serializab
             joinColumns = @JoinColumn(name = "idEvent"),
             inverseJoinColumns = @JoinColumn(name = "idAgenda"))
     @JsonIgnoreProperties({"sharedEvents", "events"})
-    private List<Event> sharedAgendas = new LinkedList<>();
+    private List<Agenda> sharedAgendas = new LinkedList<>();
+
+    public Event() {
+    }
 
     /**
      * Gets id.
@@ -147,75 +152,35 @@ public class Event extends DateAudit implements AbstractEntity<Long>, Serializab
         isPrivate = aPrivate;
     }
 
-    /**
-     * Gets status displayed.
-     *
-     * @return the status displayed
-     */
-    public EventStatus getStatusDisplayed() {
+    public EventDTO.StatusDisplayedEnum getStatusDisplayed() {
         return statusDisplayed;
     }
 
-    /**
-     * Sets status displayed.
-     *
-     * @param statusDisplayed the status displayed
-     */
-    public void setStatusDisplayed(EventStatus statusDisplayed) {
+    public void setStatusDisplayed(EventDTO.StatusDisplayedEnum statusDisplayed) {
         this.statusDisplayed = statusDisplayed;
     }
 
-    /**
-     * Gets event type.
-     *
-     * @return the event type
-     */
-    public EventType getEventType() {
+    public EventDTO.EventTypeEnum getEventType() {
         return eventType;
     }
 
-    /**
-     * Sets event type.
-     *
-     * @param eventType the event type
-     */
-    public void setEventType(EventType eventType) {
+    public void setEventType(EventDTO.EventTypeEnum eventType) {
         this.eventType = eventType;
     }
 
-    /**
-     * Gets start date.
-     *
-     * @return the start date
-     */
-    public Instant getStartDate() {
+    public OffsetDateTime getStartDate() {
         return startDate;
     }
 
-    /**
-     * Sets start date.
-     *
-     * @param startDate the start date
-     */
-    public void setStartDate(Instant startDate) {
+    public void setStartDate(OffsetDateTime startDate) {
         this.startDate = startDate;
     }
 
-    /**
-     * Gets end date.
-     *
-     * @return the end date
-     */
-    public Instant getEndDate() {
+    public OffsetDateTime getEndDate() {
         return endDate;
     }
 
-    /**
-     * Sets end date.
-     *
-     * @param endDate the end date
-     */
-    public void setEndDate(Instant endDate) {
+    public void setEndDate(OffsetDateTime endDate) {
         this.endDate = endDate;
     }
 
@@ -291,21 +256,11 @@ public class Event extends DateAudit implements AbstractEntity<Long>, Serializab
         this.agenda = agenda;
     }
 
-    /**
-     * Gets shared agendas.
-     *
-     * @return the shared agendas
-     */
-    public List<Event> getSharedAgendas() {
+    public List<Agenda> getSharedAgendas() {
         return sharedAgendas;
     }
 
-    /**
-     * Sets shared agendas.
-     *
-     * @param sharedAgendas the shared agendas
-     */
-    public void setSharedAgendas(List<Event> sharedAgendas) {
+    public void setSharedAgendas(List<Agenda> sharedAgendas) {
         this.sharedAgendas = sharedAgendas;
     }
 }

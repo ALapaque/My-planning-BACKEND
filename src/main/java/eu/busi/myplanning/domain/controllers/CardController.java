@@ -1,34 +1,21 @@
 package eu.busi.myplanning.domain.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.busi.myplanning.api.CardApi;
-import eu.busi.myplanning.domain.enumerations.CardType;
-import eu.busi.myplanning.domain.mappers.CardMapper;
-import eu.busi.myplanning.domain.models.Card;
 import eu.busi.myplanning.models.CardDTO;
 import eu.busi.myplanning.models.EventDTO;
 import eu.busi.myplanning.models.PageCardDTO;
 import eu.busi.myplanning.models.Pageable;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.threeten.bp.OffsetDateTime;
 
-import java.time.Instant;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @RestController
 public class CardController implements CardApi {
-
-
-    @Override
-    public ResponseEntity<CardDTO> aveCard(CardDTO body) {
-        return null;
-    }
 
     @Override
     public ResponseEntity<Void> deleteCard(Long id) {
@@ -52,6 +39,11 @@ public class CardController implements CardApi {
 
     @Override
     public ResponseEntity<PageCardDTO> listCards(Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<CardDTO> saveCard(CardDTO body) {
         return null;
     }
 

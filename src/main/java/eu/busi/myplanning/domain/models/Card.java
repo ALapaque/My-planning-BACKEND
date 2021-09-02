@@ -41,6 +41,9 @@ public class Card implements AbstractEntity<Long>, Serializable {
     @JsonIgnoreProperties("cards")
     private List<UserEntity> users = new ArrayList<>();
 
+    public Card() {
+    }
+
     /**
      * Gets id.
      *

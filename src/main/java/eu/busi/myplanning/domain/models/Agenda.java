@@ -79,6 +79,9 @@ public class Agenda implements AbstractEntity<Long>, Serializable {
     @JsonIgnoreProperties({"sharedAgendas", "agenda", "agendas"})
     List<Team> sharedTeams = new LinkedList<>();
 
+    public Agenda() {
+    }
+
     @Override
     public Long getId() {
         return id;
