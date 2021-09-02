@@ -18,7 +18,6 @@ public class AgendaController implements AgendaApi {
 
     /**
      * Instanciation of the repository providing the service
-     *
      * @param agendaService
      */
     public AgendaController(AgendaServiceImpl agendaService) {
