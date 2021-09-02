@@ -2,9 +2,14 @@ package eu.busi.myplanning.domain.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.busi.myplanning.api.UserApi;
+import eu.busi.myplanning.domain.services.impl.UserServiceImpl;
+import eu.busi.myplanning.exceptions.NotDeletedException;
+import eu.busi.myplanning.exceptions.NotFoundException;
+import eu.busi.myplanning.exceptions.NotSavedException;
 import eu.busi.myplanning.models.PageUserDTO;
 import eu.busi.myplanning.models.Pageable;
 import eu.busi.myplanning.models.UserDTO;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +21,11 @@ import java.util.Optional;
  */
 @RestController
 public class UserController implements UserApi {
+    private final UserServiceImpl userService;
+
+    public UserController(UserServiceImpl userService) {
+        this.userService = userService;
+    }
 
     @Override
     public Optional<ObjectMapper> getObjectMapper() {
@@ -29,26 +39,59 @@ public class UserController implements UserApi {
 
     @Override
     public ResponseEntity<Boolean> deleteUser(Long id) {
-        return null;
+        try {
+            return new ResponseEntity<>(this.userService.deleteById(id), HttpStatus.OK);
+        } catch (NotDeletedException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
     public ResponseEntity<UserDTO> findUser(Long id) {
-        return null;
+        try {
+            Optional<UserDTO> optional = this.userService.findById(id);
+
+            if (optional.isPresent()) {
+                return new ResponseEntity<>(optional.get(), HttpStatus.OK);
+            } else {
+                throw new NotFoundException();
+            }
+        } catch (NotFoundException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
     public ResponseEntity<PageUserDTO> listUsers(Pageable pageable) {
-        return null;
+        try {
+            PageUserDTO page = new PageUserDTO().content(this.userService.findAll());
+
+            return new ResponseEntity<PageUserDTO>(page, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
     public ResponseEntity<UserDTO> saveUser(UserDTO body) {
-        return null;
+        try {
+            return new ResponseEntity<>(this.userService.save(body), HttpStatus.CREATED);
+        } catch (NotSavedException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
     public ResponseEntity<UserDTO> updateUser(UserDTO body, Long id) {
-        return null;
+        try {
+            return new ResponseEntity<>(this.userService.update(body, id), HttpStatus.CREATED);
+        } catch (NotSavedException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }

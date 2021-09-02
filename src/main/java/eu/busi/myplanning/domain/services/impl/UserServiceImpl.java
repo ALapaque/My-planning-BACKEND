@@ -1,7 +1,9 @@
 package eu.busi.myplanning.domain.services.impl;
 
-import eu.busi.myplanning.domain.mappers.*;
-import eu.busi.myplanning.domain.models.Agenda;
+import eu.busi.myplanning.domain.mappers.CardMapper;
+import eu.busi.myplanning.domain.mappers.RoleMapper;
+import eu.busi.myplanning.domain.mappers.TeamMapper;
+import eu.busi.myplanning.domain.mappers.UserMapper;
 import eu.busi.myplanning.domain.models.UserEntity;
 import eu.busi.myplanning.domain.repositories.UserRepository;
 import eu.busi.myplanning.domain.services.UserService;
@@ -9,7 +11,6 @@ import eu.busi.myplanning.exceptions.NotDeletedException;
 import eu.busi.myplanning.exceptions.NotFoundException;
 import eu.busi.myplanning.exceptions.NotSavedException;
 import eu.busi.myplanning.exceptions.NotUpdatedException;
-import eu.busi.myplanning.models.AgendaDTO;
 import eu.busi.myplanning.models.UserDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -117,7 +118,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO update(UserDTO entity, Long id) throws NotFoundException {
+    public UserDTO update(UserDTO entity, Long id) throws NotUpdatedException {
         try {
             Optional<UserDTO> optional = findById(id);
 

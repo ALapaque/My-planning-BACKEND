@@ -6,4 +6,5 @@ public class NotDeletedException extends ResponseEntityException {
     public NotDeletedException() {
         super("An error occured while trying to delete the ressource");
     }
+
 }

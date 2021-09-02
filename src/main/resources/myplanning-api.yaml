@@ -139,6 +139,10 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            '*/*':
+              schema:
+                type: boolean
   /schedule/{id}:
     get:
       tags:
@@ -196,6 +200,10 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            '*/*':
+              schema:
+                type: boolean
   /role/{id}:
     get:
       tags:
@@ -253,6 +261,10 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            '*/*':
+              schema:
+                type: boolean
   /event/{id}:
     get:
       tags:
@@ -310,6 +322,10 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            '*/*':
+              schema:
+                type: boolean
   /comment/{id}:
     get:
       tags:
@@ -367,6 +383,10 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            '*/*':
+              schema:
+                type: boolean
   /card/{id}:
     get:
       tags:
@@ -424,6 +444,10 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            '*/*':
+              schema:
+                type: boolean
   /authority/{id}:
     get:
       tags:
@@ -481,6 +505,10 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            '*/*':
+              schema:
+                type: boolean
   /user:
     get:
       tags:
@@ -880,10 +908,7 @@ paths:
           in: query
           required: true
           schema:
-            type: string
-            enum:
-              - MEETING
-              - APPOINTMENT
+            $ref: '#/components/schemas/CardType'
         - name: start
           in: query
           required: true
@@ -924,6 +949,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgendaDTO'
+        "400":
+          description: Une erreur est survenue
     delete:
       tags:
         - "Agenda API"
@@ -987,6 +1014,32 @@ paths:
 
 components:
   schemas:
+    CardSize:
+      type: string
+      enum:
+        - tiny
+        - small
+        - medium
+        - large
+        - giant
+    CardType:
+      type: string
+      enum:
+        - MEETING
+        - APPOINTMENT
+    EventStatus:
+      type: string
+      enum:
+        - BUSY
+        - FREE
+        - AWAY
+    EventType:
+      type: string
+      enum:
+        - MEETING
+        - APPOINTMENT
+        - PRIVATE
+        - DAYOFF
     AgendaDTO:
       type: object
       properties:
@@ -1038,18 +1091,9 @@ components:
         recap:
           type: boolean
         type:
-          type: string
-          enum:
-            - MEETING
-            - APPOINTMENT
+          $ref: '#/components/schemas/CardType'
         size:
-          type: string
-          enum:
-            - tiny
-            - small
-            - medium
-            - large
-            - giant
+          $ref: '#/components/schemas/CardSize'
         users:
           type: array
           items:
@@ -1089,18 +1133,9 @@ components:
         name:
           type: string
         statusDisplayed:
-          type: string
-          enum:
-            - BUSY
-            - FREE
-            - AWAY
+          $ref: '#/components/schemas/EventStatus'
         eventType:
-          type: string
-          enum:
-            - MEETING
-            - APPOINTMENT
-            - PRIVATE
-            - DAYOFF
+          $ref: '#/components/schemas/EventType'
         startDate:
           type: string
           format: date-time
@@ -1250,18 +1285,9 @@ components:
         recap:
           type: boolean
         type:
-          type: string
-          enum:
-            - MEETING
-            - APPOINTMENT
+          $ref: '#/components/schemas/CardType'
         size:
-          type: string
-          enum:
-            - tiny
-            - small
-            - medium
-            - large
-            - giant
+          $ref: '#/components/schemas/CardSize'
     CommentLightDTO:
       required:
         - content
@@ -1287,18 +1313,9 @@ components:
         name:
           type: string
         statusDisplayed:
-          type: string
-          enum:
-            - BUSY
-            - FREE
-            - AWAY
+          $ref: '#/components/schemas/EventStatus'
         eventType:
-          type: string
-          enum:
-            - MEETING
-            - APPOINTMENT
-            - PRIVATE
-            - DAYOFF
+          $ref: '#/components/schemas/EventType'
         startDate:
           type: string
           format: date-time

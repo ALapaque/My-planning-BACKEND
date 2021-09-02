@@ -2,9 +2,14 @@ package eu.busi.myplanning.domain.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.busi.myplanning.api.AuthorityApi;
+import eu.busi.myplanning.domain.services.impl.AuthorityServiceImpl;
+import eu.busi.myplanning.exceptions.NotDeletedException;
+import eu.busi.myplanning.exceptions.NotFoundException;
+import eu.busi.myplanning.exceptions.NotSavedException;
 import eu.busi.myplanning.models.AuthorityDTO;
 import eu.busi.myplanning.models.PageAuthorityDTO;
 import eu.busi.myplanning.models.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +18,12 @@ import java.util.Optional;
 
 @RestController
 public class AuthorityController implements AuthorityApi {
+    private final AuthorityServiceImpl authorityService;
+
+    public AuthorityController(AuthorityServiceImpl authorityService) {
+        this.authorityService = authorityService;
+    }
+
     @Override
     public Optional<ObjectMapper> getObjectMapper() {
         return Optional.empty();
@@ -24,27 +35,60 @@ public class AuthorityController implements AuthorityApi {
     }
 
     @Override
-    public ResponseEntity<Void> deleteAuthority(Long id) {
-        return null;
+    public ResponseEntity<Boolean> deleteAuthority(Long id) {
+        try {
+            return new ResponseEntity<>(this.authorityService.deleteById(id), HttpStatus.OK);
+        } catch (NotDeletedException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
     public ResponseEntity<AuthorityDTO> findAuthority(Long id) {
-        return null;
+        try {
+            Optional<AuthorityDTO> optional = this.authorityService.findById(id);
+
+            if (optional.isPresent()) {
+                return new ResponseEntity<>(optional.get(), HttpStatus.OK);
+            } else {
+                throw new NotFoundException();
+            }
+        } catch (NotFoundException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
     public ResponseEntity<PageAuthorityDTO> listAuthorities(Pageable pageable) {
-        return null;
+        try {
+            PageAuthorityDTO page = new PageAuthorityDTO().content(this.authorityService.findAll());
+
+            return new ResponseEntity<PageAuthorityDTO>(page, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
     public ResponseEntity<AuthorityDTO> saveAuthority(AuthorityDTO body) {
-        return null;
+        try {
+            return new ResponseEntity<>(this.authorityService.save(body), HttpStatus.CREATED);
+        } catch (NotSavedException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
     public ResponseEntity<AuthorityDTO> updateAuthority(AuthorityDTO body, Long id) {
-        return null;
+        try {
+            return new ResponseEntity<>(this.authorityService.update(body, id), HttpStatus.CREATED);
+        } catch (NotSavedException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }

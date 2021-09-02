@@ -10,6 +10,7 @@ import eu.busi.myplanning.models.JwtAuthenticationRequest;
 import eu.busi.myplanning.models.UserDTO;
 import eu.busi.myplanning.payload.JwtAuthenticationResponse;
 import eu.busi.myplanning.utils.JwtUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,14 +27,14 @@ import java.util.Optional;
  */
 @RestController
 public class AuthController implements AuthApi {
-    private final AuthenticationManager _authenticationManager;
-    private final AuthService _authService;
+    private final AuthService authService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
     private final MyUserDetailService myUserDetailService;
     private final JwtUtil jwtUtils;
 
-    public AuthController(AuthenticationManager _authenticationManager, AuthService _authService, MyUserDetailService _myUserDetailService, JwtUtil _jwtUtils) {
-        this._authenticationManager = _authenticationManager;
-        this._authService = _authService;
+    public AuthController(AuthService _authService, MyUserDetailService _myUserDetailService, JwtUtil _jwtUtils) {
+        this.authService = _authService;
         this.myUserDetailService = _myUserDetailService;
         this.jwtUtils = _jwtUtils;
     }
@@ -53,7 +54,7 @@ public class AuthController implements AuthApi {
         ResponseEntity<Object> _responseEntity;
 
         try {
-            _authenticationManager.authenticate(
+            authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             body.getUsernameOrEmail(),
                             body.getPassword()
@@ -77,7 +78,7 @@ public class AuthController implements AuthApi {
 
         try {
             _responseEntity = new ResponseEntity<Object>(
-                    UserMapper.INSTANCE.asDTO(_authService.register(UserMapper.INSTANCE.fromDtoToEntity(body))),
+                    UserMapper.INSTANCE.asDTO(authService.register(UserMapper.INSTANCE.fromDtoToEntity(body))),
                     HttpStatus.CREATED
             );
         } catch (Exception e) {

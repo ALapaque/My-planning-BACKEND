@@ -24,7 +24,7 @@ public class RoleController implements RoleApi {
     }
 
     @Override
-    public ResponseEntity<Void> deleteRole(Long id) {
+    public ResponseEntity<Boolean> deleteRole(Long id) {
         return null;
     }
 

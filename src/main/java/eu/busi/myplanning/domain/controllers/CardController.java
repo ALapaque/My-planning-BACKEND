@@ -2,10 +2,13 @@ package eu.busi.myplanning.domain.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.busi.myplanning.api.CardApi;
-import eu.busi.myplanning.models.CardDTO;
-import eu.busi.myplanning.models.EventDTO;
-import eu.busi.myplanning.models.PageCardDTO;
-import eu.busi.myplanning.models.Pageable;
+import eu.busi.myplanning.domain.services.impl.CardServiceImpl;
+import eu.busi.myplanning.domain.services.impl.EventServiceImpl;
+import eu.busi.myplanning.exceptions.NotDeletedException;
+import eu.busi.myplanning.exceptions.NotFoundException;
+import eu.busi.myplanning.exceptions.NotSavedException;
+import eu.busi.myplanning.models.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +19,13 @@ import java.util.Optional;
 
 @RestController
 public class CardController implements CardApi {
+    private final CardServiceImpl cardService;
+    private final EventServiceImpl eventService;
+
+    public CardController(CardServiceImpl cardService, EventServiceImpl eventService) {
+        this.cardService = cardService;
+        this.eventService = eventService;
+    }
 
     @Override
     public Optional<ObjectMapper> getObjectMapper() {
@@ -28,37 +38,90 @@ public class CardController implements CardApi {
     }
 
     @Override
-    public ResponseEntity<Void> deleteCard(Long id) {
-        return null;
+    public ResponseEntity<Boolean> deleteCard(Long id) {
+        try {
+            return new ResponseEntity<>(this.cardService.deleteById(id), HttpStatus.OK);
+        } catch (NotDeletedException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
     public ResponseEntity<CardDTO> findCard(Long id) {
-        return null;
+        try {
+            Optional<CardDTO> optional = this.cardService.findById(id);
+
+            if (optional.isPresent()) {
+                return new ResponseEntity<>(optional.get(), HttpStatus.OK);
+            } else {
+                throw new NotFoundException();
+            }
+        } catch (NotFoundException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
-    public ResponseEntity<List<EventDTO>> findCardContent(Long userId, String type, LocalDateTime start, LocalDateTime end) {
-        return null;
+    public ResponseEntity<List<EventDTO>> findCardContent(Long userId, CardType type, LocalDateTime start, LocalDateTime end) {
+        try {
+            List<EventDTO> events = null;
+
+            if (type.equals(CardType.APPOINTMENT)) {
+                events = this.eventService.findEventsByUserAndTypeAndStartAndEnd(userId, EventType.APPOINTMENT, start, end);
+            } else if (type.equals(CardType.MEETING)) {
+                events = this.eventService.findEventsByUserAndTypeAndStartAndEnd(userId, EventType.MEETING, start, end);
+            }
+
+            if (events.isEmpty()) {
+                throw new NotFoundException();
+            } else {
+                return new ResponseEntity<>(events, HttpStatus.OK);
+            }
+        } catch (NotFoundException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
     public ResponseEntity<List<CardDTO>> findCardsByUser(Long id) {
-        return null;
+        try {
+            return new ResponseEntity<>(this.cardService.findCardsByUserId(id), HttpStatus.OK);
+        } catch (NotFoundException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
     public ResponseEntity<PageCardDTO> listCards(Pageable pageable) {
-        return null;
-    }
+        try {
+            PageCardDTO page = new PageCardDTO().content(this.cardService.findAll());
+
+            return new ResponseEntity<PageCardDTO>(page, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }    }
 
     @Override
     public ResponseEntity<CardDTO> saveCard(CardDTO body) {
-        return null;
+        try {
+            return new ResponseEntity<>(this.cardService.save(body), HttpStatus.CREATED);
+        } catch (NotSavedException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
     public ResponseEntity<CardDTO> updateCard(CardDTO body, Long id) {
-        return null;
-    }
+        try {
+            return new ResponseEntity<>(this.cardService.update(body, id), HttpStatus.CREATED);
+        } catch (NotSavedException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }    }
 }

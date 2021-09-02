@@ -1,7 +1,8 @@
 package eu.busi.myplanning.domain.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import eu.busi.myplanning.models.EventDTO;
+import eu.busi.myplanning.models.EventStatus;
+import eu.busi.myplanning.models.EventType;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -33,11 +34,11 @@ public class Event extends DateAudit implements AbstractEntity<Long>, Serializab
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private EventDTO.StatusDisplayedEnum statusDisplayed;
+    private EventStatus statusDisplayed;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private EventDTO.EventTypeEnum eventType;
+    private EventType eventType;
 
     @Column(nullable = false)
     private LocalDateTime startDate;
@@ -149,19 +150,19 @@ public class Event extends DateAudit implements AbstractEntity<Long>, Serializab
         isPrivate = aPrivate;
     }
 
-    public EventDTO.StatusDisplayedEnum getStatusDisplayed() {
+    public EventStatus getStatusDisplayed() {
         return statusDisplayed;
     }
 
-    public void setStatusDisplayed(EventDTO.StatusDisplayedEnum statusDisplayed) {
+    public void setStatusDisplayed(EventStatus statusDisplayed) {
         this.statusDisplayed = statusDisplayed;
     }
 
-    public EventDTO.EventTypeEnum getEventType() {
+    public EventType getEventType() {
         return eventType;
     }
 
-    public void setEventType(EventDTO.EventTypeEnum eventType) {
+    public void setEventType(EventType eventType) {
         this.eventType = eventType;
     }
 

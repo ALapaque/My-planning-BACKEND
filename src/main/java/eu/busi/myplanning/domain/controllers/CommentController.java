@@ -2,9 +2,14 @@ package eu.busi.myplanning.domain.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.busi.myplanning.api.CommentApi;
+import eu.busi.myplanning.domain.services.impl.CommentServiceImpl;
+import eu.busi.myplanning.exceptions.NotDeletedException;
+import eu.busi.myplanning.exceptions.NotFoundException;
+import eu.busi.myplanning.exceptions.NotSavedException;
 import eu.busi.myplanning.models.CommentDTO;
 import eu.busi.myplanning.models.PageCommentDTO;
 import eu.busi.myplanning.models.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +18,11 @@ import java.util.Optional;
 
 @RestController
 public class CommentController implements CommentApi {
+    private final CommentServiceImpl commentService;
+
+    public CommentController(CommentServiceImpl commentService) {
+        this.commentService = commentService;
+    }
 
     @Override
     public Optional<ObjectMapper> getObjectMapper() {
@@ -25,27 +35,60 @@ public class CommentController implements CommentApi {
     }
 
     @Override
-    public ResponseEntity<Void> deleteComment(Long id) {
-        return null;
+    public ResponseEntity<Boolean> deleteComment(Long id) {
+        try {
+            return new ResponseEntity<>(this.commentService.deleteById(id), HttpStatus.OK);
+        } catch (NotDeletedException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
     public ResponseEntity<CommentDTO> findComment(Long id) {
-        return null;
+        try {
+            Optional<CommentDTO> optional = this.commentService.findById(id);
+
+            if (optional.isPresent()) {
+                return new ResponseEntity<>(optional.get(), HttpStatus.OK);
+            } else {
+                throw new NotFoundException();
+            }
+        } catch (NotFoundException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
     public ResponseEntity<PageCommentDTO> listComments(Pageable pageable) {
-        return null;
+        try {
+            PageCommentDTO page = new PageCommentDTO().content(this.commentService.findAll());
+
+            return new ResponseEntity<PageCommentDTO>(page, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
     public ResponseEntity<CommentDTO> saveComment(CommentDTO body) {
-        return null;
+        try {
+            return new ResponseEntity<>(this.commentService.save(body), HttpStatus.CREATED);
+        } catch (NotSavedException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
     public ResponseEntity<CommentDTO> updateComment(CommentDTO body, Long id) {
-        return null;
+        try {
+            return new ResponseEntity<>(this.commentService.update(body, id), HttpStatus.CREATED);
+        } catch (NotSavedException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }
