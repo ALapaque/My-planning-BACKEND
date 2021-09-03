@@ -1,5 +1,6 @@
 package eu.busi.myplanning.domain.services.impl;
 
+import eu.busi.myplanning.domain.dto.AgendaDTO;
 import eu.busi.myplanning.domain.mappers.AgendaMapper;
 import eu.busi.myplanning.domain.mappers.TeamMapper;
 import eu.busi.myplanning.domain.mappers.UserMapper;
@@ -12,7 +13,6 @@ import eu.busi.myplanning.exceptions.NotDeletedException;
 import eu.busi.myplanning.exceptions.NotFoundException;
 import eu.busi.myplanning.exceptions.NotSavedException;
 import eu.busi.myplanning.exceptions.NotUpdatedException;
-import eu.busi.myplanning.models.AgendaDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

@@ -1,5 +1,7 @@
 package eu.busi.myplanning.domain.services.impl;
 
+import eu.busi.myplanning.domain.dto.EventDTO;
+import eu.busi.myplanning.domain.dto.EventType;
 import eu.busi.myplanning.domain.mappers.AgendaMapper;
 import eu.busi.myplanning.domain.mappers.CommentMapper;
 import eu.busi.myplanning.domain.mappers.EventMapper;
@@ -14,14 +16,13 @@ import eu.busi.myplanning.exceptions.NotDeletedException;
 import eu.busi.myplanning.exceptions.NotFoundException;
 import eu.busi.myplanning.exceptions.NotSavedException;
 import eu.busi.myplanning.exceptions.NotUpdatedException;
-import eu.busi.myplanning.models.EventDTO;
-import eu.busi.myplanning.models.EventType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -172,7 +173,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<EventDTO> findEventsByUserAndTypeAndStartAndEnd(Long id, EventType type, LocalDateTime start, LocalDateTime end) throws NotFoundException {
+    public List<EventDTO> findEventsByUserAndTypeAndStartAndEnd(Long id, EventType type, Instant start, Instant end) throws NotFoundException {
         try {
             Optional<UserEntity> optional = userRepository.findById(id);
 
@@ -184,7 +185,7 @@ public class EventServiceImpl implements EventService {
                                 agendas,
                                 type.toString(),
                                 start,
-                                end.format(DateTimeFormatter.ISO_LOCAL_DATE))
+                                LocalDateTime.ofInstant(end, this.zoneId).format(DateTimeFormatter.ISO_LOCAL_DATE))
                         .stream()
                         .map(EventMapper.INSTANCE::asDTO)
                         .collect(Collectors.toList());
@@ -197,7 +198,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<EventDTO> findEventsByUserAndStartAndEnd(Long id, LocalDateTime startDate, LocalDateTime endDate) throws NotFoundException {
+    public List<EventDTO> findEventsByUserAndStartAndEnd(Long id, Instant startDate, Instant endDate) throws NotFoundException {
         try {
             Optional<UserEntity> optional = userRepository.findById(id);
 

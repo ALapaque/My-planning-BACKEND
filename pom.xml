@@ -143,15 +143,24 @@
                         <configuration>
                             <inputSpec>${project.basedir}/src/main/resources/myplanning-api.yaml</inputSpec>
                             <language>spring</language>
-                            <output>${project.build.directory}/generated-sources/</output>
+                            <output>${project.basedir}</output>
                             <generateSupportingFiles>false</generateSupportingFiles>
-                            <apiPackage>eu.busi.myplanning.api</apiPackage>
-                            <modelPackage>eu.busi.myplanning.models</modelPackage>
+                            <apiPackage>eu.busi.myplanning.domain.api</apiPackage>
+                            <modelPackage>eu.busi.myplanning.domain.dto</modelPackage>
                             <configOptions>
                                 <interfaceOnly>true</interfaceOnly>
                                 <defaultInterfaces>false</defaultInterfaces>
-                                <dateLibrary>java8-localdatetime</dateLibrary>
+                                <java8>true</java8>
+                                <dateLibrary>custom</dateLibrary>
                             </configOptions>
+                            <typeMappings>
+                                <typeMapping>DateTime=Instant</typeMapping>
+                                <typeMapping>Date=Time</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>Instant=java.time.Instant</importMapping>
+                                <importMapping>java.util.Date=java.sql.Time</importMapping>
+                            </importMappings>
                         </configuration>
                     </execution>
                 </executions>

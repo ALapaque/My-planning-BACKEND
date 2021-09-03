@@ -1,5 +1,6 @@
 package eu.busi.myplanning.domain.services.impl;
 
+import eu.busi.myplanning.domain.dto.RoleDTO;
 import eu.busi.myplanning.domain.mappers.AuthorityMapper;
 import eu.busi.myplanning.domain.mappers.RoleMapper;
 import eu.busi.myplanning.domain.models.Role;
@@ -9,7 +10,6 @@ import eu.busi.myplanning.exceptions.NotDeletedException;
 import eu.busi.myplanning.exceptions.NotFoundException;
 import eu.busi.myplanning.exceptions.NotSavedException;
 import eu.busi.myplanning.exceptions.NotUpdatedException;
-import eu.busi.myplanning.models.RoleDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

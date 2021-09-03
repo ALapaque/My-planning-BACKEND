@@ -1,13 +1,13 @@
 package eu.busi.myplanning.domain.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eu.busi.myplanning.api.TeamApi;
+import eu.busi.myplanning.domain.api.TeamApi;
+import eu.busi.myplanning.domain.dto.Pageable;
+import eu.busi.myplanning.domain.dto.TeamDTO;
 import eu.busi.myplanning.domain.services.impl.TeamServiceImpl;
 import eu.busi.myplanning.exceptions.NotDeletedException;
 import eu.busi.myplanning.exceptions.NotFoundException;
 import eu.busi.myplanning.exceptions.NotSavedException;
-import eu.busi.myplanning.models.Pageable;
-import eu.busi.myplanning.models.TeamDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;

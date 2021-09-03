@@ -1,18 +1,19 @@
 package eu.busi.myplanning.domain.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eu.busi.myplanning.api.CardApi;
+import eu.busi.myplanning.domain.api.CardApi;
+import eu.busi.myplanning.domain.dto.*;
 import eu.busi.myplanning.domain.services.impl.CardServiceImpl;
 import eu.busi.myplanning.domain.services.impl.EventServiceImpl;
 import eu.busi.myplanning.exceptions.NotDeletedException;
 import eu.busi.myplanning.exceptions.NotFoundException;
 import eu.busi.myplanning.exceptions.NotSavedException;
-import eu.busi.myplanning.models.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -64,7 +65,7 @@ public class CardController implements CardApi {
     }
 
     @Override
-    public ResponseEntity<Object> findCardContent(Long userId, CardType type, LocalDateTime start, LocalDateTime end) {
+    public ResponseEntity<Object> findCardContent(Long userId, CardType type, Instant start, Instant end) {
         try {
             List<EventDTO> events = null;
 

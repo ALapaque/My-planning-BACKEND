@@ -1,8 +1,8 @@
 package eu.busi.myplanning.domain.mappers;
 
+import eu.busi.myplanning.domain.dto.EventDTO;
+import eu.busi.myplanning.domain.dto.EventLightDTO;
 import eu.busi.myplanning.domain.models.Event;
-import eu.busi.myplanning.models.EventDTO;
-import eu.busi.myplanning.models.EventLightDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

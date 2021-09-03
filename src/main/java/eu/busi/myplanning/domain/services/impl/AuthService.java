@@ -5,7 +5,6 @@ import eu.busi.myplanning.domain.repositories.CardRepository;
 import eu.busi.myplanning.domain.repositories.RoleRepository;
 import eu.busi.myplanning.domain.repositories.UserRepository;
 import org.apache.velocity.exception.ResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**

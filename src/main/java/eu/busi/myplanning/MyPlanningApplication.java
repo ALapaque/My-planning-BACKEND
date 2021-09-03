@@ -14,13 +14,13 @@ import java.util.TimeZone;
 @OpenAPIDefinition(info = @Info(title = "MyPlanning API", version = "0.0.1"))
 public class MyPlanningApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(MyPlanningApplication.class, args);
-    }
-
     @PostConstruct
     public void init(){
         // Setting Spring Boot SetTimeZone
-        TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/Paris"));
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(MyPlanningApplication.class, args);
     }
 }

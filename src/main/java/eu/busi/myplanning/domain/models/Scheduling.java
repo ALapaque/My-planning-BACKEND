@@ -4,6 +4,7 @@ package eu.busi.myplanning.domain.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.time.LocalDateTime;
 
 /**
@@ -19,17 +20,17 @@ public class Scheduling implements AbstractEntity<Long> {
     private Integer day;
 
     @Column(nullable = false)
-    private LocalDateTime startHour;
+    private Time startHour;
 
     @Column(nullable = false)
-    private LocalDateTime endHour;
+    private Time endHour;
 
     @Column(nullable = false)
     private Boolean hasBreak;
 
-    private LocalDateTime startBreak;
+    private Time startBreak;
 
-    private LocalDateTime endBreak;
+    private Time endBreak;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idAgenda", referencedColumnName = "id")
@@ -57,19 +58,19 @@ public class Scheduling implements AbstractEntity<Long> {
         this.day = day;
     }
 
-    public LocalDateTime getStartHour() {
+    public Time getStartHour() {
         return startHour;
     }
 
-    public void setStartHour(LocalDateTime startHour) {
+    public void setStartHour(Time startHour) {
         this.startHour = startHour;
     }
 
-    public LocalDateTime getEndHour() {
+    public Time getEndHour() {
         return endHour;
     }
 
-    public void setEndHour(LocalDateTime endHour) {
+    public void setEndHour(Time endHour) {
         this.endHour = endHour;
     }
 
@@ -81,19 +82,19 @@ public class Scheduling implements AbstractEntity<Long> {
         this.hasBreak = hasBreak;
     }
 
-    public LocalDateTime getStartBreak() {
+    public Time getStartBreak() {
         return startBreak;
     }
 
-    public void setStartBreak(LocalDateTime startBreak) {
+    public void setStartBreak(Time startBreak) {
         this.startBreak = startBreak;
     }
 
-    public LocalDateTime getEndBreak() {
+    public Time getEndBreak() {
         return endBreak;
     }
 
-    public void setEndBreak(LocalDateTime endBreak) {
+    public void setEndBreak(Time endBreak) {
         this.endBreak = endBreak;
     }
 

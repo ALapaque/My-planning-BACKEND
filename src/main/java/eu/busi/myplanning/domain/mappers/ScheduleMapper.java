@@ -1,8 +1,8 @@
 package eu.busi.myplanning.domain.mappers;
 
+import eu.busi.myplanning.domain.dto.ScheduleDTO;
+import eu.busi.myplanning.domain.dto.ScheduleLightDTO;
 import eu.busi.myplanning.domain.models.Scheduling;
-import eu.busi.myplanning.models.ScheduleDTO;
-import eu.busi.myplanning.models.ScheduleLightDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

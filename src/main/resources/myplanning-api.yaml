@@ -1177,18 +1177,18 @@ components:
           type: integer
         startHour:
           type: string
-          format: date-time
+          format: date
         endHour:
           type: string
-          format: date-time
+          format: date
         hasBreak:
           type: boolean
         startBreak:
           type: string
-          format: date-time
+          format: date
         endBreak:
           type: string
-          format: date-time
+          format: date
         agenda:
           $ref: '#/components/schemas/AgendaLightDTO'
     TeamDTO:
@@ -1343,18 +1343,18 @@ components:
           type: integer
         startHour:
           type: string
-          format: date-time
+          format: date
         endHour:
           type: string
-          format: date-time
+          format: date
         hasBreak:
           type: boolean
         startBreak:
           type: string
-          format: date-time
+          format: date
         endBreak:
           type: string
-          format: date-time
+          format: date
     TeamLightDTO:
       type: object
       properties:

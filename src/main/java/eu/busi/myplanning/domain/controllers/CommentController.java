@@ -1,13 +1,13 @@
 package eu.busi.myplanning.domain.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eu.busi.myplanning.api.CommentApi;
+import eu.busi.myplanning.domain.api.CommentApi;
+import eu.busi.myplanning.domain.dto.CommentDTO;
+import eu.busi.myplanning.domain.dto.Pageable;
 import eu.busi.myplanning.domain.services.impl.CommentServiceImpl;
 import eu.busi.myplanning.exceptions.NotDeletedException;
 import eu.busi.myplanning.exceptions.NotFoundException;
 import eu.busi.myplanning.exceptions.NotSavedException;
-import eu.busi.myplanning.models.CommentDTO;
-import eu.busi.myplanning.models.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;

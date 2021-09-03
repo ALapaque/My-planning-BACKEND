@@ -1,8 +1,8 @@
 package eu.busi.myplanning.domain.mappers;
 
+import eu.busi.myplanning.domain.dto.CardDTO;
+import eu.busi.myplanning.domain.dto.CardLightDTO;
 import eu.busi.myplanning.domain.models.Card;
-import eu.busi.myplanning.models.CardDTO;
-import eu.busi.myplanning.models.CardLightDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

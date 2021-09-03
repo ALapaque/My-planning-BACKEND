@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,13 +25,13 @@ public interface EventRepository extends JpaRepository<Event, Long> {
      * @return the list
      */
     @Query(value = "SELECT event.* FROM events as event where (event.id_agenda in (?1)) and event.event_type = ?2 and event.start_date >= ?3 AND event.end_date LIKE CONCAT('%',?4,'%') ORDER BY event.start_date ASC", nativeQuery = true)
-    List<Event> findEventsOfTheDayIncoming(List<Agenda> agendas, String type, LocalDateTime startDate, String endDatePattern);
+    List<Event> findEventsOfTheDayIncoming(List<Agenda> agendas, String type, Instant startDate, String endDatePattern);
 
     List<Event> findDistinctByAgendaInAndStartDateIsBetweenOrEndDateIsBetween(
             List<Agenda> agendas,
-            LocalDateTime startBetweenStartDate,
-            LocalDateTime endBetweenStartDate,
-            LocalDateTime startBetweenEndDate,
-            LocalDateTime endBetweenEndDate
+            Instant startBetweenStartDate,
+            Instant endBetweenStartDate,
+            Instant startBetweenEndDate,
+            Instant endBetweenEndDate
     );
 }

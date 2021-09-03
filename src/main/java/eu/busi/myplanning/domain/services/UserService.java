@@ -1,7 +1,6 @@
 package eu.busi.myplanning.domain.services;
 
-
-import eu.busi.myplanning.models.UserDTO;
+import eu.busi.myplanning.domain.dto.UserDTO;
 
 /**
  * The interface User service.

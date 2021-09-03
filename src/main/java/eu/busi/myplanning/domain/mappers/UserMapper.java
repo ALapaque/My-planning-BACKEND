@@ -1,8 +1,8 @@
 package eu.busi.myplanning.domain.mappers;
 
+import eu.busi.myplanning.domain.dto.UserDTO;
+import eu.busi.myplanning.domain.dto.UserLightDTO;
 import eu.busi.myplanning.domain.models.UserEntity;
-import eu.busi.myplanning.models.UserDTO;
-import eu.busi.myplanning.models.UserLightDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

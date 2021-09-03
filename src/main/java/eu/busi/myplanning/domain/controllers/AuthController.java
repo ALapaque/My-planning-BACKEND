@@ -2,12 +2,12 @@ package eu.busi.myplanning.domain.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eu.busi.myplanning.api.AuthApi;
+import eu.busi.myplanning.domain.api.AuthApi;
+import eu.busi.myplanning.domain.dto.JwtAuthenticationRequest;
+import eu.busi.myplanning.domain.dto.UserDTO;
 import eu.busi.myplanning.domain.mappers.UserMapper;
 import eu.busi.myplanning.domain.services.impl.AuthService;
 import eu.busi.myplanning.domain.services.impl.MyUserDetailService;
-import eu.busi.myplanning.models.JwtAuthenticationRequest;
-import eu.busi.myplanning.models.UserDTO;
 import eu.busi.myplanning.payload.JwtAuthenticationResponse;
 import eu.busi.myplanning.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
