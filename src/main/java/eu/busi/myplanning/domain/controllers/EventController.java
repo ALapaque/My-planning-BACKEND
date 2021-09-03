@@ -63,8 +63,8 @@ public class EventController implements EventApi {
     @Override
     public ResponseEntity<Object> listEvents(
             Long userId,
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate
+            @DateTimeFormat(pattern = "yyyyMMdd HH:mm:ss.SSSSSS ZZZ") LocalDateTime startDate,
+            @DateTimeFormat(pattern = "yyyyMMdd HH:mm:ss.SSSSSS ZZZ") LocalDateTime endDate
     ) {
         try {
             return new ResponseEntity<>(this.eventService.findEventsByUserAndStartAndEnd(userId, startDate, endDate), HttpStatus.OK);
