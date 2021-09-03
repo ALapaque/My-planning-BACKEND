@@ -136,25 +136,30 @@ public class EventServiceImpl implements EventService {
                 Event event = EventMapper.INSTANCE.fromDtoToEntity(optional.get());
 
                 event.setName(entity.getName());
-                event.setADayOff(entity.isAdayOff());
-                event.setPrivate(entity.isPrivate());
+                event.setDayOff(entity.isDayOff());
+                event.setPrivateEvent(entity.isPrivateEvent());
                 event.setStatusDisplayed(entity.getStatusDisplayed());
                 event.setEventType(entity.getEventType());
                 event.setStartDate(entity.getStartDate());
                 event.setEndDate(entity.getEndDate());
                 event.setMeetingUrl(entity.getMeetingUrl());
                 event.setReport(entity.getReport());
-                event.setComments(entity
-                        .getComments()
-                        .stream()
-                        .map(CommentMapper.INSTANCE::fromDtoToEntity)
-                        .collect(Collectors.toList()));
                 event.setAgenda(AgendaMapper.INSTANCE.fromDtoToEntity(entity.getAgenda()));
-                event.setSharedAgendas(entity
-                        .getSharedAgendas()
-                        .stream()
-                        .map(AgendaMapper.INSTANCE::fromLightDtoToEntity)
-                        .collect(Collectors.toList()));
+                if (!entity.getComments().isEmpty()) {
+                    event.setComments(entity
+                            .getComments()
+                            .stream()
+                            .map(CommentMapper.INSTANCE::fromDtoToEntity)
+                            .collect(Collectors.toList()));
+                }
+
+                if (!entity.getSharedAgendas().isEmpty()) {
+                    event.setSharedAgendas(entity
+                            .getSharedAgendas()
+                            .stream()
+                            .map(AgendaMapper.INSTANCE::fromLightDtoToEntity)
+                            .collect(Collectors.toList()));
+                }
 
                 return save(EventMapper.INSTANCE.asDTO(repository.save(event)));
 

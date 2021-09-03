@@ -1,9 +1,7 @@
 package eu.busi.myplanning.domain.services.impl;
 
-import eu.busi.myplanning.domain.mappers.AgendaMapper;
 import eu.busi.myplanning.domain.mappers.AuthorityMapper;
 import eu.busi.myplanning.domain.mappers.RoleMapper;
-import eu.busi.myplanning.domain.models.Agenda;
 import eu.busi.myplanning.domain.models.Role;
 import eu.busi.myplanning.domain.repositories.RoleRepository;
 import eu.busi.myplanning.domain.services.RoleService;
@@ -11,7 +9,6 @@ import eu.busi.myplanning.exceptions.NotDeletedException;
 import eu.busi.myplanning.exceptions.NotFoundException;
 import eu.busi.myplanning.exceptions.NotSavedException;
 import eu.busi.myplanning.exceptions.NotUpdatedException;
-import eu.busi.myplanning.models.AgendaDTO;
 import eu.busi.myplanning.models.RoleDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

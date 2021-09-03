@@ -27,10 +27,10 @@ public class Event extends DateAudit implements AbstractEntity<Long>, Serializab
     private String name;
 
     @Column(nullable = false, name = "is_a_day_off")
-    private boolean isADayOff;
+    private boolean dayOff = false;
 
-    @Column(nullable = false)
-    private boolean isPrivate;
+    @Column(nullable = false, name = "is_private")
+    private boolean privateEvent = false;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -119,17 +119,17 @@ public class Event extends DateAudit implements AbstractEntity<Long>, Serializab
      *
      * @return the boolean
      */
-    public boolean isADayOff() {
-        return isADayOff;
+    public boolean isDayOff() {
+        return dayOff;
     }
 
     /**
      * Sets a day off.
      *
-     * @param ADayOff the a day off
+     * @param dayOff the a day off
      */
-    public void setADayOff(boolean ADayOff) {
-        isADayOff = ADayOff;
+    public void setDayOff(boolean dayOff) {
+        this.dayOff = dayOff;
     }
 
     /**
@@ -137,17 +137,17 @@ public class Event extends DateAudit implements AbstractEntity<Long>, Serializab
      *
      * @return the boolean
      */
-    public boolean isPrivate() {
-        return isPrivate;
+    public boolean isPrivateEvent() {
+        return privateEvent;
     }
 
     /**
      * Sets private.
      *
-     * @param aPrivate the a private
+     * @param privateEvent the a private
      */
-    public void setPrivate(boolean aPrivate) {
-        isPrivate = aPrivate;
+    public void setPrivateEvent(boolean privateEvent) {
+        this.privateEvent = privateEvent;
     }
 
     public EventStatus getStatusDisplayed() {

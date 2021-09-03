@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -46,7 +45,7 @@ public class EventController implements EventApi {
     }
 
     @Override
-    public ResponseEntity<EventDTO> findEvent(Long id) {
+    public ResponseEntity<Object> findEvent(Long id) {
         try {
             Optional<EventDTO> optional = this.eventService.findById(id);
 
@@ -62,7 +61,7 @@ public class EventController implements EventApi {
     }
 
     @Override
-    public ResponseEntity<List<EventDTO>> listEvents(
+    public ResponseEntity<Object> listEvents(
             Long userId,
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate
@@ -76,7 +75,7 @@ public class EventController implements EventApi {
     }
 
     @Override
-    public ResponseEntity<EventDTO> saveEvent(EventDTO body) {
+    public ResponseEntity<Object> saveEvent(EventDTO body) {
         try {
             return new ResponseEntity<>(this.eventService.save(body), HttpStatus.CREATED);
         } catch (NotSavedException e) {
@@ -86,7 +85,7 @@ public class EventController implements EventApi {
     }
 
     @Override
-    public ResponseEntity<EventDTO> updateEvent(EventDTO body, Long id) {
+    public ResponseEntity<Object> updateEvent(EventDTO body, Long id) {
         try {
             return new ResponseEntity<>(this.eventService.update(body, id), HttpStatus.CREATED);
         } catch (NotSavedException e) {

@@ -48,7 +48,7 @@ public class CardController implements CardApi {
     }
 
     @Override
-    public ResponseEntity<CardDTO> findCard(Long id) {
+    public ResponseEntity<Object> findCard(Long id) {
         try {
             Optional<CardDTO> optional = this.cardService.findById(id);
 
@@ -64,7 +64,7 @@ public class CardController implements CardApi {
     }
 
     @Override
-    public ResponseEntity<List<EventDTO>> findCardContent(Long userId, CardType type, LocalDateTime start, LocalDateTime end) {
+    public ResponseEntity<Object> findCardContent(Long userId, CardType type, LocalDateTime start, LocalDateTime end) {
         try {
             List<EventDTO> events = null;
 
@@ -86,7 +86,7 @@ public class CardController implements CardApi {
     }
 
     @Override
-    public ResponseEntity<List<CardDTO>> findCardsByUser(Long id) {
+    public ResponseEntity<Object> findCardsByUser(Long id) {
         try {
             return new ResponseEntity<>(this.cardService.findCardsByUserId(id), HttpStatus.OK);
         } catch (NotFoundException e) {
@@ -96,18 +96,18 @@ public class CardController implements CardApi {
     }
 
     @Override
-    public ResponseEntity<PageCardDTO> listCards(Pageable pageable) {
+    public ResponseEntity<Object> listCards(Pageable pageable) {
         try {
-            PageCardDTO page = new PageCardDTO().content(this.cardService.findAll());
+            //PageCardDTO page = new PageCardDTO().content(this.cardService.findAll());
 
-            return new ResponseEntity<PageCardDTO>(page, HttpStatus.OK);
+            return new ResponseEntity<>(null, HttpStatus.OK);
         } catch (NotFoundException e) {
             log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }    }
 
     @Override
-    public ResponseEntity<CardDTO> saveCard(CardDTO body) {
+    public ResponseEntity<Object> saveCard(CardDTO body) {
         try {
             return new ResponseEntity<>(this.cardService.save(body), HttpStatus.CREATED);
         } catch (NotSavedException e) {
@@ -117,7 +117,7 @@ public class CardController implements CardApi {
     }
 
     @Override
-    public ResponseEntity<CardDTO> updateCard(CardDTO body, Long id) {
+    public ResponseEntity<Object> updateCard(CardDTO body, Long id) {
         try {
             return new ResponseEntity<>(this.cardService.update(body, id), HttpStatus.CREATED);
         } catch (NotSavedException e) {

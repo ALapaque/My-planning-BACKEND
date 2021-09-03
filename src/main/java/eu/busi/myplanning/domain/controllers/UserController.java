@@ -6,7 +6,6 @@ import eu.busi.myplanning.domain.services.impl.UserServiceImpl;
 import eu.busi.myplanning.exceptions.NotDeletedException;
 import eu.busi.myplanning.exceptions.NotFoundException;
 import eu.busi.myplanning.exceptions.NotSavedException;
-import eu.busi.myplanning.models.PageUserDTO;
 import eu.busi.myplanning.models.Pageable;
 import eu.busi.myplanning.models.UserDTO;
 import org.springframework.http.HttpStatus;
@@ -48,7 +47,7 @@ public class UserController implements UserApi {
     }
 
     @Override
-    public ResponseEntity<UserDTO> findUser(Long id) {
+    public ResponseEntity<Object> findUser(Long id) {
         try {
             Optional<UserDTO> optional = this.userService.findById(id);
 
@@ -64,11 +63,11 @@ public class UserController implements UserApi {
     }
 
     @Override
-    public ResponseEntity<PageUserDTO> listUsers(Pageable pageable) {
+    public ResponseEntity<Object> listUsers(Pageable pageable) {
         try {
-            PageUserDTO page = new PageUserDTO().content(this.userService.findAll());
+            //PageUserDTO page = new PageUserDTO().content(this.userService.findAll());
 
-            return new ResponseEntity<PageUserDTO>(page, HttpStatus.OK);
+            return new ResponseEntity<>(null, HttpStatus.OK);
         } catch (NotFoundException e) {
             log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -76,7 +75,7 @@ public class UserController implements UserApi {
     }
 
     @Override
-    public ResponseEntity<UserDTO> saveUser(UserDTO body) {
+    public ResponseEntity<Object> saveUser(UserDTO body) {
         try {
             return new ResponseEntity<>(this.userService.save(body), HttpStatus.CREATED);
         } catch (NotSavedException e) {
@@ -86,7 +85,7 @@ public class UserController implements UserApi {
     }
 
     @Override
-    public ResponseEntity<UserDTO> updateUser(UserDTO body, Long id) {
+    public ResponseEntity<Object> updateUser(UserDTO body, Long id) {
         try {
             return new ResponseEntity<>(this.userService.update(body, id), HttpStatus.CREATED);
         } catch (NotSavedException e) {

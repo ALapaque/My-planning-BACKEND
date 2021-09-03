@@ -39,7 +39,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/UserDTO'
+                type: object
     put:
       tags:
         - "User API"
@@ -63,7 +63,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/UserDTO'
+                type: object
     delete:
       tags:
         - "User API"
@@ -100,7 +100,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/TeamDTO'
+                type: object
     put:
       tags:
         - "Team API"
@@ -124,7 +124,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/TeamDTO'
+                type: object
     delete:
       tags:
         - "Team API"
@@ -161,7 +161,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ScheduleDTO'
+                type: object
     put:
       tags:
         - "Schedule API"
@@ -185,7 +185,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ScheduleDTO'
+                type: object
     delete:
       tags:
         - "Schedule API"
@@ -222,7 +222,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/RoleDTO'
+                type: object
     put:
       tags:
         - "Role API"
@@ -246,7 +246,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/RoleDTO'
+                type: object
     delete:
       tags:
         - "Role API"
@@ -283,7 +283,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/EventDTO'
+                type: object
     put:
       tags:
         - "Event API"
@@ -307,7 +307,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/EventDTO'
+                type: object
     delete:
       tags:
         - "Event API"
@@ -344,7 +344,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/CommentDTO'
+                type: object
     put:
       tags:
         - "Comment API"
@@ -368,7 +368,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/CommentDTO'
+                type: object
     delete:
       tags:
         - "Comment API"
@@ -405,7 +405,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/CardDTO'
+                type: object
     put:
       tags:
         - "Card API"
@@ -429,7 +429,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/CardDTO'
+                type: object
     delete:
       tags:
         - "Card API"
@@ -466,7 +466,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/AuthorityDTO'
+                type: object
     put:
       tags:
         - "Authority API"
@@ -490,7 +490,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/AuthorityDTO'
+                type: object
     delete:
       tags:
         - "Authority API"
@@ -526,7 +526,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/PageUserDTO'
+                type: object
     post:
       tags:
         - "User API"
@@ -543,7 +543,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/UserDTO'
+                type: object
   /team:
     get:
       tags:
@@ -561,7 +561,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/PageTeamDTO'
+                type: object
     post:
       tags:
         - "Team API"
@@ -578,7 +578,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/TeamDTO'
+                type: object
   /schedule:
     get:
       tags:
@@ -596,7 +596,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/PageScheduleDTO'
+                type: object
     post:
       tags:
         - "Schedule API"
@@ -613,7 +613,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ScheduleDTO'
+                type: object
   /role:
     get:
       tags:
@@ -631,7 +631,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/PageRoleDTO'
+                type: object
     post:
       tags:
         - "Role API"
@@ -648,7 +648,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/RoleDTO'
+                type: object
   /event:
     get:
       tags:
@@ -679,9 +679,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/EventDTO'
+                type: object
     post:
       tags:
         - "Event API"
@@ -698,7 +696,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/EventDTO'
+                type: object
   /comment:
     get:
       tags:
@@ -716,7 +714,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/PageCommentDTO'
+                type: object
     post:
       tags:
         - "Comment API"
@@ -733,7 +731,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/CommentDTO'
+                type: object
   /card:
     get:
       tags:
@@ -751,7 +749,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/PageCardDTO'
+                type: object
     post:
       tags:
         - "Card API"
@@ -768,7 +766,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/CardDTO'
+                type: object
   /authority:
     get:
       tags:
@@ -786,7 +784,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/PageAuthorityDTO'
+                type: object
     post:
       tags:
         - "Authority API"
@@ -803,7 +801,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/AuthorityDTO'
+                type: object
   /auth/register:
     post:
       tags:
@@ -851,9 +849,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/AgendaDTO'
+                type: object
     post:
       tags:
         - "Agenda API"
@@ -865,12 +861,12 @@ paths:
               $ref: '#/components/schemas/AgendaDTO'
         required: true
       responses:
-        "200":
+        "201":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AgendaDTO'
+                type: object
   /card/user/{id}:
     get:
       tags:
@@ -889,9 +885,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CardDTO'
+                type: object
   /card/incoming:
     get:
       tags:
@@ -927,9 +921,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/EventDTO'
+                type: object
   /agenda/{id}:
     get:
       tags:
@@ -948,7 +940,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AgendaDTO'
+                type: object
         "400":
           description: Une erreur est survenue
     delete:
@@ -987,9 +979,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/AgendaDTO'
+                type: object
   /agenda/shared/user/{id}:
     get:
       tags:
@@ -1008,12 +998,11 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/AgendaDTO'
+                type: object
 
 components:
   schemas:
+    ## ENUMERATIONS
     CardSize:
       type: string
       enum:
@@ -1040,6 +1029,8 @@ components:
         - APPOINTMENT
         - PRIVATE
         - DAYOFF
+
+    ## DTOs
     AgendaDTO:
       type: object
       properties:
@@ -1156,9 +1147,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AgendaLightDTO'
-        private:
+        privateEvent:
           type: boolean
-        adayOff:
+        dayOff:
           type: boolean
     RoleDTO:
       type: object
@@ -1326,9 +1317,9 @@ components:
           type: string
         report:
           type: string
-        private:
+        privateEvent:
           type: boolean
-        adayOff:
+        dayOff:
           type: boolean
     RoleLightDTO:
       type: object
@@ -1422,229 +1413,5 @@ components:
           type: boolean
         unsorted:
           type: boolean
-        empty:
-          type: boolean
-    PageUserDTO:
-      type: object
-      properties:
-        totalPages:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        size:
-          type: integer
-          format: int32
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserDTO'
-        number:
-          type: integer
-          format: int32
-        sort:
-          $ref: '#/components/schemas/Sort'
-        numberOfElements:
-          type: integer
-          format: int32
-        first:
-          type: boolean
-        last:
-          type: boolean
-        pageable:
-          $ref: '#/components/schemas/Pageable'
-        empty:
-          type: boolean
-    PageTeamDTO:
-      type: object
-      properties:
-        totalPages:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        size:
-          type: integer
-          format: int32
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/TeamDTO'
-        number:
-          type: integer
-          format: int32
-        sort:
-          $ref: '#/components/schemas/Sort'
-        numberOfElements:
-          type: integer
-          format: int32
-        first:
-          type: boolean
-        last:
-          type: boolean
-        pageable:
-          $ref: '#/components/schemas/Pageable'
-        empty:
-          type: boolean
-    PageScheduleDTO:
-      type: object
-      properties:
-        totalPages:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        size:
-          type: integer
-          format: int32
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScheduleDTO'
-        number:
-          type: integer
-          format: int32
-        sort:
-          $ref: '#/components/schemas/Sort'
-        numberOfElements:
-          type: integer
-          format: int32
-        first:
-          type: boolean
-        last:
-          type: boolean
-        pageable:
-          $ref: '#/components/schemas/Pageable'
-        empty:
-          type: boolean
-    PageRoleDTO:
-      type: object
-      properties:
-        totalPages:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        size:
-          type: integer
-          format: int32
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/RoleDTO'
-        number:
-          type: integer
-          format: int32
-        sort:
-          $ref: '#/components/schemas/Sort'
-        numberOfElements:
-          type: integer
-          format: int32
-        first:
-          type: boolean
-        last:
-          type: boolean
-        pageable:
-          $ref: '#/components/schemas/Pageable'
-        empty:
-          type: boolean
-    PageCommentDTO:
-      type: object
-      properties:
-        totalPages:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        size:
-          type: integer
-          format: int32
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommentDTO'
-        number:
-          type: integer
-          format: int32
-        sort:
-          $ref: '#/components/schemas/Sort'
-        numberOfElements:
-          type: integer
-          format: int32
-        first:
-          type: boolean
-        last:
-          type: boolean
-        pageable:
-          $ref: '#/components/schemas/Pageable'
-        empty:
-          type: boolean
-    PageCardDTO:
-      type: object
-      properties:
-        totalPages:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        size:
-          type: integer
-          format: int32
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/CardDTO'
-        number:
-          type: integer
-          format: int32
-        sort:
-          $ref: '#/components/schemas/Sort'
-        numberOfElements:
-          type: integer
-          format: int32
-        first:
-          type: boolean
-        last:
-          type: boolean
-        pageable:
-          $ref: '#/components/schemas/Pageable'
-        empty:
-          type: boolean
-    PageAuthorityDTO:
-      type: object
-      properties:
-        totalPages:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        size:
-          type: integer
-          format: int32
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/AuthorityDTO'
-        number:
-          type: integer
-          format: int32
-        sort:
-          $ref: '#/components/schemas/Sort'
-        numberOfElements:
-          type: integer
-          format: int32
-        first:
-          type: boolean
-        last:
-          type: boolean
-        pageable:
-          $ref: '#/components/schemas/Pageable'
         empty:
           type: boolean

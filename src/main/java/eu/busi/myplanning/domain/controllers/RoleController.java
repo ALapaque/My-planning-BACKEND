@@ -6,7 +6,6 @@ import eu.busi.myplanning.domain.services.impl.RoleServiceImpl;
 import eu.busi.myplanning.exceptions.NotDeletedException;
 import eu.busi.myplanning.exceptions.NotFoundException;
 import eu.busi.myplanning.exceptions.NotSavedException;
-import eu.busi.myplanning.models.PageRoleDTO;
 import eu.busi.myplanning.models.Pageable;
 import eu.busi.myplanning.models.RoleDTO;
 import org.springframework.http.HttpStatus;
@@ -45,7 +44,7 @@ public class RoleController implements RoleApi {
     }
 
     @Override
-    public ResponseEntity<RoleDTO> findRole(Long id) {
+    public ResponseEntity<Object> findRole(Long id) {
         try {
             Optional<RoleDTO> optional = this.roleService.findById(id);
 
@@ -61,11 +60,11 @@ public class RoleController implements RoleApi {
     }
 
     @Override
-    public ResponseEntity<PageRoleDTO> listRoles(Pageable pageable) {
+    public ResponseEntity<Object> listRoles(Pageable pageable) {
         try {
-            PageRoleDTO page = new PageRoleDTO().content(this.roleService.findAll());
+            //PageRoleDTO page = new PageRoleDTO().content(this.roleService.findAll());
 
-            return new ResponseEntity<PageRoleDTO>(page, HttpStatus.OK);
+            return new ResponseEntity<>(null, HttpStatus.OK);
         } catch (NotFoundException e) {
             log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -73,7 +72,7 @@ public class RoleController implements RoleApi {
     }
 
     @Override
-    public ResponseEntity<RoleDTO> saveRole(RoleDTO body) {
+    public ResponseEntity<Object> saveRole(RoleDTO body) {
         try {
             return new ResponseEntity<>(this.roleService.save(body), HttpStatus.CREATED);
         } catch (NotSavedException e) {
@@ -83,7 +82,7 @@ public class RoleController implements RoleApi {
     }
 
     @Override
-    public ResponseEntity<RoleDTO> updateRole(RoleDTO body, Long id) {
+    public ResponseEntity<Object> updateRole(RoleDTO body, Long id) {
         try {
             return new ResponseEntity<>(this.roleService.update(body, id), HttpStatus.CREATED);
         } catch (NotSavedException e) {

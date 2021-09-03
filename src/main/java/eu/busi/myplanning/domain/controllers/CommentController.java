@@ -7,7 +7,6 @@ import eu.busi.myplanning.exceptions.NotDeletedException;
 import eu.busi.myplanning.exceptions.NotFoundException;
 import eu.busi.myplanning.exceptions.NotSavedException;
 import eu.busi.myplanning.models.CommentDTO;
-import eu.busi.myplanning.models.PageCommentDTO;
 import eu.busi.myplanning.models.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +44,7 @@ public class CommentController implements CommentApi {
     }
 
     @Override
-    public ResponseEntity<CommentDTO> findComment(Long id) {
+    public ResponseEntity<Object> findComment(Long id) {
         try {
             Optional<CommentDTO> optional = this.commentService.findById(id);
 
@@ -61,11 +60,11 @@ public class CommentController implements CommentApi {
     }
 
     @Override
-    public ResponseEntity<PageCommentDTO> listComments(Pageable pageable) {
+    public ResponseEntity<Object> listComments(Pageable pageable) {
         try {
-            PageCommentDTO page = new PageCommentDTO().content(this.commentService.findAll());
+            //PageCommentDTO page = new PageCommentDTO().content(this.commentService.findAll());
 
-            return new ResponseEntity<PageCommentDTO>(page, HttpStatus.OK);
+            return new ResponseEntity<>(null, HttpStatus.OK);
         } catch (NotFoundException e) {
             log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -73,7 +72,7 @@ public class CommentController implements CommentApi {
     }
 
     @Override
-    public ResponseEntity<CommentDTO> saveComment(CommentDTO body) {
+    public ResponseEntity<Object> saveComment(CommentDTO body) {
         try {
             return new ResponseEntity<>(this.commentService.save(body), HttpStatus.CREATED);
         } catch (NotSavedException e) {
@@ -83,7 +82,7 @@ public class CommentController implements CommentApi {
     }
 
     @Override
-    public ResponseEntity<CommentDTO> updateComment(CommentDTO body, Long id) {
+    public ResponseEntity<Object> updateComment(CommentDTO body, Long id) {
         try {
             return new ResponseEntity<>(this.commentService.update(body, id), HttpStatus.CREATED);
         } catch (NotSavedException e) {

@@ -2,8 +2,6 @@ package eu.busi.myplanning.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import eu.busi.myplanning.domain.mappers.UserMapper;
 import eu.busi.myplanning.domain.models.UserEntity;
 import eu.busi.myplanning.domain.repositories.UserRepository;
@@ -11,7 +9,6 @@ import eu.busi.myplanning.models.UserDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 

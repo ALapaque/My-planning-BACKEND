@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -43,13 +42,12 @@ public class AgendaController implements AgendaApi {
         try {
             return new ResponseEntity<>(this.agendaService.deleteById(id), HttpStatus.OK);
         } catch (NotDeletedException e) {
-            log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     @Override
-    public ResponseEntity<AgendaDTO> findAgenda(Long id) {
+    public ResponseEntity<Object> findAgenda(Long id) {
         try {
             Optional<AgendaDTO> optional = this.agendaService.findById(id);
 
@@ -59,48 +57,43 @@ public class AgendaController implements AgendaApi {
                 throw new NotFoundException();
             }
         } catch (NotFoundException e) {
-            log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
 
     @Override
-    public ResponseEntity<List<AgendaDTO>> findAgendas() {
+    public ResponseEntity<Object> findAgendas() {
         try {
             return new ResponseEntity<>(this.agendaService.findAll(), HttpStatus.OK);
         } catch (NotFoundException e) {
-            log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     @Override
-    public ResponseEntity<List<AgendaDTO>> findAgendasByUser(Long id) {
+    public ResponseEntity<Object> findAgendasByUser(Long id) {
         try {
             return new ResponseEntity<>(this.agendaService.findByUser(id), HttpStatus.OK);
         } catch (NotFoundException e) {
-            log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     @Override
-    public ResponseEntity<List<AgendaDTO>> findSharedAgendasByUser(Long id) {
+    public ResponseEntity<Object> findSharedAgendasByUser(Long id) {
         try {
             return new ResponseEntity<>(this.agendaService.findSharedAgendasByUser(id), HttpStatus.OK);
         } catch (NotFoundException e) {
-            log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     @Override
-    public ResponseEntity<AgendaDTO> saveAgenda(AgendaDTO body) {
+    public ResponseEntity<Object> saveAgenda(AgendaDTO body) {
         try {
             return new ResponseEntity<>(this.agendaService.save(body), HttpStatus.CREATED);
         } catch (NotSavedException e) {
-            log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

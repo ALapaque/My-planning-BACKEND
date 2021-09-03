@@ -7,7 +7,6 @@ import eu.busi.myplanning.exceptions.NotDeletedException;
 import eu.busi.myplanning.exceptions.NotFoundException;
 import eu.busi.myplanning.exceptions.NotSavedException;
 import eu.busi.myplanning.models.AuthorityDTO;
-import eu.busi.myplanning.models.PageAuthorityDTO;
 import eu.busi.myplanning.models.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +44,7 @@ public class AuthorityController implements AuthorityApi {
     }
 
     @Override
-    public ResponseEntity<AuthorityDTO> findAuthority(Long id) {
+    public ResponseEntity<Object> findAuthority(Long id) {
         try {
             Optional<AuthorityDTO> optional = this.authorityService.findById(id);
 
@@ -61,11 +60,11 @@ public class AuthorityController implements AuthorityApi {
     }
 
     @Override
-    public ResponseEntity<PageAuthorityDTO> listAuthorities(Pageable pageable) {
+    public ResponseEntity<Object> listAuthorities(Pageable pageable) {
         try {
-            PageAuthorityDTO page = new PageAuthorityDTO().content(this.authorityService.findAll());
+            //PageAuthorityDTO page = new PageAuthorityDTO().content(this.authorityService.findAll());
 
-            return new ResponseEntity<PageAuthorityDTO>(page, HttpStatus.OK);
+            return new ResponseEntity<>(null, HttpStatus.OK);
         } catch (NotFoundException e) {
             log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -73,7 +72,7 @@ public class AuthorityController implements AuthorityApi {
     }
 
     @Override
-    public ResponseEntity<AuthorityDTO> saveAuthority(AuthorityDTO body) {
+    public ResponseEntity<Object> saveAuthority(AuthorityDTO body) {
         try {
             return new ResponseEntity<>(this.authorityService.save(body), HttpStatus.CREATED);
         } catch (NotSavedException e) {
@@ -83,7 +82,7 @@ public class AuthorityController implements AuthorityApi {
     }
 
     @Override
-    public ResponseEntity<AuthorityDTO> updateAuthority(AuthorityDTO body, Long id) {
+    public ResponseEntity<Object> updateAuthority(AuthorityDTO body, Long id) {
         try {
             return new ResponseEntity<>(this.authorityService.update(body, id), HttpStatus.CREATED);
         } catch (NotSavedException e) {
