@@ -7,6 +7,7 @@ import eu.busi.myplanning.exceptions.NotDeletedException;
 import eu.busi.myplanning.exceptions.NotFoundException;
 import eu.busi.myplanning.exceptions.NotSavedException;
 import eu.busi.myplanning.models.EventDTO;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -61,7 +62,11 @@ public class EventController implements EventApi {
     }
 
     @Override
-    public ResponseEntity<List<EventDTO>> listEvents(Long userId, LocalDateTime startDate, LocalDateTime endDate) {
+    public ResponseEntity<List<EventDTO>> listEvents(
+            Long userId,
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate
+    ) {
         try {
             return new ResponseEntity<>(this.eventService.findEventsByUserAndStartAndEnd(userId, startDate, endDate), HttpStatus.OK);
         } catch (NotFoundException e) {
