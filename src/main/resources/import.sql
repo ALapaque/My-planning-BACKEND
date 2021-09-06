@@ -1,0 +1,17 @@
+INSERT INTO authorities(id, name) VALUES (1, '*');
+INSERT INTO roles(id, name)VALUES (1, 'ADMIN'),(2, 'USER'),(3, 'VIEWER');
+INSERT INTO roles_has_authorities(id_role, id_authority) VALUES (1, 1), (2,1);
+INSERT INTO cards(id, is_recap, size, type) VALUES (1, 1, 'tiny', 'APPOINTMENT'), (2, 1, 'tiny', 'MEETING'), (3, 0, 'giant', 'APPOINTMENT'), (4, 0, 'giant', 'MEETING');
+INSERT INTO users(id, created_at, updated_at, email, first_name, last_name, password, username, id_role) VALUES (1, null, null, 'admin.myplanning@gmail.com', 'Administrateur', 'myPlanning', '$2a$10$vffSrvmJqAGoqrGj9M2E1eaAA6yrZVPe1T0VZ2JtpSD5WpLD3zLMm', 'Admin', 1), (2, null, null, 'amaury.lapaque@gmail.com', 'Amaury', 'Lapaque', '$2a$10$vffSrvmJqAGoqrGj9M2E1eaAA6yrZVPe1T0VZ2JtpSD5WpLD3zLMm', 'amaury.lapaque', 1);
+INSERT INTO teams(id, name) VALUES (1, 'My team');
+INSERT INTO agendas (id, color, name, id_team, id_user) VALUES (NULL, '#c151a9', 'My agenda', NULL, 2);
+INSERT INTO agendas (id, color, name, id_team, id_user) VALUES (NULL, '#b151d9', 'My agenda', 1, NULL);
+INSERT INTO teams_or_users_shared_agendas(id_agenda, id_user, id_team) VALUES (1, 2, 1), (2, 1, 1);
+INSERT INTO events(id, name, created_at, updated_at, start_date, event_type, is_a_day_off, is_private, meeting_url, report, end_date, status_displayed, id_agenda) VALUE (1, 'test', null, null, '2021-08-25 17:00:00.000000', 'APPOINTMENT', 0, 0, null, null, '2021-08-25 19:00:00.000000', 'BUSY', 1);
+INSERT INTO events(id, name, created_at, updated_at, start_date, event_type, is_a_day_off, is_private, meeting_url, report, end_date, status_displayed, id_agenda) VALUE (2, 'test 2', null, null, '2021-08-25 06:00:00.000000', 'APPOINTMENT', 0, 0, null, null, '2021-08-25 07:00:00.000000', 'BUSY', 1);
+INSERT INTO events(id, name, created_at, updated_at, start_date, event_type, is_a_day_off, is_private, meeting_url, report, end_date, status_displayed, id_agenda) VALUE (3, 'test 3', null, null, '2021-08-25 09:00:00.000000', 'APPOINTMENT', 0, 0, null, null, '2021-08-26 10:00:00.000000', 'BUSY', 1);
+INSERT INTO events(id, name, created_at, updated_at, start_date, event_type, is_a_day_off, is_private, meeting_url, report, end_date, status_displayed, id_agenda) VALUE (4, 'test 4', null, null, '2021-08-28 13:00:00.000000', 'APPOINTMENT', 0, 0, null, null, '2021-08-31 15:00:00.000000', 'BUSY', 1);
+INSERT INTO events(id, name, created_at, updated_at, start_date, event_type, is_a_day_off, is_private, meeting_url, report, end_date, status_displayed, id_agenda) VALUE (5, 'Réunions drink avec la boite', null, null, '2021-08-26 15:00:00.000000', 'APPOINTMENT', 0, 0, null, null, '2021-08-26 16:00:00.000000', 'BUSY', 1);
+INSERT INTO events(id, name, created_at, updated_at, start_date, event_type, is_a_day_off, is_private, meeting_url, report, end_date, status_displayed, id_agenda) VALUE (6, 'test 6', null, null, '2021-08-24 14:00:00.000000', 'APPOINTMENT', 0, 0, null, null, '2021-08-24 15:00:00.000000', 'BUSY', 1);
+INSERT INTO events(id, name, created_at, updated_at, start_date, event_type, is_a_day_off, is_private, meeting_url, report, end_date, status_displayed, id_agenda) VALUE (7, 'test 7', null, null, '2021-08-24 06:00:00.000000', 'APPOINTMENT', 0, 0, null, null, '2021-08-24 10:00:00.000000', 'BUSY', 1);
+INSERT INTO users_has_cards(id_user, id_card) VALUES (1, 1), (1, 2), (1, 3), (1, 4);
