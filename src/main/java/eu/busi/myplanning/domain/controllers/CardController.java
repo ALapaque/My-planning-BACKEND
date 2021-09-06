@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,11 +74,7 @@ public class CardController implements CardApi {
                 events = this.eventService.findEventsByUserAndTypeAndStartAndEnd(userId, EventType.MEETING, start, end);
             }
 
-            if (events.isEmpty()) {
-                throw new NotFoundException();
-            } else {
-                return new ResponseEntity<>(events, HttpStatus.OK);
-            }
+            return new ResponseEntity<>(events, HttpStatus.OK);
         } catch (NotFoundException e) {
             log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -105,7 +100,8 @@ public class CardController implements CardApi {
         } catch (NotFoundException e) {
             log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }    }
+        }
+    }
 
     @Override
     public ResponseEntity<Object> saveCard(CardDTO body) {
@@ -124,5 +120,6 @@ public class CardController implements CardApi {
         } catch (NotSavedException e) {
             log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }    }
+        }
+    }
 }

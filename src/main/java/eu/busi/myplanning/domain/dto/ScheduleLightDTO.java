@@ -1,21 +1,18 @@
 package eu.busi.myplanning.domain.dto;
 
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.Date;
-import java.sql.Time;
 import org.springframework.validation.annotation.Validated;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.sql.Time;
+import java.util.Objects;
 
 /**
  * ScheduleLightDTO
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-03T19:48:41.441946+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-06T09:34:46.153534100+02:00[Europe/Berlin]")
 public class ScheduleLightDTO   {
   @JsonProperty("id")
   private Long id = null;
