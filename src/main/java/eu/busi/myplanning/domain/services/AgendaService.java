@@ -1,6 +1,6 @@
 package eu.busi.myplanning.domain.services;
 
-import eu.busi.myplanning.domain.dto.AgendaDTO;
+import eu.busi.myplanning.api.models.AgendaDTO;
 import eu.busi.myplanning.exceptions.NotFoundException;
 
 import java.util.List;

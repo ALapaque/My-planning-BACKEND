@@ -2,9 +2,9 @@ package eu.busi.myplanning.domain.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eu.busi.myplanning.domain.api.AuthApi;
-import eu.busi.myplanning.domain.dto.JwtAuthenticationRequest;
-import eu.busi.myplanning.domain.dto.UserDTO;
+import eu.busi.myplanning.api.controllers.AuthApi;
+import eu.busi.myplanning.api.models.JwtAuthenticationRequest;
+import eu.busi.myplanning.api.models.UserDTO;
 import eu.busi.myplanning.domain.mappers.UserMapper;
 import eu.busi.myplanning.domain.services.impl.AuthService;
 import eu.busi.myplanning.domain.services.impl.MyUserDetailService;

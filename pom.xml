@@ -145,8 +145,8 @@
                             <language>spring</language>
                             <output>${project.basedir}</output>
                             <generateSupportingFiles>false</generateSupportingFiles>
-                            <apiPackage>eu.busi.myplanning.domain.api</apiPackage>
-                            <modelPackage>eu.busi.myplanning.domain.dto</modelPackage>
+                            <apiPackage>eu.busi.myplanning.api.controllers</apiPackage>
+                            <modelPackage>eu.busi.myplanning.api.models</modelPackage>
                             <configOptions>
                                 <interfaceOnly>true</interfaceOnly>
                                 <defaultInterfaces>false</defaultInterfaces>

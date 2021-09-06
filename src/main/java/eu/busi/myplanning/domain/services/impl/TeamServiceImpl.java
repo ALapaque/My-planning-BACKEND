@@ -1,6 +1,6 @@
 package eu.busi.myplanning.domain.services.impl;
 
-import eu.busi.myplanning.domain.dto.TeamDTO;
+import eu.busi.myplanning.api.models.TeamDTO;
 import eu.busi.myplanning.domain.mappers.AgendaMapper;
 import eu.busi.myplanning.domain.mappers.TeamMapper;
 import eu.busi.myplanning.domain.mappers.UserMapper;

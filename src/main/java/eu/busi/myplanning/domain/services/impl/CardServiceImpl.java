@@ -1,6 +1,6 @@
 package eu.busi.myplanning.domain.services.impl;
 
-import eu.busi.myplanning.domain.dto.CardDTO;
+import eu.busi.myplanning.api.models.CardDTO;
 import eu.busi.myplanning.domain.mappers.CardMapper;
 import eu.busi.myplanning.domain.models.Card;
 import eu.busi.myplanning.domain.models.UserEntity;

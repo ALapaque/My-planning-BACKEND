@@ -1,6 +1,6 @@
 package eu.busi.myplanning.domain.services.impl;
 
-import eu.busi.myplanning.domain.dto.AuthorityDTO;
+import eu.busi.myplanning.api.models.AuthorityDTO;
 import eu.busi.myplanning.domain.mappers.AuthorityMapper;
 import eu.busi.myplanning.domain.mappers.RoleMapper;
 import eu.busi.myplanning.domain.models.Authority;

@@ -1,8 +1,8 @@
 package eu.busi.myplanning.domain.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eu.busi.myplanning.domain.api.CardApi;
-import eu.busi.myplanning.domain.dto.*;
+import eu.busi.myplanning.api.controllers.CardApi;
+import eu.busi.myplanning.api.models.*;
 import eu.busi.myplanning.domain.services.impl.CardServiceImpl;
 import eu.busi.myplanning.domain.services.impl.EventServiceImpl;
 import eu.busi.myplanning.exceptions.NotDeletedException;

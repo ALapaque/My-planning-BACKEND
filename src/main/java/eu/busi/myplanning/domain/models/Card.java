@@ -1,8 +1,8 @@
 package eu.busi.myplanning.domain.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import eu.busi.myplanning.domain.dto.CardSize;
-import eu.busi.myplanning.domain.dto.CardType;
+import eu.busi.myplanning.api.models.CardSize;
+import eu.busi.myplanning.api.models.CardType;
 
 import javax.persistence.*;
 import java.io.Serializable;

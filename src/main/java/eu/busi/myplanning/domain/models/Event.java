@@ -1,13 +1,12 @@
 package eu.busi.myplanning.domain.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import eu.busi.myplanning.domain.dto.EventStatus;
-import eu.busi.myplanning.domain.dto.EventType;
+import eu.busi.myplanning.api.models.EventStatus;
+import eu.busi.myplanning.api.models.EventType;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;

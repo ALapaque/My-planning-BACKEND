@@ -1,22 +1,19 @@
 package eu.busi.myplanning.domain.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eu.busi.myplanning.domain.api.EventApi;
-import eu.busi.myplanning.domain.dto.EventDTO;
+import eu.busi.myplanning.api.controllers.EventApi;
+import eu.busi.myplanning.api.models.EventDTO;
 import eu.busi.myplanning.domain.services.impl.EventServiceImpl;
 import eu.busi.myplanning.exceptions.NotDeletedException;
 import eu.busi.myplanning.exceptions.NotFoundException;
 import eu.busi.myplanning.exceptions.NotSavedException;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.TimeZone;
 
 @RestController
 public class EventController implements EventApi {

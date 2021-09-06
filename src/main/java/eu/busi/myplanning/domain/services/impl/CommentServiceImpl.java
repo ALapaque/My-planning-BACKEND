@@ -1,6 +1,6 @@
 package eu.busi.myplanning.domain.services.impl;
 
-import eu.busi.myplanning.domain.dto.CommentDTO;
+import eu.busi.myplanning.api.models.CommentDTO;
 import eu.busi.myplanning.domain.mappers.CommentMapper;
 import eu.busi.myplanning.domain.mappers.UserMapper;
 import eu.busi.myplanning.domain.models.Comment;

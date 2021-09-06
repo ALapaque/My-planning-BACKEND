@@ -1,9 +1,9 @@
 package eu.busi.myplanning.domain.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eu.busi.myplanning.domain.api.UserApi;
-import eu.busi.myplanning.domain.dto.Pageable;
-import eu.busi.myplanning.domain.dto.UserDTO;
+import eu.busi.myplanning.api.controllers.UserApi;
+import eu.busi.myplanning.api.models.Pageable;
+import eu.busi.myplanning.api.models.UserDTO;
 import eu.busi.myplanning.domain.services.impl.UserServiceImpl;
 import eu.busi.myplanning.exceptions.NotDeletedException;
 import eu.busi.myplanning.exceptions.NotFoundException;

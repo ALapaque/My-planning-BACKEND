@@ -1,7 +1,7 @@
 package eu.busi.myplanning.domain.services.impl;
 
-import eu.busi.myplanning.domain.dto.EventDTO;
-import eu.busi.myplanning.domain.dto.EventType;
+import eu.busi.myplanning.api.models.EventDTO;
+import eu.busi.myplanning.api.models.EventType;
 import eu.busi.myplanning.domain.mappers.AgendaMapper;
 import eu.busi.myplanning.domain.mappers.CommentMapper;
 import eu.busi.myplanning.domain.mappers.EventMapper;

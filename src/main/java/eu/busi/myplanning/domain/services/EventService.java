@@ -1,7 +1,7 @@
 package eu.busi.myplanning.domain.services;
 
-import eu.busi.myplanning.domain.dto.EventDTO;
-import eu.busi.myplanning.domain.dto.EventType;
+import eu.busi.myplanning.api.models.EventDTO;
+import eu.busi.myplanning.api.models.EventType;
 import eu.busi.myplanning.exceptions.NotFoundException;
 
 import java.time.Instant;
