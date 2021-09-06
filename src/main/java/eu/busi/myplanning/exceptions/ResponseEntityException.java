@@ -11,7 +11,8 @@ public class ResponseEntityException extends RuntimeException {
     }
 
     public ResponseEntity<Object> responseEntity() {
-        return new ResponseEntity<>(new ApiError(super.getMessage(), HttpStatus.BAD_REQUEST), HttpStatus.BAD_REQUEST);
+        ApiError error = new ApiError(super.getMessage(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
 }

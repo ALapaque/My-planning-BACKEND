@@ -77,7 +77,7 @@ public class CardController implements CardApi {
             return new ResponseEntity<>(events, HttpStatus.OK);
         } catch (NotFoundException e) {
             log.error(e.toString());
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return e.responseEntity();
         }
     }
 
@@ -87,7 +87,7 @@ public class CardController implements CardApi {
             return new ResponseEntity<>(this.cardService.findCardsByUserId(id), HttpStatus.OK);
         } catch (NotFoundException e) {
             log.error(e.toString());
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return e.responseEntity();
         }
     }
 
@@ -99,7 +99,7 @@ public class CardController implements CardApi {
             return new ResponseEntity<>(null, HttpStatus.OK);
         } catch (NotFoundException e) {
             log.error(e.toString());
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return e.responseEntity();
         }
     }
 
@@ -109,7 +109,7 @@ public class CardController implements CardApi {
             return new ResponseEntity<>(this.cardService.save(body), HttpStatus.CREATED);
         } catch (NotSavedException e) {
             log.error(e.toString());
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return e.responseEntity();
         }
     }
 
@@ -119,7 +119,7 @@ public class CardController implements CardApi {
             return new ResponseEntity<>(this.cardService.update(body, id), HttpStatus.CREATED);
         } catch (NotSavedException e) {
             log.error(e.toString());
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return e.responseEntity();
         }
     }
 }

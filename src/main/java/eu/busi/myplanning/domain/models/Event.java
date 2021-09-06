@@ -48,6 +48,7 @@ public class Event extends DateAudit implements AbstractEntity<Long>, Serializab
 
     private String meetingUrl;
 
+    @Lob
     private String report;
 
     /**
