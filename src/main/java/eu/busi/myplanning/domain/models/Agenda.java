@@ -19,6 +19,8 @@ public class Agenda implements AbstractEntity<Long>, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Boolean byDefault;
+
     @Column(length = 60)
     private String name;
 
@@ -81,6 +83,16 @@ public class Agenda implements AbstractEntity<Long>, Serializable {
     public Agenda() {
     }
 
+    public static Agenda defaultAgenda() {
+        Agenda defaultAgenda = new Agenda();
+
+        defaultAgenda.setName("APP.AGENDA.DEFAULT_NAME");
+        defaultAgenda.setByDefault(true);
+        defaultAgenda.setColor("#1ed4d4");
+
+        return defaultAgenda;
+    }
+
     @Override
     public Long getId() {
         return id;
@@ -93,6 +105,14 @@ public class Agenda implements AbstractEntity<Long>, Serializable {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Boolean getByDefault() {
+        return byDefault;
+    }
+
+    public void setByDefault(Boolean byDefault) {
+        this.byDefault = byDefault;
     }
 
     /**

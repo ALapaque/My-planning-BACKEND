@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -62,11 +63,12 @@ public class EventController implements EventApi {
     @Override
     public ResponseEntity<Object> listEvents(
             Long userId,
+            List<Long> agendaIds,
             Instant startDate,
             Instant endDate
     ) {
         try {
-            return new ResponseEntity<>(this.eventService.findEventsByUserAndStartAndEnd(userId, startDate, endDate), HttpStatus.OK);
+            return new ResponseEntity<>(this.eventService.findEventsByAgendasAndStartAndEnd(agendaIds, startDate, endDate), HttpStatus.OK);
         } catch (NotFoundException e) {
             log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

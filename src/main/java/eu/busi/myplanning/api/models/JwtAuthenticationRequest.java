@@ -10,7 +10,7 @@ import java.util.Objects;
  * JwtAuthenticationRequest
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-06T09:55:51.442971500+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-10T10:43:54.248580700+02:00[Europe/Berlin]")
 public class JwtAuthenticationRequest   {
   @JsonProperty("usernameOrEmail")
   private String usernameOrEmail = null;

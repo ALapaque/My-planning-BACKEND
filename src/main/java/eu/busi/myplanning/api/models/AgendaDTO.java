@@ -13,10 +13,13 @@ import java.util.Objects;
  * AgendaDTO
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-06T09:55:51.442971500+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-10T10:43:54.248580700+02:00[Europe/Berlin]")
 public class AgendaDTO   {
   @JsonProperty("id")
   private Long id = null;
+
+  @JsonProperty("byDefault")
+  private Boolean byDefault = null;
 
   @JsonProperty("name")
   private String name = null;
@@ -63,6 +66,25 @@ public class AgendaDTO   {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public AgendaDTO byDefault(Boolean byDefault) {
+    this.byDefault = byDefault;
+    return this;
+  }
+
+  /**
+   * Get byDefault
+   * @return byDefault
+  **/
+  @ApiModelProperty(value = "")
+  
+    public Boolean isByDefault() {
+    return byDefault;
+  }
+
+  public void setByDefault(Boolean byDefault) {
+    this.byDefault = byDefault;
   }
 
   public AgendaDTO name(String name) {
@@ -262,6 +284,7 @@ public class AgendaDTO   {
     }
     AgendaDTO agendaDTO = (AgendaDTO) o;
     return Objects.equals(this.id, agendaDTO.id) &&
+        Objects.equals(this.byDefault, agendaDTO.byDefault) &&
         Objects.equals(this.name, agendaDTO.name) &&
         Objects.equals(this.color, agendaDTO.color) &&
         Objects.equals(this.user, agendaDTO.user) &&
@@ -274,7 +297,7 @@ public class AgendaDTO   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, color, user, team, events, sharedEvents, sharedUsers, sharedTeams);
+    return Objects.hash(id, byDefault, name, color, user, team, events, sharedEvents, sharedUsers, sharedTeams);
   }
 
   @Override
@@ -283,6 +306,7 @@ public class AgendaDTO   {
     sb.append("class AgendaDTO {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    byDefault: ").append(toIndentedString(byDefault)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    color: ").append(toIndentedString(color)).append("\n");
     sb.append("    user: ").append(toIndentedString(user)).append("\n");

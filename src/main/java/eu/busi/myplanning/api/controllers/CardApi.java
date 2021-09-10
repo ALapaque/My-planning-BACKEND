@@ -20,7 +20,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.util.Optional;
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-06T09:55:51.442971500+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-10T10:43:54.248580700+02:00[Europe/Berlin]")
 @Api(value = "card", description = "the card API")
 public interface CardApi {
 

@@ -29,6 +29,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Transactional
@@ -198,21 +199,25 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<EventDTO> findEventsByUserAndStartAndEnd(Long id, Instant startDate, Instant endDate) throws NotFoundException {
+    public List<EventDTO> findEventsByAgendasAndStartAndEnd(List<Long> agendaIds, Instant startDate, Instant endDate) throws NotFoundException {
         try {
-            Optional<UserEntity> optional = userRepository.findById(id);
+            List<Agenda> agendas = agendaRepository.findAllById(agendaIds);
+            List<Event> eventsBetweenStartDate = repository.findDistinctByAgendaIsInAndStartDateIsBetween(
+                    agendas,
+                    startDate,
+                    endDate
+            );
 
-            if (optional.isPresent()) {
-                List<Agenda> agendas = agendaRepository.findAgendaByUser(optional.get());
+            List<Event> eventsBetweenEndDate = repository.findDistinctByAgendaIsInAndEndDateIsBetween(
+                    agendas,
+                    startDate,
+                    endDate
+            );
 
-                return repository
-                        .findDistinctByAgendaInAndStartDateIsBetweenOrEndDateIsBetween(agendas, startDate, endDate, startDate, endDate)
-                        .stream()
-                        .map(EventMapper.INSTANCE::asDTO)
-                        .collect(Collectors.toList());
-            } else {
-                throw new Exception("Ressource not found...");
-            }
+            return Stream.concat(eventsBetweenStartDate.stream(), eventsBetweenEndDate.stream())
+                    .distinct()
+                    .map(EventMapper.INSTANCE::asDTO)
+                    .collect(Collectors.toList());
         } catch (Exception e) {
             throw new NotFoundException();
         }

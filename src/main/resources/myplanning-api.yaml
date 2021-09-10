@@ -661,6 +661,15 @@ paths:
           schema:
             type: integer
             format: int64
+        - name: agendaIds
+          in: query
+          required: true
+          schema:
+            type: array
+            format: int64
+            items:
+              type: integer
+              format: int64
         - name: startDate
           in: query
           required: true
@@ -1037,6 +1046,8 @@ components:
         id:
           type: integer
           format: int64
+        byDefault:
+          type: boolean
         name:
           type: string
         color:
@@ -1255,6 +1266,8 @@ components:
         id:
           type: integer
           format: int64
+        byDefault:
+          type: boolean
         name:
           type: string
         color:

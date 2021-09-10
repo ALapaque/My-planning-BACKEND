@@ -10,10 +10,13 @@ import java.util.Objects;
  * AgendaLightDTO
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-06T09:55:51.442971500+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-10T10:43:54.248580700+02:00[Europe/Berlin]")
 public class AgendaLightDTO   {
   @JsonProperty("id")
   private Long id = null;
+
+  @JsonProperty("byDefault")
+  private Boolean byDefault = null;
 
   @JsonProperty("name")
   private String name = null;
@@ -38,6 +41,25 @@ public class AgendaLightDTO   {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public AgendaLightDTO byDefault(Boolean byDefault) {
+    this.byDefault = byDefault;
+    return this;
+  }
+
+  /**
+   * Get byDefault
+   * @return byDefault
+  **/
+  @ApiModelProperty(value = "")
+  
+    public Boolean isByDefault() {
+    return byDefault;
+  }
+
+  public void setByDefault(Boolean byDefault) {
+    this.byDefault = byDefault;
   }
 
   public AgendaLightDTO name(String name) {
@@ -89,13 +111,14 @@ public class AgendaLightDTO   {
     }
     AgendaLightDTO agendaLightDTO = (AgendaLightDTO) o;
     return Objects.equals(this.id, agendaLightDTO.id) &&
+        Objects.equals(this.byDefault, agendaLightDTO.byDefault) &&
         Objects.equals(this.name, agendaLightDTO.name) &&
         Objects.equals(this.color, agendaLightDTO.color);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, color);
+    return Objects.hash(id, byDefault, name, color);
   }
 
   @Override
@@ -104,6 +127,7 @@ public class AgendaLightDTO   {
     sb.append("class AgendaLightDTO {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    byDefault: ").append(toIndentedString(byDefault)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    color: ").append(toIndentedString(color)).append("\n");
     sb.append("}");

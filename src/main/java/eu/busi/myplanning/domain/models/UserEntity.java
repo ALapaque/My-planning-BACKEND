@@ -65,7 +65,7 @@ public class UserEntity extends DateAudit implements AbstractEntity<Long>, Seria
     /**
      * user agendas
      */
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     @JsonIgnoreProperties("user")
     private List<Agenda> agendas;
 

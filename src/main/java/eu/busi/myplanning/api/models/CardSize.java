@@ -19,6 +19,12 @@ public enum CardSize {
     this.value = value;
   }
 
+  @Override
+  @JsonValue
+  public String toString() {
+    return String.valueOf(value);
+  }
+
   @JsonCreator
   public static CardSize fromValue(String text) {
     for (CardSize b : CardSize.values()) {
@@ -27,11 +33,5 @@ public enum CardSize {
       }
     }
     return null;
-  }
-
-  @Override
-  @JsonValue
-  public String toString() {
-    return String.valueOf(value);
   }
 }

@@ -1,11 +1,14 @@
 package eu.busi.myplanning.domain.services.impl;
 
+import eu.busi.myplanning.domain.models.Agenda;
 import eu.busi.myplanning.domain.models.UserEntity;
 import eu.busi.myplanning.domain.repositories.CardRepository;
 import eu.busi.myplanning.domain.repositories.RoleRepository;
 import eu.busi.myplanning.domain.repositories.UserRepository;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * The type Auth service.
@@ -40,6 +43,9 @@ public class AuthService {
         }
         user.setRole(_roleRepository.findByName("USER"));
         user.setCards(_cardRepository.findAll());
+        Agenda defaultAgenda = Agenda.defaultAgenda();
+        defaultAgenda.setUser(user);
+        user.setAgendas(List.of(defaultAgenda));
 
         return _userRepository.save(user);
     }
