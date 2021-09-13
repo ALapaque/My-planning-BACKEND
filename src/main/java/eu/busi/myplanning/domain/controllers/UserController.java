@@ -47,9 +47,16 @@ public class UserController implements UserApi {
     }
 
     @Override
-    public ResponseEntity<Object> findUser(Long id) {
+    public ResponseEntity<Object> findUser(String idOrUsernameOrEmail) {
         try {
-            Optional<UserDTO> optional = this.userService.findById(id);
+            Optional<UserDTO> optional;
+
+            try {
+                Long id = Long.parseLong(idOrUsernameOrEmail);
+                optional = this.userService.findById(id);
+            } catch (NumberFormatException e) {
+                optional = this.userService.findByUsernameOrEmail(idOrUsernameOrEmail);
+            }
 
             if (optional.isPresent()) {
                 return new ResponseEntity<>(optional.get(), HttpStatus.OK);
@@ -59,8 +66,7 @@ public class UserController implements UserApi {
         } catch (NotFoundException e) {
             log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
+        }    }
 
     @Override
     public ResponseEntity<Object> listUsers(Pageable pageable) {
