@@ -7,6 +7,7 @@ import eu.busi.myplanning.domain.services.impl.AgendaServiceImpl;
 import eu.busi.myplanning.exceptions.NotDeletedException;
 import eu.busi.myplanning.exceptions.NotFoundException;
 import eu.busi.myplanning.exceptions.NotSavedException;
+import eu.busi.myplanning.exceptions.NotUpdatedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -94,6 +95,15 @@ public class AgendaController implements AgendaApi {
         try {
             return new ResponseEntity<>(this.agendaService.save(body), HttpStatus.CREATED);
         } catch (NotSavedException e) {
+            return e.responseEntity();
+        }
+    }
+
+    @Override
+    public ResponseEntity<Object> updateAgenda(AgendaDTO body, Long id) {
+        try {
+            return new ResponseEntity<>(this.agendaService.update(body, id), HttpStatus.OK);
+        } catch (NotUpdatedException e) {
             return e.responseEntity();
         }
     }

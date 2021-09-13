@@ -1,22 +1,18 @@
 package eu.busi.myplanning.api.models;
 
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import eu.busi.myplanning.api.models.EventStatus;
-import eu.busi.myplanning.api.models.EventType;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.time.Instant;
 import org.springframework.validation.annotation.Validated;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.time.Instant;
+import java.util.Objects;
 
 /**
  * EventLightDTO
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-11T09:18:24.321227300+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-13T17:42:56.959298800+02:00[Europe/Berlin]")
 public class EventLightDTO   {
   @JsonProperty("id")
   private Long id = null;

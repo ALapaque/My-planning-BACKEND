@@ -21,18 +21,17 @@ tags:
   - name: "Authority API"
 
 paths:
-  /user/{id}:
+  /user/{idOrUsernameOrEmail}:
     get:
       tags:
         - "User API"
       operationId: findUser
       parameters:
-        - name: id
+        - name: idOrUsernameOrEmail
           in: path
           required: true
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
         "200":
           description: OK
@@ -40,6 +39,7 @@ paths:
             '*/*':
               schema:
                 type: object
+  /user/{id}:
     put:
       tags:
         - "User API"
@@ -952,6 +952,30 @@ paths:
                 type: object
         "400":
           description: Une erreur est survenue
+    put:
+      tags:
+        - "Agenda API"
+      operationId: updateAgenda
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgendaDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
     delete:
       tags:
         - "Agenda API"

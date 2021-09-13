@@ -89,6 +89,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Optional<UserDTO> findByUsernameOrEmail(String usernameOrEmail) {
+        try {
+            return repository
+                    .findByEmailOrUsername(usernameOrEmail, usernameOrEmail)
+                    .map(UserMapper.INSTANCE::asDTO);
+        } catch (Exception e) {
+            throw new NotFoundException();
+        }
+    }
+
+    @Override
     public List<UserDTO> findAll() throws NotFoundException {
         try {
             return repository
