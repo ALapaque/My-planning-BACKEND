@@ -11,7 +11,7 @@ import java.util.Objects;
  * CardLightDTO
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-13T17:42:56.959298800+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-14T11:20:33.931268100+02:00[Europe/Berlin]")
 public class CardLightDTO   {
   @JsonProperty("id")
   private Long id = null;

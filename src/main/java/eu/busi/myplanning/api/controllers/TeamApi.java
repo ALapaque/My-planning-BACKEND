@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Optional;
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-13T17:42:56.959298800+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-14T11:20:33.931268100+02:00[Europe/Berlin]")
 @Api(value = "team", description = "the team API")
 public interface TeamApi {
 
@@ -47,6 +47,16 @@ public interface TeamApi {
         produces = { "*/*" }, 
         method = RequestMethod.GET)
     ResponseEntity<Object> findTeam(@ApiParam(value = "",required=true) @PathVariable("id") Long id
+);
+
+
+    @ApiOperation(value = "", nickname = "findTeamsByUser", notes = "", response = Object.class, tags={ "Team API", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = Object.class) })
+    @RequestMapping(value = "/team/user/{id}",
+        produces = { "*/*" }, 
+        method = RequestMethod.GET)
+    ResponseEntity<Object> findTeamsByUser(@ApiParam(value = "",required=true) @PathVariable("id") Long id
 );
 
 

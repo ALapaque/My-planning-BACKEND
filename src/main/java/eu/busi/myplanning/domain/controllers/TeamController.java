@@ -5,6 +5,7 @@ import eu.busi.myplanning.api.controllers.TeamApi;
 import eu.busi.myplanning.api.models.Pageable;
 import eu.busi.myplanning.api.models.TeamDTO;
 import eu.busi.myplanning.domain.services.impl.TeamServiceImpl;
+import eu.busi.myplanning.domain.services.impl.UserServiceImpl;
 import eu.busi.myplanning.exceptions.NotDeletedException;
 import eu.busi.myplanning.exceptions.NotFoundException;
 import eu.busi.myplanning.exceptions.NotSavedException;
@@ -18,9 +19,11 @@ import java.util.Optional;
 @RestController
 public class TeamController implements TeamApi {
     private final TeamServiceImpl teamService;
+    private final UserServiceImpl userService;
 
-    public TeamController(TeamServiceImpl teamService) {
+    public TeamController(TeamServiceImpl teamService, UserServiceImpl userService) {
         this.teamService = teamService;
+        this.userService = userService;
     }
 
     @Override
@@ -53,6 +56,16 @@ public class TeamController implements TeamApi {
             } else {
                 throw new NotFoundException();
             }
+        } catch (NotFoundException e) {
+            log.error(e.toString());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseEntity<Object> findTeamsByUser(Long id) {
+        try {
+            return new ResponseEntity<>(this.teamService.findByUser(id), HttpStatus.OK);
         } catch (NotFoundException e) {
             log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,12 +43,29 @@ public class Agenda implements AbstractEntity<Long>, Serializable {
     private Team team;
 
     /**
+     * shared users of this agenda
+     */
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "teams_or_users_shared_agendas",
+            joinColumns = @JoinColumn(name = "idAgenda", nullable = true),
+            inverseJoinColumns = @JoinColumn(name = "idUser", nullable = true))
+    @JsonIgnoreProperties({"sharedAgendas", "agenda", "agendas"})
+    List<UserEntity> sharedUsers = new ArrayList<>();
+    /**
+     * shared teams of this agenda
+     */
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "teams_or_users_shared_agendas",
+            joinColumns = @JoinColumn(name = "idAgenda", nullable = true),
+            inverseJoinColumns = @JoinColumn(name = "idTeam", nullable = true))
+    @JsonIgnoreProperties({"sharedAgendas", "agenda", "agendas"})
+    List<Team> sharedTeams = new ArrayList<>();
+    /**
      * events linked to the agenda
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "agenda", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties({"sharedAgendas", "agenda", "agendas"})
-    private List<Event> events = new LinkedList<>();
-
+    private List<Event> events = new ArrayList<>();
     /**
      * shared events of this agenda
      */
@@ -57,28 +74,7 @@ public class Agenda implements AbstractEntity<Long>, Serializable {
             joinColumns = @JoinColumn(name = "idAgenda"),
             inverseJoinColumns = @JoinColumn(name = "idEvent"))
     @JsonIgnoreProperties({"sharedAgendas", "agenda", "agendas"})
-    private List<Event> sharedEvents = new LinkedList<>();
-
-    /**
-     * shared users of this agenda
-     */
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "teams_or_users_shared_agendas",
-            joinColumns = @JoinColumn(name = "idAgenda"),
-            inverseJoinColumns = @JoinColumn(name = "idUser"))
-    @Column(nullable = true)
-    @JsonIgnoreProperties({"sharedAgendas", "agenda", "agendas"})
-    List<UserEntity> sharedUsers = new LinkedList<>();
-
-    /**
-     * shared teams of this agenda
-     */
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "teams_or_users_shared_agendas",
-            joinColumns = @JoinColumn(name = "idAgenda"),
-            inverseJoinColumns = @JoinColumn(name = "idTeam"))
-    @JsonIgnoreProperties({"sharedAgendas", "agenda", "agendas"})
-    List<Team> sharedTeams = new LinkedList<>();
+    private List<Event> sharedEvents = new ArrayList<>();
 
     public Agenda() {
     }

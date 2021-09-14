@@ -26,14 +26,14 @@ public class Team implements AbstractEntity<Long>, Serializable {
     @JsonIgnoreProperties({"team", "sharedTeams"})
     private List<Agenda> agendas = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     @JoinTable(name = "users_has_teams",
             joinColumns = @JoinColumn(name = "idTeam"),
             inverseJoinColumns = @JoinColumn(name = "idUser"))
     @JsonIgnoreProperties("teams")
     private List<UserEntity> users = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "sharedTeams", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "sharedTeams", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     @JsonIgnoreProperties({"team", "sharedTeams"})
     private List<Agenda> sharedAgendas = new ArrayList<>();
 

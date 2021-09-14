@@ -5,7 +5,9 @@ import eu.busi.myplanning.domain.mappers.AgendaMapper;
 import eu.busi.myplanning.domain.mappers.TeamMapper;
 import eu.busi.myplanning.domain.mappers.UserMapper;
 import eu.busi.myplanning.domain.models.Team;
+import eu.busi.myplanning.domain.models.UserEntity;
 import eu.busi.myplanning.domain.repositories.TeamRepository;
+import eu.busi.myplanning.domain.repositories.UserRepository;
 import eu.busi.myplanning.domain.services.TeamService;
 import eu.busi.myplanning.exceptions.NotDeletedException;
 import eu.busi.myplanning.exceptions.NotFoundException;
@@ -25,9 +27,11 @@ import java.util.stream.Collectors;
 @Transactional
 public class TeamServiceImpl implements TeamService {
     private final TeamRepository repository;
+    private final UserRepository userRepository;
 
-    public TeamServiceImpl(TeamRepository repository) {
+    public TeamServiceImpl(TeamRepository repository, UserRepository userRepository) {
         this.repository = repository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -79,6 +83,23 @@ public class TeamServiceImpl implements TeamService {
             return repository
                     .findById(id)
                     .map(TeamMapper.INSTANCE::asDTO);
+        } catch (Exception e) {
+            throw new NotFoundException();
+        }
+    }
+
+    @Override
+    public List<TeamDTO> findByUser(Long id) {
+        try {
+            Optional<UserEntity> optional = userRepository.findById(id);
+
+            return optional
+                    .map(userEntity -> repository
+                            .findTeamByUsersIsIn(List.of(userEntity))
+                            .stream()
+                            .map(TeamMapper.INSTANCE::asDTO)
+                            .collect(Collectors.toList()))
+                    .orElse(null);
         } catch (Exception e) {
             throw new NotFoundException();
         }
