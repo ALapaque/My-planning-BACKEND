@@ -66,14 +66,13 @@ public class UserController implements UserApi {
         } catch (NotFoundException e) {
             log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }    }
+        }
+    }
 
     @Override
     public ResponseEntity<Object> listUsers(Pageable pageable) {
         try {
-            //PageUserDTO page = new PageUserDTO().content(this.userService.findAll());
-
-            return new ResponseEntity<>(null, HttpStatus.OK);
+            return new ResponseEntity<>(this.userService.findAll(), HttpStatus.OK);
         } catch (NotFoundException e) {
             log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

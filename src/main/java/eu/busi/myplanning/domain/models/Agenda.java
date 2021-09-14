@@ -47,10 +47,10 @@ public class Agenda implements AbstractEntity<Long>, Serializable {
      */
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "teams_or_users_shared_agendas",
-            joinColumns = @JoinColumn(name = "idAgenda", nullable = true),
-            inverseJoinColumns = @JoinColumn(name = "idUser", nullable = true))
+            joinColumns = @JoinColumn(name = "idAgenda"),
+            inverseJoinColumns = @JoinColumn(name = "idUser"))
     @JsonIgnoreProperties({"sharedAgendas", "agenda", "agendas"})
-    List<UserEntity> sharedUsers = new ArrayList<>();
+    List<UserEntity> sharedUsers = null;
     /**
      * shared teams of this agenda
      */
@@ -59,7 +59,7 @@ public class Agenda implements AbstractEntity<Long>, Serializable {
             joinColumns = @JoinColumn(name = "idAgenda", nullable = true),
             inverseJoinColumns = @JoinColumn(name = "idTeam", nullable = true))
     @JsonIgnoreProperties({"sharedAgendas", "agenda", "agendas"})
-    List<Team> sharedTeams = new ArrayList<>();
+    List<Team> sharedTeams = null;
     /**
      * events linked to the agenda
      */

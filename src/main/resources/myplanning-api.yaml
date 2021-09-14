@@ -536,7 +536,7 @@ paths:
       parameters:
         - name: pageable
           in: query
-          required: true
+          required: false
           schema:
             $ref: '#/components/schemas/Pageable'
       responses:
