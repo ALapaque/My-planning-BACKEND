@@ -179,7 +179,7 @@ public class EventServiceImpl implements EventService {
             Optional<UserEntity> optional = userRepository.findById(id);
 
             if (optional.isPresent()) {
-                List<Agenda> agendas = agendaRepository.findAgendaByUser(optional.get());
+                List<Agenda> agendas = agendaRepository.findDistinctByUserOrTeamIsInOrderByByDefaultDescNameAsc(optional.get(), optional.get().getTeams());
 
                 return repository
                         .findEventsOfTheDayIncoming(

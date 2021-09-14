@@ -166,7 +166,7 @@ public class AgendaServiceImpl implements AgendaService {
 
             return optional
                     .map(userEntity -> repository
-                            .findAgendaByUser(userEntity)
+                            .findDistinctByUserOrTeamIsInOrderByByDefaultDescNameAsc(userEntity, userEntity.getTeams())
                             .stream()
                             .map(AgendaMapper.INSTANCE::asDTO)
                             .collect(Collectors.toList()))
@@ -183,7 +183,7 @@ public class AgendaServiceImpl implements AgendaService {
 
             return optional
                     .map(userEntity -> repository
-                            .findAgendaBySharedUsersIsIn(List.of(userEntity))
+                            .findDistinctBySharedUsersIsInOrSharedTeamsIsInOrderByNameAsc(List.of(userEntity), userEntity.getTeams())
                             .stream()
                             .map(AgendaMapper.INSTANCE::asDTO)
                             .collect(Collectors.toList()))
