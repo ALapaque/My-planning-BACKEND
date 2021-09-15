@@ -1,26 +1,19 @@
 package eu.busi.myplanning.api.models;
 
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import eu.busi.myplanning.api.models.AgendaLightDTO;
-import eu.busi.myplanning.api.models.CardLightDTO;
-import eu.busi.myplanning.api.models.CommentLightDTO;
-import eu.busi.myplanning.api.models.RoleLightDTO;
-import eu.busi.myplanning.api.models.TeamLightDTO;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.util.Objects;
 
 /**
  * UserDTO
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-14T21:59:49.960608700+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-15T11:57:02.661986300+02:00[Europe/Berlin]")
 public class UserDTO   {
   @JsonProperty("id")
   private Long id = null;
@@ -49,7 +42,7 @@ public class UserDTO   {
 
   @JsonProperty("agendas")
   @Valid
-  private List<AgendaLightDTO> agendas = null;
+  private List<AgendaDTO> agendas = null;
 
   @JsonProperty("teams")
   @Valid
@@ -61,7 +54,7 @@ public class UserDTO   {
 
   @JsonProperty("sharedAgendas")
   @Valid
-  private List<AgendaLightDTO> sharedAgendas = null;
+  private List<AgendaDTO> sharedAgendas = null;
 
   public UserDTO id(Long id) {
     this.id = id;
@@ -224,12 +217,12 @@ public class UserDTO   {
     this.comments = comments;
   }
 
-  public UserDTO agendas(List<AgendaLightDTO> agendas) {
+  public UserDTO agendas(List<AgendaDTO> agendas) {
     this.agendas = agendas;
     return this;
   }
 
-  public UserDTO addAgendasItem(AgendaLightDTO agendasItem) {
+  public UserDTO addAgendasItem(AgendaDTO agendasItem) {
     if (this.agendas == null) {
       this.agendas = new ArrayList<>();
     }
@@ -243,11 +236,11 @@ public class UserDTO   {
   **/
   @ApiModelProperty(value = "")
       @Valid
-    public List<AgendaLightDTO> getAgendas() {
+    public List<AgendaDTO> getAgendas() {
     return agendas;
   }
 
-  public void setAgendas(List<AgendaLightDTO> agendas) {
+  public void setAgendas(List<AgendaDTO> agendas) {
     this.agendas = agendas;
   }
 
@@ -305,12 +298,12 @@ public class UserDTO   {
     this.cards = cards;
   }
 
-  public UserDTO sharedAgendas(List<AgendaLightDTO> sharedAgendas) {
+  public UserDTO sharedAgendas(List<AgendaDTO> sharedAgendas) {
     this.sharedAgendas = sharedAgendas;
     return this;
   }
 
-  public UserDTO addSharedAgendasItem(AgendaLightDTO sharedAgendasItem) {
+  public UserDTO addSharedAgendasItem(AgendaDTO sharedAgendasItem) {
     if (this.sharedAgendas == null) {
       this.sharedAgendas = new ArrayList<>();
     }
@@ -324,11 +317,11 @@ public class UserDTO   {
   **/
   @ApiModelProperty(value = "")
       @Valid
-    public List<AgendaLightDTO> getSharedAgendas() {
+    public List<AgendaDTO> getSharedAgendas() {
     return sharedAgendas;
   }
 
-  public void setSharedAgendas(List<AgendaLightDTO> sharedAgendas) {
+  public void setSharedAgendas(List<AgendaDTO> sharedAgendas) {
     this.sharedAgendas = sharedAgendas;
   }
 

@@ -72,7 +72,7 @@ public class UserEntity extends DateAudit implements AbstractEntity<Long>, Seria
     /**
      * user teams
      */
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
     @JoinTable(name = "users_has_teams",
             joinColumns = @JoinColumn(name = "idUser"),
             inverseJoinColumns = @JoinColumn(name = "idTeam"))
@@ -82,7 +82,7 @@ public class UserEntity extends DateAudit implements AbstractEntity<Long>, Seria
     /**
      * user dashboard's cards
      */
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
     @JoinTable(name = "users_has_cards",
             joinColumns = @JoinColumn(name = "idUser"),
             inverseJoinColumns = @JoinColumn(name = "idCard"))

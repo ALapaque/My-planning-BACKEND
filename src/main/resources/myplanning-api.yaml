@@ -1290,7 +1290,7 @@ components:
         agendas:
           type: array
           items:
-            $ref: '#/components/schemas/AgendaLightDTO'
+            $ref: '#/components/schemas/AgendaDTO'
         teams:
           type: array
           items:
@@ -1302,7 +1302,7 @@ components:
         sharedAgendas:
           type: array
           items:
-            $ref: '#/components/schemas/AgendaLightDTO'
+            $ref: '#/components/schemas/AgendaDTO'
     AgendaLightDTO:
       type: object
       properties:
