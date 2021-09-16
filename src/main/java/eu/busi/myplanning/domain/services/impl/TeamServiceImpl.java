@@ -4,6 +4,7 @@ import eu.busi.myplanning.api.models.TeamDTO;
 import eu.busi.myplanning.domain.mappers.AgendaMapper;
 import eu.busi.myplanning.domain.mappers.TeamMapper;
 import eu.busi.myplanning.domain.mappers.UserMapper;
+import eu.busi.myplanning.domain.models.Agenda;
 import eu.busi.myplanning.domain.models.Team;
 import eu.busi.myplanning.domain.models.UserEntity;
 import eu.busi.myplanning.domain.repositories.TeamRepository;
@@ -37,12 +38,15 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public TeamDTO save(TeamDTO entity) throws NotSavedException {
         try {
+            Team team = TeamMapper.INSTANCE.fromDtoToEntity(entity);
+            Agenda agenda = new Agenda();
+            agenda.setName(team.getName());
+            agenda.setTeam(team);
+            team.setAgendas(List.of(agenda));
+
             return TeamMapper
                     .INSTANCE
-                    .asDTO(repository
-                            .save(TeamMapper
-                                    .INSTANCE
-                                    .fromDtoToEntity(entity)));
+                    .asDTO(repository.save(team));
         } catch (Exception e) {
             throw new NotSavedException();
         }
@@ -143,6 +147,10 @@ public class TeamServiceImpl implements TeamService {
                 Team team = TeamMapper.INSTANCE.fromDtoToEntity(optional.get());
 
                 team.setName(entity.getName());
+                team.setAgendas(entity.getAgendas()
+                        .stream()
+                        .map(AgendaMapper.INSTANCE::fromDtoToEntity)
+                        .collect(Collectors.toList()));
                 team.setUsers(entity
                         .getUsers()
                         .stream()
@@ -154,7 +162,9 @@ public class TeamServiceImpl implements TeamService {
                         .map(AgendaMapper.INSTANCE::fromDtoToEntity)
                         .collect(Collectors.toList()));
 
-                return save(TeamMapper.INSTANCE.asDTO(team));
+                return TeamMapper
+                        .INSTANCE
+                        .asDTO(repository.save(team));
             } else {
                 throw new Exception("Ressource not found...");
             }

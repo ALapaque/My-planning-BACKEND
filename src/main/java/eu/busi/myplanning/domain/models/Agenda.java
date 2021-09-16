@@ -19,12 +19,12 @@ public class Agenda implements AbstractEntity<Long>, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Boolean byDefault;
+    private Boolean byDefault = false;
 
     @Column(length = 60)
     private String name;
 
-    private String color;
+    private String color = "#1ed4d4";
 
     /**
      * owner of the agenda

@@ -22,7 +22,7 @@ public class Team implements AbstractEntity<Long>, Serializable {
     @Column(nullable = false, length = 60)
     private String name;
 
-    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnoreProperties({"team", "sharedTeams"})
     private List<Agenda> agendas = new ArrayList<>();
 
