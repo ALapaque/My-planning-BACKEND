@@ -6,19 +6,20 @@
 package eu.busi.myplanning.api.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eu.busi.myplanning.api.models.Pageable;
 import eu.busi.myplanning.api.models.RoleDTO;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.Optional;
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-16T10:03:39.616366700+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-16T17:35:03.693542400+02:00[Europe/Berlin]")
 @Api(value = "role", description = "the role API")
 public interface RoleApi {
 
@@ -50,14 +51,13 @@ public interface RoleApi {
 );
 
 
-    @ApiOperation(value = "", nickname = "listRoles", notes = "", response = Object.class, tags={ "Role API", })
+    @ApiOperation(value = "", nickname = "findRoles", notes = "", response = Object.class, tags={ "Role API", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = Object.class) })
     @RequestMapping(value = "/role",
         produces = { "*/*" }, 
         method = RequestMethod.GET)
-    ResponseEntity<Object> listRoles(@NotNull @ApiParam(value = "", required = true) @Valid @RequestParam(value = "pageable", required = true) Pageable pageable
-);
+    ResponseEntity<Object> findRoles();
 
 
     @ApiOperation(value = "", nickname = "saveRole", notes = "", response = Object.class, tags={ "Role API", })

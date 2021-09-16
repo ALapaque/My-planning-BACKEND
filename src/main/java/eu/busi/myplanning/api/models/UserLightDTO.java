@@ -10,13 +10,16 @@ import java.util.Objects;
  * UserLightDTO
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-16T10:03:39.616366700+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-16T17:35:03.693542400+02:00[Europe/Berlin]")
 public class UserLightDTO   {
   @JsonProperty("id")
   private Long id = null;
 
   @JsonProperty("firstName")
   private String firstName = null;
+
+  @JsonProperty("organization")
+  private String organization = null;
 
   @JsonProperty("lastName")
   private String lastName = null;
@@ -66,6 +69,25 @@ public class UserLightDTO   {
 
   public void setFirstName(String firstName) {
     this.firstName = firstName;
+  }
+
+  public UserLightDTO organization(String organization) {
+    this.organization = organization;
+    return this;
+  }
+
+  /**
+   * Get organization
+   * @return organization
+  **/
+  @ApiModelProperty(value = "")
+  
+    public String getOrganization() {
+    return organization;
+  }
+
+  public void setOrganization(String organization) {
+    this.organization = organization;
   }
 
   public UserLightDTO lastName(String lastName) {
@@ -156,6 +178,7 @@ public class UserLightDTO   {
     UserLightDTO userLightDTO = (UserLightDTO) o;
     return Objects.equals(this.id, userLightDTO.id) &&
         Objects.equals(this.firstName, userLightDTO.firstName) &&
+        Objects.equals(this.organization, userLightDTO.organization) &&
         Objects.equals(this.lastName, userLightDTO.lastName) &&
         Objects.equals(this.username, userLightDTO.username) &&
         Objects.equals(this.email, userLightDTO.email) &&
@@ -164,7 +187,7 @@ public class UserLightDTO   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, lastName, username, email, password);
+    return Objects.hash(id, firstName, organization, lastName, username, email, password);
   }
 
   @Override
@@ -174,6 +197,7 @@ public class UserLightDTO   {
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
+    sb.append("    organization: ").append(toIndentedString(organization)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
     sb.append("    username: ").append(toIndentedString(username)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");

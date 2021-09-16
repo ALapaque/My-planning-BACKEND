@@ -25,6 +25,10 @@ public class UserEntity extends DateAudit implements AbstractEntity<Long>, Seria
     private Long id;
 
     @NotBlank
+    @Column(length = 100)
+    private String organization;
+
+    @NotBlank
     @Size(max = 40)
     private String firstName;
 
@@ -117,9 +121,10 @@ public class UserEntity extends DateAudit implements AbstractEntity<Long>, Seria
      * @param cards         the cards
      * @param sharedAgendas the shared agendas
      */
-    public UserEntity(Long id, String firstName, String lastName, String username, String email, String password, Role role, List<Comment> comments, List<Agenda> agendas, List<Team> teams, List<Card> cards, List<Agenda> sharedAgendas) {
+    public UserEntity(Long id, String firstName, String organization, String lastName, String username, String email, String password, Role role, List<Comment> comments, List<Agenda> agendas, List<Team> teams, List<Card> cards, List<Agenda> sharedAgendas) {
         this.id = id;
         this.firstName = firstName;
+        this.organization = organization;
         this.lastName = lastName;
         this.username = username;
         this.email = email;
@@ -166,6 +171,14 @@ public class UserEntity extends DateAudit implements AbstractEntity<Long>, Seria
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(String organization) {
+        this.organization = organization;
     }
 
     /**

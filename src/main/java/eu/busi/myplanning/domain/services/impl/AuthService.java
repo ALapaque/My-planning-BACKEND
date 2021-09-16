@@ -41,7 +41,7 @@ public class AuthService {
         if (_userRepository.findByEmailOrUsername(user.getEmail(), user.getUsername()).isPresent()) {
             throw new ResourceNotFoundException("Username or Email already taken");
         }
-        user.setRole(_roleRepository.findByName("USER"));
+        user.setRole(_roleRepository.findByName("ADMIN"));
         user.setCards(_cardRepository.findAll());
         Agenda defaultAgenda = Agenda.defaultAgenda();
         defaultAgenda.setUser(user);

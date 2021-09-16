@@ -637,13 +637,7 @@ paths:
     get:
       tags:
         - "Role API"
-      operationId: listRoles
-      parameters:
-        - name: pageable
-          in: query
-          required: true
-          schema:
-            $ref: '#/components/schemas/Pageable'
+      operationId: findRoles
       responses:
         "200":
           description: OK
@@ -1275,6 +1269,8 @@ components:
           type: string
         lastName:
           type: string
+        organization:
+          type: string
         username:
           type: string
         email:
@@ -1426,6 +1422,8 @@ components:
           type: integer
           format: int64
         firstName:
+          type: string
+        organization:
           type: string
         lastName:
           type: string

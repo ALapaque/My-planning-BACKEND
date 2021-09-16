@@ -2,7 +2,6 @@ package eu.busi.myplanning.domain.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.busi.myplanning.api.controllers.RoleApi;
-import eu.busi.myplanning.api.models.Pageable;
 import eu.busi.myplanning.api.models.RoleDTO;
 import eu.busi.myplanning.domain.services.impl.RoleServiceImpl;
 import eu.busi.myplanning.exceptions.NotDeletedException;
@@ -60,11 +59,9 @@ public class RoleController implements RoleApi {
     }
 
     @Override
-    public ResponseEntity<Object> listRoles(Pageable pageable) {
+    public ResponseEntity<Object> findRoles() {
         try {
-            //PageRoleDTO page = new PageRoleDTO().content(this.roleService.findAll());
-
-            return new ResponseEntity<>(null, HttpStatus.OK);
+            return new ResponseEntity<>(roleService.findAll(), HttpStatus.OK);
         } catch (NotFoundException e) {
             log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

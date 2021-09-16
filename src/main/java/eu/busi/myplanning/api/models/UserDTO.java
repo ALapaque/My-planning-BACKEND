@@ -13,7 +13,7 @@ import java.util.Objects;
  * UserDTO
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-16T10:03:39.616366700+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-16T17:35:03.693542400+02:00[Europe/Berlin]")
 public class UserDTO   {
   @JsonProperty("id")
   private Long id = null;
@@ -23,6 +23,9 @@ public class UserDTO   {
 
   @JsonProperty("lastName")
   private String lastName = null;
+
+  @JsonProperty("organization")
+  private String organization = null;
 
   @JsonProperty("username")
   private String username = null;
@@ -111,6 +114,25 @@ public class UserDTO   {
 
   public void setLastName(String lastName) {
     this.lastName = lastName;
+  }
+
+  public UserDTO organization(String organization) {
+    this.organization = organization;
+    return this;
+  }
+
+  /**
+   * Get organization
+   * @return organization
+  **/
+  @ApiModelProperty(value = "")
+  
+    public String getOrganization() {
+    return organization;
+  }
+
+  public void setOrganization(String organization) {
+    this.organization = organization;
   }
 
   public UserDTO username(String username) {
@@ -338,6 +360,7 @@ public class UserDTO   {
     return Objects.equals(this.id, userDTO.id) &&
         Objects.equals(this.firstName, userDTO.firstName) &&
         Objects.equals(this.lastName, userDTO.lastName) &&
+        Objects.equals(this.organization, userDTO.organization) &&
         Objects.equals(this.username, userDTO.username) &&
         Objects.equals(this.email, userDTO.email) &&
         Objects.equals(this.password, userDTO.password) &&
@@ -351,7 +374,7 @@ public class UserDTO   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, lastName, username, email, password, role, comments, agendas, teams, cards, sharedAgendas);
+    return Objects.hash(id, firstName, lastName, organization, username, email, password, role, comments, agendas, teams, cards, sharedAgendas);
   }
 
   @Override
@@ -362,6 +385,7 @@ public class UserDTO   {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
+    sb.append("    organization: ").append(toIndentedString(organization)).append("\n");
     sb.append("    username: ").append(toIndentedString(username)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
