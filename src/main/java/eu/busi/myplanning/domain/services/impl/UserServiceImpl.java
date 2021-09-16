@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
     public List<UserDTO> findAll() throws NotFoundException {
         try {
             return repository
-                    .findAll()
+                    .findAllByOrderByFirstNameAsc()
                     .stream()
                     .map(UserMapper.INSTANCE::asDTO)
                     .collect(Collectors.toList());

@@ -12,7 +12,7 @@ import java.util.Objects;
  * ScheduleLightDTO
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-15T11:57:02.661986300+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-16T10:03:39.616366700+02:00[Europe/Berlin]")
 public class ScheduleLightDTO   {
   @JsonProperty("id")
   private Long id = null;

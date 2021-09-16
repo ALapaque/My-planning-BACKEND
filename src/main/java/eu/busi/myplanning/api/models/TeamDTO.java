@@ -13,7 +13,7 @@ import java.util.Objects;
  * TeamDTO
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-15T11:57:02.661986300+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-16T10:03:39.616366700+02:00[Europe/Berlin]")
 public class TeamDTO   {
   @JsonProperty("id")
   private Long id = null;
@@ -27,11 +27,11 @@ public class TeamDTO   {
 
   @JsonProperty("agendas")
   @Valid
-  private List<AgendaLightDTO> agendas = null;
+  private List<AgendaDTO> agendas = null;
 
   @JsonProperty("sharedAgendas")
   @Valid
-  private List<AgendaLightDTO> sharedAgendas = null;
+  private List<AgendaDTO> sharedAgendas = null;
 
   public TeamDTO id(Long id) {
     this.id = id;
@@ -98,12 +98,12 @@ public class TeamDTO   {
     this.users = users;
   }
 
-  public TeamDTO agendas(List<AgendaLightDTO> agendas) {
+  public TeamDTO agendas(List<AgendaDTO> agendas) {
     this.agendas = agendas;
     return this;
   }
 
-  public TeamDTO addAgendasItem(AgendaLightDTO agendasItem) {
+  public TeamDTO addAgendasItem(AgendaDTO agendasItem) {
     if (this.agendas == null) {
       this.agendas = new ArrayList<>();
     }
@@ -117,20 +117,20 @@ public class TeamDTO   {
   **/
   @ApiModelProperty(value = "")
       @Valid
-    public List<AgendaLightDTO> getAgendas() {
+    public List<AgendaDTO> getAgendas() {
     return agendas;
   }
 
-  public void setAgendas(List<AgendaLightDTO> agendas) {
+  public void setAgendas(List<AgendaDTO> agendas) {
     this.agendas = agendas;
   }
 
-  public TeamDTO sharedAgendas(List<AgendaLightDTO> sharedAgendas) {
+  public TeamDTO sharedAgendas(List<AgendaDTO> sharedAgendas) {
     this.sharedAgendas = sharedAgendas;
     return this;
   }
 
-  public TeamDTO addSharedAgendasItem(AgendaLightDTO sharedAgendasItem) {
+  public TeamDTO addSharedAgendasItem(AgendaDTO sharedAgendasItem) {
     if (this.sharedAgendas == null) {
       this.sharedAgendas = new ArrayList<>();
     }
@@ -144,11 +144,11 @@ public class TeamDTO   {
   **/
   @ApiModelProperty(value = "")
       @Valid
-    public List<AgendaLightDTO> getSharedAgendas() {
+    public List<AgendaDTO> getSharedAgendas() {
     return sharedAgendas;
   }
 
-  public void setSharedAgendas(List<AgendaLightDTO> sharedAgendas) {
+  public void setSharedAgendas(List<AgendaDTO> sharedAgendas) {
     this.sharedAgendas = sharedAgendas;
   }
 

@@ -95,7 +95,7 @@ public class TeamServiceImpl implements TeamService {
 
             return optional
                     .map(userEntity -> repository
-                            .findTeamByUsersIsIn(List.of(userEntity))
+                            .findTeamByUsersIsInOrderByNameAsc(List.of(userEntity))
                             .stream()
                             .map(TeamMapper.INSTANCE::asDTO)
                             .collect(Collectors.toList()))
@@ -151,7 +151,7 @@ public class TeamServiceImpl implements TeamService {
                 team.setSharedAgendas(entity
                         .getSharedAgendas()
                         .stream()
-                        .map(AgendaMapper.INSTANCE::fromLightDtoToEntity)
+                        .map(AgendaMapper.INSTANCE::fromDtoToEntity)
                         .collect(Collectors.toList()));
 
                 return save(TeamMapper.INSTANCE.asDTO(team));
