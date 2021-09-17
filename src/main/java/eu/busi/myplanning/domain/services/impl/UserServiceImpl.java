@@ -5,7 +5,9 @@ import eu.busi.myplanning.domain.mappers.CardMapper;
 import eu.busi.myplanning.domain.mappers.RoleMapper;
 import eu.busi.myplanning.domain.mappers.TeamMapper;
 import eu.busi.myplanning.domain.mappers.UserMapper;
+import eu.busi.myplanning.domain.models.Agenda;
 import eu.busi.myplanning.domain.models.UserEntity;
+import eu.busi.myplanning.domain.repositories.CardRepository;
 import eu.busi.myplanning.domain.repositories.UserRepository;
 import eu.busi.myplanning.domain.services.UserService;
 import eu.busi.myplanning.exceptions.NotDeletedException;
@@ -29,20 +31,21 @@ import java.util.stream.Collectors;
 @Transactional
 public class UserServiceImpl implements UserService {
     private final UserRepository repository;
+    private final CardRepository cardRepository;
 
-    public UserServiceImpl(UserRepository repository) {
+    public UserServiceImpl(UserRepository repository, CardRepository cardRepository) {
         this.repository = repository;
+        this.cardRepository = cardRepository;
     }
 
     @Override
     public UserDTO save(UserDTO entity) throws NotSavedException {
         try {
+            UserEntity user = this.initDefaultUser(UserMapper.INSTANCE.fromDtoToEntity(entity));
+
             return UserMapper
                     .INSTANCE
-                    .asDTO(repository
-                            .save(UserMapper
-                                    .INSTANCE
-                                    .fromDtoToEntity(entity)));
+                    .asDTO(repository.save(user));
         } catch (Exception e) {
             throw new NotSavedException();
         }
@@ -113,6 +116,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDTO> findAllByOrganization(String organization) {
+        try {
+            return repository
+                    .findAllByOrganizationOrderByFirstNameAsc(organization)
+                    .stream()
+                    .map(UserMapper.INSTANCE::asDTO)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new NotFoundException();
+        }
+    }
+
+    @Override
     public Page<UserDTO> findAll(Pageable pageable) throws NotFoundException {
         try {
             Page<UserEntity> entityPage = repository.findAll(pageable);
@@ -159,5 +175,14 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             throw new NotUpdatedException();
         }
+    }
+
+    public UserEntity initDefaultUser(UserEntity user) {
+        user.setCards(cardRepository.findAll());
+        Agenda defaultAgenda = Agenda.defaultAgenda();
+        defaultAgenda.setUser(user);
+        user.setAgendas(List.of(defaultAgenda));
+
+        return user;
     }
 }

@@ -11,7 +11,7 @@ import java.util.Objects;
  * Pageable
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-16T17:35:03.693542400+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-17T09:37:55.101969900+02:00[Europe/Berlin]")
 public class Pageable   {
   @JsonProperty("offset")
   private Long offset = null;

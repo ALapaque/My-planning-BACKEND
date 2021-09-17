@@ -14,7 +14,7 @@ import java.util.Objects;
  * EventDTO
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-16T17:35:03.693542400+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-17T09:37:55.101969900+02:00[Europe/Berlin]")
 public class EventDTO   {
   @JsonProperty("id")
   private Long id = null;

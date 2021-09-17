@@ -528,17 +528,17 @@ paths:
             '*/*':
               schema:
                 type: boolean
-  /user:
+  /user/organization/{organization}:
     get:
       tags:
         - "User API"
-      operationId: listUsers
+      operationId: findUsersByOrganization
       parameters:
-        - name: pageable
-          in: query
-          required: false
+        - name: organization
+          in: path
+          required: true
           schema:
-            $ref: '#/components/schemas/Pageable'
+            type: string
       responses:
         "200":
           description: OK
@@ -546,6 +546,7 @@ paths:
             '*/*':
               schema:
                 type: object
+  /user:
     post:
       tags:
         - "User API"

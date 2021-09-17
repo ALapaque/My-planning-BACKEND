@@ -2,7 +2,6 @@ package eu.busi.myplanning.domain.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.busi.myplanning.api.controllers.UserApi;
-import eu.busi.myplanning.api.models.Pageable;
 import eu.busi.myplanning.api.models.UserDTO;
 import eu.busi.myplanning.domain.services.impl.UserServiceImpl;
 import eu.busi.myplanning.exceptions.NotDeletedException;
@@ -70,9 +69,9 @@ public class UserController implements UserApi {
     }
 
     @Override
-    public ResponseEntity<Object> listUsers(Pageable pageable) {
+    public ResponseEntity<Object> findUsersByOrganization(String organization) {
         try {
-            return new ResponseEntity<>(this.userService.findAll(), HttpStatus.OK);
+            return new ResponseEntity<>(this.userService.findAllByOrganization(organization), HttpStatus.OK);
         } catch (NotFoundException e) {
             log.error(e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
