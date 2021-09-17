@@ -155,7 +155,9 @@ public class UserServiceImpl implements UserService {
                 user.setFirstName(entity.getFirstName());
                 user.setLastName(entity.getLastName());
                 user.setEmail(entity.getEmail());
-                user.setPassword(entity.getPassword());
+                if (!entity.getPassword().isEmpty()) {
+                    user.setPassword(entity.getPassword());
+                }
                 user.setRole(RoleMapper.INSTANCE.fromLightDtoToEntity(entity.getRole()));
                 user.setTeams(entity
                         .getTeams()
@@ -168,7 +170,7 @@ public class UserServiceImpl implements UserService {
                         .map(CardMapper.INSTANCE::fromLightDtoToEntity)
                         .collect(Collectors.toList()));
 
-                return save(UserMapper.INSTANCE.asDTO(user));
+                return UserMapper.INSTANCE.asDTO(repository.save(user));
             } else {
                 throw new Exception("Ressource not found...");
             }
