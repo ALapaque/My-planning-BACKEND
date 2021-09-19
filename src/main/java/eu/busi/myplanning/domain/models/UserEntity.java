@@ -38,7 +38,7 @@ public class UserEntity extends DateAudit implements AbstractEntity<Long>, Seria
 
     @NotBlank
     @Size(max = 15)
-    @Column(unique = true, length = 15)
+    @Column(unique = true, length = 100)
     private String username;
 
     @NaturalId
