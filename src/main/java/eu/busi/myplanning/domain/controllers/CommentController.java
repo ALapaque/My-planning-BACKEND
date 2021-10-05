@@ -15,10 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * Comment controller
+ * contains all the endpoints
+ */
 @RestController
 public class CommentController implements CommentApi {
     private final CommentServiceImpl commentService;
 
+    /**
+     * Instantiates a new Comment controller.
+     *
+     * @param commentService the comment service
+     */
     public CommentController(CommentServiceImpl commentService) {
         this.commentService = commentService;
     }
@@ -33,6 +42,11 @@ public class CommentController implements CommentApi {
         return Optional.empty();
     }
 
+    /**
+     * delete a comment by an id
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Boolean> deleteComment(Long id) {
         try {
@@ -43,6 +57,11 @@ public class CommentController implements CommentApi {
         }
     }
 
+    /**
+     * find a comment by an id
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Object> findComment(Long id) {
         try {
@@ -59,6 +78,11 @@ public class CommentController implements CommentApi {
         }
     }
 
+    /**
+     * return a pageable of comments
+     * @param pageable
+     * @return
+     */
     @Override
     public ResponseEntity<Object> listComments(Pageable pageable) {
         try {
@@ -71,6 +95,11 @@ public class CommentController implements CommentApi {
         }
     }
 
+    /**
+     * save a comment
+     * @param body
+     * @return
+     */
     @Override
     public ResponseEntity<Object> saveComment(CommentDTO body) {
         try {
@@ -81,6 +110,12 @@ public class CommentController implements CommentApi {
         }
     }
 
+    /**
+     * update a comment
+     * @param body
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Object> updateComment(CommentDTO body, Long id) {
         try {

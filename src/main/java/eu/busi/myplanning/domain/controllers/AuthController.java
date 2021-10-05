@@ -23,7 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 /**
- * The type Auth controller.
+ * Auth controller
+ * this contains all the endpoints
  */
 @RestController
 public class AuthController implements AuthApi {
@@ -33,6 +34,12 @@ public class AuthController implements AuthApi {
     private final MyUserDetailService myUserDetailService;
     private final JwtUtil jwtUtils;
 
+    /**
+     * injection of dependencies through the constructor
+     * @param _authService
+     * @param _myUserDetailService
+     * @param _jwtUtils
+     */
     public AuthController(AuthService _authService, MyUserDetailService _myUserDetailService, JwtUtil _jwtUtils) {
         this.authService = _authService;
         this.myUserDetailService = _myUserDetailService;
@@ -49,6 +56,10 @@ public class AuthController implements AuthApi {
         return Optional.empty();
     }
 
+    /**
+     * this will try to authenticate the user and generate a token
+     * if the user did mention the correct credentials
+     */
     @Override
     public ResponseEntity<Object> authenticateUser(JwtAuthenticationRequest body) {
         ResponseEntity<Object> _responseEntity;
@@ -72,6 +83,9 @@ public class AuthController implements AuthApi {
         return _responseEntity;
     }
 
+    /**
+     * this will try to register a new user
+     */
     @Override
     public ResponseEntity<Object> register(UserDTO body) {
         ResponseEntity<Object> _responseEntity;

@@ -17,11 +17,21 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Card controller
+ * This contains all the endpoints
+ */
 @RestController
 public class CardController implements CardApi {
     private final CardServiceImpl cardService;
     private final EventServiceImpl eventService;
 
+    /**
+     * Instantiates a new Card controller.
+     *
+     * @param cardService  the card service
+     * @param eventService the event service
+     */
     public CardController(CardServiceImpl cardService, EventServiceImpl eventService) {
         this.cardService = cardService;
         this.eventService = eventService;
@@ -37,6 +47,11 @@ public class CardController implements CardApi {
         return Optional.empty();
     }
 
+    /**
+     * this will delete a card by an id
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Boolean> deleteCard(Long id) {
         try {
@@ -47,6 +62,11 @@ public class CardController implements CardApi {
         }
     }
 
+    /**
+     * this will find a card by an id
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Object> findCard(Long id) {
         try {
@@ -63,6 +83,14 @@ public class CardController implements CardApi {
         }
     }
 
+    /**
+     * this will find the content to display of a defined card
+     * @param userId
+     * @param type
+     * @param start
+     * @param end
+     * @return
+     */
     @Override
     public ResponseEntity<Object> findCardContent(Long userId, CardType type, Instant start, Instant end) {
         try {
@@ -81,6 +109,11 @@ public class CardController implements CardApi {
         }
     }
 
+    /**
+     * this will find the card used by a user
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Object> findCardsByUser(Long id) {
         try {
@@ -91,6 +124,11 @@ public class CardController implements CardApi {
         }
     }
 
+    /**
+     * this will return a pageable of cards
+     * @param pageable
+     * @return
+     */
     @Override
     public ResponseEntity<Object> listCards(Pageable pageable) {
         try {
@@ -103,6 +141,11 @@ public class CardController implements CardApi {
         }
     }
 
+    /**
+     * this will save a card
+     * @param body
+     * @return
+     */
     @Override
     public ResponseEntity<Object> saveCard(CardDTO body) {
         try {
@@ -113,6 +156,12 @@ public class CardController implements CardApi {
         }
     }
 
+    /**
+     * this will update a card
+     * @param body
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Object> updateCard(CardDTO body, Long id) {
         try {

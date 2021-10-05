@@ -1,0 +1,328 @@
+@startuml
+left to right direction
+
+package eu.busi.myplanning.domain {
+package models {
+
+    interface AbstractEntity<T> {
+    ~ T getId()
+    ~ void setId(T)
+    }
+
+    abstract class DateAudit {
+    - Instant createdAt
+    - Instant updatedAt
+    + Instant getCreatedAt()
+    + void setCreatedAt(Instant)
+    + Instant getUpdatedAt()
+    + void setUpdatedAt(Instant)
+    }
+
+    class Agenda {
+    - {static} long serialVersionUID
+    - Long id
+    - Boolean byDefault
+    - String name
+    - String color
+    - UserEntity user
+    - Team team
+    ~ List<UserEntity> sharedUsers
+    ~ List<Team> sharedTeams
+    - List<Event> events
+    - List<Event> sharedEvents
+    ..
+    + <<Create>> Agenda()
+    + {static} Agenda defaultAgenda()
+    + Long getId()
+    + void setId(Long)
+    + Boolean getByDefault()
+    + void setByDefault(Boolean)
+    + String getName()
+    + void setName(String)
+    + String getColor()
+    + void setColor(String)
+    + UserEntity getUser()
+    + void setUser(UserEntity)
+    + Team getTeam()
+    + void setTeam(Team)
+    + List<Event> getEvents()
+    + void setEvents(List<Event>)
+    + List<Event> getSharedEvents()
+    + void setSharedEvents(List<Event>)
+    + List<UserEntity> getSharedUsers()
+    + void setSharedUsers(List<UserEntity>)
+    + List<Team> getSharedTeams()
+    + void setSharedTeams(List<Team>)
+    }
+
+    AbstractEntity <|.. Agenda
+    java.io.Serializable <|.. Agenda
+    UserEntity --o Agenda
+    Team --o Agenda
+    Agendas_has_shared_events o-- Agenda
+
+    class Authority {
+    - {static} long serialVersionUID
+    - Long id
+    - String name
+    - List<Role> roles
+    ..
+    + <<Create>> Authority()
+    + Long getId()
+    + void setId(Long)
+    + String getName()
+    + void setName(String)
+    + List<Role> getRoles()
+    + void setRoles(List<Role>)
+    }
+
+    AbstractEntity <|.. Authority
+    java.io.Serializable <|.. Authority
+    Roles_has_authorities o-- Authority
+
+    class Card {
+    - {static} long serialVersionUID
+    - Long id
+    - boolean recap
+    - CardType type
+    - CardSize size
+    - List<UserEntity> users
+    ..
+    + <<Create>> Card()
+    + Long getId()
+    + void setId(Long)
+    + boolean isRecap()
+    + void setRecap(boolean)
+    + CardType getType()
+    + void setType(CardType)
+    + CardSize getSize()
+    + void setSize(CardSize)
+    + List<UserEntity> getUsers()
+    + void setUsers(List<UserEntity>)
+    }
+
+    AbstractEntity <|.. Card
+    java.io.Serializable <|.. Card
+    Users_has_cards o-- Card
+
+    class Comment {
+    - {static} long serialVersionUID
+    - Long id
+    - String content
+    - UserEntity user
+    - Event event
+    + <<Create>> Comment()
+    + Long getId()
+    + void setId(Long)
+    + String getContent()
+    + void setContent(String)
+    + UserEntity getUser()
+    + void setUser(UserEntity)
+    + Event getEvent()
+    + void setEvent(Event)
+    }
+
+    AbstractEntity <|.. Comment
+    java.io.Serializable <|.. Comment
+    DateAudit <|-- Comment
+    UserEntity --o Comment
+    Event --o Comment
+
+    class Event {
+    - {static} long serialVersionUID
+    - Long id
+    - String name
+    - boolean dayOff
+    - boolean privateEvent
+    - EventStatus statusDisplayed
+    - EventType eventType
+    - Instant startDate
+    - Instant endDate
+    - String meetingUrl
+    - String report
+    - List<Comment> comments
+    - Agenda agenda
+    - List<Agenda> sharedAgendas
+    ..
+    + <<Create>> Event()
+    + Long getId()
+    + void setId(Long)
+    + String getName()
+    + void setName(String)
+    + boolean isDayOff()
+    + void setDayOff(boolean)
+    + boolean isPrivateEvent()
+    + void setPrivateEvent(boolean)
+    + EventStatus getStatusDisplayed()
+    + void setStatusDisplayed(EventStatus)
+    + EventType getEventType()
+    + void setEventType(EventType)
+    + Instant getStartDate()
+    + void setStartDate(Instant)
+    + Instant getEndDate()
+    + void setEndDate(Instant)
+    + String getMeetingUrl()
+    + void setMeetingUrl(String)
+    + String getReport()
+    + void setReport(String)
+    + List<Comment> getComments()
+    + void setComments(List<Comment>)
+    + Agenda getAgenda()
+    + void setAgenda(Agenda)
+    + List<Agenda> getSharedAgendas()
+    + void setSharedAgendas(List<Agenda>)
+    }
+
+    AbstractEntity <|.. Event
+    java.io.Serializable <|.. Event
+    DateAudit <|-- Event
+    Comment --o Event
+    Agenda o-- Event
+    Agendas_has_shared_events o-- Event
+
+    class Role {
+    - {static} long serialVersionUID
+    - Long id
+    - String name
+    - List<UserEntity> users
+    - List<Authority> authorities
+    ..
+    + <<Create>> Role()
+    + Long getId()
+    + void setId(Long)
+    + String getName()
+    + void setName(String)
+    + List<UserEntity> getUsers()
+    + void setUsers(List<UserEntity>)
+    + List<Authority> getAuthorities()
+    + void setAuthorities(List<Authority>)
+    }
+
+    AbstractEntity <|.. Role
+    java.io.Serializable <|.. Role
+    UserEntity o-- Role
+    Roles_has_authorities o-- Role
+
+    class Scheduling {
+    - Long id
+    - Integer day
+    - Time startHour
+    - Time endHour
+    - Boolean hasBreak
+    - Time startBreak
+    - Time endBreak
+    - Agenda agenda
+    ..
+    + <<Create>> Scheduling()
+    + Long getId()
+    + void setId(Long)
+    + Integer getDay()
+    + void setDay(Integer)
+    + Time getStartHour()
+    + void setStartHour(Time)
+    + Time getEndHour()
+    + void setEndHour(Time)
+    + Boolean getHasBreak()
+    + void setHasBreak(Boolean)
+    + Time getStartBreak()
+    + void setStartBreak(Time)
+    + Time getEndBreak()
+    + void setEndBreak(Time)
+    + Agenda getAgenda()
+    + void setAgenda(Agenda)
+    }
+
+    AbstractEntity <|.. Scheduling
+    Agenda --o Scheduling
+
+    class Team {
+    - {static} long serialVersionUID
+    - Long id
+    - String name
+    - List<Agenda> agendas
+    - List<UserEntity> users
+    - List<Agenda> sharedAgendas
+    ..
+    + <<Create>> Team()
+    + Long getId()
+    + void setId(Long)
+    + String getName()
+    + void setName(String)
+    + List<Agenda> getAgendas()
+    + void setAgendas(List<Agenda>)
+    + List<UserEntity> getUsers()
+    + void setUsers(List<UserEntity>)
+    + List<Agenda> getSharedAgendas()
+    + void setSharedAgendas(List<Agenda>)
+    }
+
+    AbstractEntity <|.. Team
+    java.io.Serializable <|.. Team
+    Agenda o-- Team
+    Users_has_teams o-- Team
+    Teams_or_users_shared_agedans o-- Team
+
+    class UserEntity {
+    - {static} long serialVersionUID
+    - Long id
+    - String organization
+    - String firstName
+    - String lastName
+    - String username
+    - String email
+    - String password
+    - Role role
+    - List<Comment> comments
+    - List<Agenda> agendas
+    - List<Team> teams
+    - List<Card> cards
+    - List<Agenda> sharedAgendas
+    ..
+    + <<Create>> UserEntity()
+    + <<Create>> UserEntity(Long,String,String,String,String,String,String,Role,List<Comment>,List<Agenda>,List<Team>,List<Card>,List<Agenda>)
+    + Long getId()
+    + void setId(Long)
+    + String getFirstName()
+    + void setFirstName(String)
+    + String getOrganization()
+    + void setOrganization(String)
+    + String getLastName()
+    + void setLastName(String)
+    + String getUsername()
+    + void setUsername(String)
+    + String getEmail()
+    + void setEmail(String)
+    + String getPassword()
+    + void setPassword(String)
+    + Role getRole()
+    + void setRole(Role)
+    + List<Comment> getComments()
+    + void setComments(List<Comment>)
+    + List<Agenda> getAgendas()
+    + void setAgendas(List<Agenda>)
+    + List<Team> getTeams()
+    + void setTeams(List<Team>)
+    + List<Card> getCards()
+    + void setCards(List<Card>)
+    + List<Agenda> getSharedAgendas()
+    + void setSharedAgendas(List<Agenda>)
+    }
+
+    AbstractEntity <|.. UserEntity
+    java.io.Serializable <|.. UserEntity
+    DateAudit <|-- UserEntity
+    Role --o UserEntity
+    Comment o-- UserEntity
+    Agenda o-- UserEntity
+    Users_has_teams o-- UserEntity
+    Users_has_cards o-- UserEntity
+    Teams_or_users_shared_agedans o-- UserEntity
+
+    class Agendas_has_shared_events {}
+    class Teams_or_users_shared_agedans {}
+    class Roles_has_authorities {}
+    class Users_has_cards {}
+    class Users_has_teams {}
+    }
+}
+@enduml

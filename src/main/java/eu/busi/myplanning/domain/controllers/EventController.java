@@ -16,10 +16,19 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Event controller
+ * this contains all the endpoint
+ */
 @RestController
 public class EventController implements EventApi {
     private final EventServiceImpl eventService;
 
+    /**
+     * Instantiates a new Event controller.
+     *
+     * @param eventService the event service
+     */
     public EventController(EventServiceImpl eventService) {
         this.eventService = eventService;
     }
@@ -34,6 +43,11 @@ public class EventController implements EventApi {
         return Optional.empty();
     }
 
+    /**
+     * delete an event by an id
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Boolean> deleteEvent(Long id) {
         try {
@@ -44,6 +58,11 @@ public class EventController implements EventApi {
         }
     }
 
+    /**
+     * find an event by an id
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Object> findEvent(Long id) {
         try {
@@ -60,6 +79,15 @@ public class EventController implements EventApi {
         }
     }
 
+    /**
+     * return all the events from different parameters
+     *
+     * @param userId
+     * @param agendaIds
+     * @param startDate
+     * @param endDate
+     * @return
+     */
     @Override
     public ResponseEntity<Object> listEvents(
             Long userId,
@@ -75,6 +103,11 @@ public class EventController implements EventApi {
         }
     }
 
+    /**
+     * save an event
+     * @param body
+     * @return
+     */
     @Override
     public ResponseEntity<Object> saveEvent(EventDTO body) {
         try {
@@ -85,6 +118,12 @@ public class EventController implements EventApi {
         }
     }
 
+    /**
+     * update an event
+     * @param body
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Object> updateEvent(EventDTO body, Long id) {
         try {

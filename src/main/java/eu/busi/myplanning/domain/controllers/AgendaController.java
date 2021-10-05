@@ -15,12 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * Agenda controller
+ * this contains all the endpoints
+ */
 @RestController
 public class AgendaController implements AgendaApi {
     private final AgendaServiceImpl agendaService;
 
     /**
-     * Instanciation of the repository providing the service
+     * Injection of the service
      *
      * @param agendaService
      */
@@ -38,6 +42,9 @@ public class AgendaController implements AgendaApi {
         return Optional.empty();
     }
 
+    /**
+     * delete an agenda by id
+     */
     @Override
     public ResponseEntity<Boolean> deleteAgenda(Long id) {
         try {
@@ -47,6 +54,9 @@ public class AgendaController implements AgendaApi {
         }
     }
 
+    /**
+     * find an agenda by id
+     */
     @Override
     public ResponseEntity<Object> findAgenda(Long id) {
         try {
@@ -62,7 +72,9 @@ public class AgendaController implements AgendaApi {
         }
     }
 
-
+    /**
+     * find all agendas
+     */
     @Override
     public ResponseEntity<Object> findAgendas() {
         try {
@@ -72,6 +84,9 @@ public class AgendaController implements AgendaApi {
         }
     }
 
+    /**
+     * find all agendas by a user
+     */
     @Override
     public ResponseEntity<Object> findAgendasByUser(Long id) {
         try {
@@ -81,6 +96,9 @@ public class AgendaController implements AgendaApi {
         }
     }
 
+    /**
+     * find all shared agendas by a user
+     */
     @Override
     public ResponseEntity<Object> findSharedAgendasByUser(Long id) {
         try {
@@ -90,6 +108,9 @@ public class AgendaController implements AgendaApi {
         }
     }
 
+    /**
+     * save an agenda
+     */
     @Override
     public ResponseEntity<Object> saveAgenda(AgendaDTO body) {
         try {
@@ -99,6 +120,9 @@ public class AgendaController implements AgendaApi {
         }
     }
 
+    /**
+     * update an agenda
+     */
     @Override
     public ResponseEntity<Object> updateAgenda(AgendaDTO body, Long id) {
         try {

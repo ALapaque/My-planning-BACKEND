@@ -15,10 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * Authority controller
+ * this contains all the endpoints
+ */
 @RestController
 public class AuthorityController implements AuthorityApi {
     private final AuthorityServiceImpl authorityService;
 
+    /**
+     * Instantiates a new Authority controller.
+     *
+     * @param authorityService the authority service
+     */
     public AuthorityController(AuthorityServiceImpl authorityService) {
         this.authorityService = authorityService;
     }
@@ -33,6 +42,9 @@ public class AuthorityController implements AuthorityApi {
         return Optional.empty();
     }
 
+    /**
+     * will delete an authority by an id
+     */
     @Override
     public ResponseEntity<Boolean> deleteAuthority(Long id) {
         try {
@@ -43,6 +55,9 @@ public class AuthorityController implements AuthorityApi {
         }
     }
 
+    /**
+     * will find an authority by an id
+     */
     @Override
     public ResponseEntity<Object> findAuthority(Long id) {
         try {
@@ -59,6 +74,11 @@ public class AuthorityController implements AuthorityApi {
         }
     }
 
+    /**
+     * Should return a Pageable object with authorities
+     * @param pageable
+     * @return
+     */
     @Override
     public ResponseEntity<Object> listAuthorities(Pageable pageable) {
         try {
@@ -71,6 +91,11 @@ public class AuthorityController implements AuthorityApi {
         }
     }
 
+    /**
+     * will save an authority
+     * @param body
+     * @return
+     */
     @Override
     public ResponseEntity<Object> saveAuthority(AuthorityDTO body) {
         try {
@@ -81,6 +106,12 @@ public class AuthorityController implements AuthorityApi {
         }
     }
 
+    /**
+     * will update an authority
+     * @param body
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Object> updateAuthority(AuthorityDTO body, Long id) {
         try {

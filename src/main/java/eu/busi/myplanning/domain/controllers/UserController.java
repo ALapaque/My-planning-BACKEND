@@ -15,12 +15,18 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 /**
- * The type User controller.
+ * User controller
+ * contains all the endpoints
  */
 @RestController
 public class UserController implements UserApi {
     private final UserServiceImpl userService;
 
+    /**
+     * Instantiates a new User controller.
+     *
+     * @param userService the user service
+     */
     public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
@@ -35,6 +41,11 @@ public class UserController implements UserApi {
         return Optional.empty();
     }
 
+    /**
+     * will delete a user by an id
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Boolean> deleteUser(Long id) {
         try {
@@ -45,6 +56,11 @@ public class UserController implements UserApi {
         }
     }
 
+    /**
+     * will find a user by an id or an email
+     * @param idOrUsernameOrEmail
+     * @return
+     */
     @Override
     public ResponseEntity<Object> findUser(String idOrUsernameOrEmail) {
         try {
@@ -68,6 +84,11 @@ public class UserController implements UserApi {
         }
     }
 
+    /**
+     * will find users by an organization
+     * @param organization
+     * @return
+     */
     @Override
     public ResponseEntity<Object> findUsersByOrganization(String organization) {
         try {
@@ -78,6 +99,11 @@ public class UserController implements UserApi {
         }
     }
 
+    /**
+     * will save a user
+     * @param body
+     * @return
+     */
     @Override
     public ResponseEntity<Object> saveUser(UserDTO body) {
         try {
@@ -88,6 +114,12 @@ public class UserController implements UserApi {
         }
     }
 
+    /**
+     * will update the user
+     * @param body
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Object> updateUser(UserDTO body, Long id) {
         try {

@@ -14,10 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * Role controller
+ * this contains all the endpoints
+ */
 @RestController
 public class RoleController implements RoleApi {
     private final RoleServiceImpl roleService;
 
+    /**
+     * Instantiates a new Role controller.
+     *
+     * @param roleService the role service
+     */
     public RoleController(RoleServiceImpl roleService) {
         this.roleService = roleService;
     }
@@ -32,6 +41,11 @@ public class RoleController implements RoleApi {
         return Optional.empty();
     }
 
+    /**
+     * delete a role by an id
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Boolean> deleteRole(Long id) {
         try {
@@ -42,6 +56,11 @@ public class RoleController implements RoleApi {
         }
     }
 
+    /**
+     * find a role by an id
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Object> findRole(Long id) {
         try {
@@ -58,6 +77,10 @@ public class RoleController implements RoleApi {
         }
     }
 
+    /**
+     * find all roles
+     * @return
+     */
     @Override
     public ResponseEntity<Object> findRoles() {
         try {
@@ -68,6 +91,11 @@ public class RoleController implements RoleApi {
         }
     }
 
+    /**
+     * save a role
+     * @param body
+     * @return
+     */
     @Override
     public ResponseEntity<Object> saveRole(RoleDTO body) {
         try {
@@ -78,6 +106,12 @@ public class RoleController implements RoleApi {
         }
     }
 
+    /**
+     * update a role
+     * @param body
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Object> updateRole(RoleDTO body, Long id) {
         try {

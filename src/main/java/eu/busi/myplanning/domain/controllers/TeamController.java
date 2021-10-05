@@ -16,11 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * Team controller
+ * this contains all the endpoints
+ */
 @RestController
 public class TeamController implements TeamApi {
     private final TeamServiceImpl teamService;
     private final UserServiceImpl userService;
 
+    /**
+     * Instantiates a new Team controller.
+     *
+     * @param teamService the team service
+     * @param userService the user service
+     */
     public TeamController(TeamServiceImpl teamService, UserServiceImpl userService) {
         this.teamService = teamService;
         this.userService = userService;
@@ -36,6 +46,11 @@ public class TeamController implements TeamApi {
         return Optional.empty();
     }
 
+    /**
+     * will delete a team by an id
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Boolean> deleteTeam(Long id) {
         try {
@@ -46,6 +61,11 @@ public class TeamController implements TeamApi {
         }
     }
 
+    /**
+     * will find a team by an id
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Object> findTeam(Long id) {
         try {
@@ -62,6 +82,11 @@ public class TeamController implements TeamApi {
         }
     }
 
+    /**
+     * will find users teams
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Object> findTeamsByUser(Long id) {
         try {
@@ -72,6 +97,11 @@ public class TeamController implements TeamApi {
         }
     }
 
+    /**
+     * will return a pageable of teams
+     * @param pageable
+     * @return
+     */
     @Override
     public ResponseEntity<Object> listTeams(Pageable pageable) {
         try {
@@ -84,6 +114,11 @@ public class TeamController implements TeamApi {
         }
     }
 
+    /**
+     * will save a team
+     * @param body
+     * @return
+     */
     @Override
     public ResponseEntity<Object> saveTeam(TeamDTO body) {
         try {
@@ -94,6 +129,12 @@ public class TeamController implements TeamApi {
         }
     }
 
+    /**
+     * will update a team
+     * @param body
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<Object> updateTeam(TeamDTO body, Long id) {
         try {
