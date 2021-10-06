@@ -25,30 +25,29 @@ public class UserEntity extends DateAudit implements AbstractEntity<Long>, Seria
     private Long id;
 
     @NotBlank
-    @Column(length = 100)
+    @Column(length = 100, nullable = false)
     private String organization;
 
     @NotBlank
-    @Size(max = 40)
+    @Column(length = 40, nullable = false)
     private String firstName;
 
     @NotBlank
-    @Column(length = 40)
+    @Column(length = 40, nullable = false)
     private String lastName;
 
     @NotBlank
-    @Size(max = 15)
-    @Column(unique = true, length = 100)
+    @Column(unique = true, length = 100, nullable = false)
     private String username;
 
     @NaturalId
     @NotBlank
     @Email
-    @Column(unique = true, length = 40)
+    @Column(unique = true, length = 40, nullable = false)
     private String email;
 
     @NotBlank
-    @Size(max = 100)
+    @Column(length = 255, nullable = false)
     private String password;
 
     /**
@@ -110,6 +109,7 @@ public class UserEntity extends DateAudit implements AbstractEntity<Long>, Seria
      *
      * @param id            the id
      * @param firstName     the first name
+     * @param organization  the organization
      * @param lastName      the last name
      * @param username      the username
      * @param email         the email
@@ -173,10 +173,20 @@ public class UserEntity extends DateAudit implements AbstractEntity<Long>, Seria
         this.firstName = firstName;
     }
 
+    /**
+     * Gets organization.
+     *
+     * @return the organization
+     */
     public String getOrganization() {
         return organization;
     }
 
+    /**
+     * Sets organization.
+     *
+     * @param organization the organization
+     */
     public void setOrganization(String organization) {
         this.organization = organization;
     }
@@ -245,7 +255,7 @@ public class UserEntity extends DateAudit implements AbstractEntity<Long>, Seria
     }
 
     /**
-     * Lists password.
+     * Lists password encoded
      *
      * @param password the password
      */

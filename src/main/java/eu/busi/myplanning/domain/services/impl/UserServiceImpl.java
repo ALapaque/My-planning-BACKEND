@@ -33,11 +33,23 @@ public class UserServiceImpl implements UserService {
     private final UserRepository repository;
     private final CardRepository cardRepository;
 
+    /**
+     * Instantiates a new User service.
+     *
+     * @param repository     the repository
+     * @param cardRepository the card repository
+     */
     public UserServiceImpl(UserRepository repository, CardRepository cardRepository) {
         this.repository = repository;
         this.cardRepository = cardRepository;
     }
 
+    /**
+     * save a user
+     * @param entity the entity
+     * @return
+     * @throws NotSavedException
+     */
     @Override
     public UserDTO save(UserDTO entity) throws NotSavedException {
         try {
@@ -51,6 +63,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * save a list of users
+     * @param entities the entities
+     * @return
+     * @throws NotSavedException
+     */
     @Override
     public List<UserDTO> save(List<UserDTO> entities) throws NotSavedException {
         try {
@@ -69,6 +87,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * delete a user by it's id
+     * @param id the id
+     * @return
+     * @throws NotDeletedException
+     */
     @Override
     public boolean deleteById(Long id) throws NotDeletedException {
         try {
@@ -80,6 +104,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * find a user by an id
+     * @param id the id
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public Optional<UserDTO> findById(Long id) throws NotFoundException {
         try {
@@ -91,6 +121,11 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * find a user by its email or username
+     * @param usernameOrEmail the username or email
+     * @return
+     */
     @Override
     public Optional<UserDTO> findByUsernameOrEmail(String usernameOrEmail) {
         try {
@@ -102,6 +137,11 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * find all users
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public List<UserDTO> findAll() throws NotFoundException {
         try {
@@ -115,6 +155,11 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * find all users of an organization
+     * @param organization the organization
+     * @return
+     */
     @Override
     public List<UserDTO> findAllByOrganization(String organization) {
         try {
@@ -128,6 +173,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * find all users from a pageable object
+     * @param pageable the pageable
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public Page<UserDTO> findAll(Pageable pageable) throws NotFoundException {
         try {
@@ -144,6 +195,13 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * update a user
+     * @param entity the entity
+     * @param id     the id
+     * @return
+     * @throws NotUpdatedException
+     */
     @Override
     public UserDTO update(UserDTO entity, Long id) throws NotUpdatedException {
         try {
@@ -179,6 +237,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Init default user user entity.
+     *
+     * @param user the user
+     * @return the user entity
+     */
     public UserEntity initDefaultUser(UserEntity user) {
         user.setCards(cardRepository.findAll());
         Agenda defaultAgenda = Agenda.defaultAgenda();

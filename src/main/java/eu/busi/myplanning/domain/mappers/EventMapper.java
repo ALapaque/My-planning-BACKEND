@@ -6,7 +6,13 @@ import eu.busi.myplanning.domain.models.Event;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+/**
+ * The interface Event mapper.
+ */
 @Mapper
 public interface EventMapper extends GenericMapper<Event, EventDTO, EventLightDTO> {
+    /**
+     * The constant INSTANCE.
+     */
     EventMapper INSTANCE = Mappers.getMapper(EventMapper.class);
 }

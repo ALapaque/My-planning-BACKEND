@@ -15,6 +15,13 @@ public class AuthService {
     private final UserServiceImpl userService;
     private final RoleRepository roleRepository;
 
+    /**
+     * Instantiates a new Auth service.
+     *
+     * @param userRepository the user repository
+     * @param userService    the user service
+     * @param roleRepository the role repository
+     */
     public AuthService(UserRepository userRepository, UserServiceImpl userService, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.userService = userService;
@@ -33,6 +40,13 @@ public class AuthService {
     }
 
 
+    /**
+     * check if the user email or username already exist
+     * if not will save the user
+     *
+     * @param user the user
+     * @return the user entity
+     */
     public UserEntity register(UserEntity user) {
         if (userRepository.findByEmailOrUsername(user.getEmail(), user.getUsername()).isPresent()) {
             throw new ResourceNotFoundException("Username or Email already taken");

@@ -48,6 +48,10 @@ public class Event extends DateAudit implements AbstractEntity<Long>, Serializab
 
     private String meetingUrl;
 
+    /**
+     * this contains on complex JSON object stringified
+     * in order to store the content of the report
+     */
     @Lob
     private String report;
 
@@ -76,6 +80,9 @@ public class Event extends DateAudit implements AbstractEntity<Long>, Serializab
     @JsonIgnoreProperties({"sharedEvents", "events"})
     private List<Agenda> sharedAgendas = new LinkedList<>();
 
+    /**
+     * Instantiates a new Event.
+     */
     public Event() {
     }
 
@@ -151,34 +158,74 @@ public class Event extends DateAudit implements AbstractEntity<Long>, Serializab
         this.privateEvent = privateEvent;
     }
 
+    /**
+     * Gets status displayed.
+     *
+     * @return the status displayed
+     */
     public EventStatus getStatusDisplayed() {
         return statusDisplayed;
     }
 
+    /**
+     * Sets status displayed.
+     *
+     * @param statusDisplayed the status displayed
+     */
     public void setStatusDisplayed(EventStatus statusDisplayed) {
         this.statusDisplayed = statusDisplayed;
     }
 
+    /**
+     * Gets event type.
+     *
+     * @return the event type
+     */
     public EventType getEventType() {
         return eventType;
     }
 
+    /**
+     * Sets event type.
+     *
+     * @param eventType the event type
+     */
     public void setEventType(EventType eventType) {
         this.eventType = eventType;
     }
 
+    /**
+     * Gets start date.
+     *
+     * @return the start date
+     */
     public Instant getStartDate() {
         return startDate;
     }
 
+    /**
+     * Sets start date.
+     *
+     * @param startDate the start date
+     */
     public void setStartDate(Instant startDate) {
         this.startDate = startDate;
     }
 
+    /**
+     * Gets end date.
+     *
+     * @return the end date
+     */
     public Instant getEndDate() {
         return endDate;
     }
 
+    /**
+     * Sets end date.
+     *
+     * @param endDate the end date
+     */
     public void setEndDate(Instant endDate) {
         this.endDate = endDate;
     }
@@ -255,10 +302,20 @@ public class Event extends DateAudit implements AbstractEntity<Long>, Serializab
         this.agenda = agenda;
     }
 
+    /**
+     * Gets shared agendas.
+     *
+     * @return the shared agendas
+     */
     public List<Agenda> getSharedAgendas() {
         return sharedAgendas;
     }
 
+    /**
+     * Sets shared agendas.
+     *
+     * @param sharedAgendas the shared agendas
+     */
     public void setSharedAgendas(List<Agenda> sharedAgendas) {
         this.sharedAgendas = sharedAgendas;
     }

@@ -40,6 +40,9 @@ public class Card implements AbstractEntity<Long>, Serializable {
     @JsonIgnoreProperties("cards")
     private List<UserEntity> users = new ArrayList<>();
 
+    /**
+     * Instantiates a new Card.
+     */
     public Card() {
     }
 
@@ -80,18 +83,38 @@ public class Card implements AbstractEntity<Long>, Serializable {
     }
 
 
+    /**
+     * Gets type.
+     *
+     * @return the type
+     */
     public CardType getType() {
         return type;
     }
 
+    /**
+     * Sets type.
+     *
+     * @param type the type
+     */
     public void setType(CardType type) {
         this.type = type;
     }
 
+    /**
+     * Gets size.
+     *
+     * @return the size
+     */
     public CardSize getSize() {
         return size;
     }
 
+    /**
+     * Sets size.
+     *
+     * @param size the size
+     */
     public void setSize(CardSize size) {
         this.size = size;
     }

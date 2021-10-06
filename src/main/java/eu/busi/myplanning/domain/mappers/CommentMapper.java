@@ -6,7 +6,13 @@ import eu.busi.myplanning.domain.models.Comment;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+/**
+ * The interface Comment mapper.
+ */
 @Mapper
 public interface CommentMapper extends GenericMapper<Comment, CommentDTO, CommentLightDTO> {
+    /**
+     * The constant INSTANCE.
+     */
     CommentMapper INSTANCE = Mappers.getMapper(CommentMapper.class);
 }

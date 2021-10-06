@@ -22,6 +22,7 @@ public interface GenericService<E, I> {
      *
      * @param entity the entity
      * @return the e
+     * @throws NotSavedException the not saved exception
      */
     E save(E entity) throws NotSavedException;
 
@@ -30,6 +31,7 @@ public interface GenericService<E, I> {
      *
      * @param entities the entities
      * @return the list
+     * @throws NotSavedException the not saved exception
      */
     List<E> save(List<E> entities) throws NotSavedException;
 
@@ -38,6 +40,7 @@ public interface GenericService<E, I> {
      *
      * @param id the id
      * @return the boolean
+     * @throws NotDeletedException the not deleted exception
      */
     boolean deleteById(I id) throws NotDeletedException;
 
@@ -46,6 +49,7 @@ public interface GenericService<E, I> {
      *
      * @param id the id
      * @return the optional
+     * @throws NotFoundException the not found exception
      */
     Optional<E> findById(I id) throws NotFoundException;
 
@@ -53,6 +57,7 @@ public interface GenericService<E, I> {
      * Find all list.
      *
      * @return the list
+     * @throws NotFoundException the not found exception
      */
     List<E> findAll() throws NotFoundException;
 
@@ -61,6 +66,7 @@ public interface GenericService<E, I> {
      *
      * @param pageable the pageable
      * @return the page
+     * @throws NotFoundException the not found exception
      */
     Page<E> findAll(Pageable pageable) throws NotFoundException;
 
@@ -70,6 +76,7 @@ public interface GenericService<E, I> {
      * @param entity the entity
      * @param id     the id
      * @return the e
+     * @throws NotUpdatedException the not updated exception
      */
     E update(E entity, I id) throws NotUpdatedException;
 }

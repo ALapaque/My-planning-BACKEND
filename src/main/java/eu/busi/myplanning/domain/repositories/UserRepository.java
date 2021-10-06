@@ -12,9 +12,21 @@ import java.util.Optional;
  */
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
+    /**
+     * Find all by organization order by first name asc list.
+     *
+     * @param organization the organization
+     * @return the list
+     */
     List<UserEntity> findAllByOrganizationOrderByFirstNameAsc(String organization);
 
+    /**
+     * Find all by order by first name asc list.
+     *
+     * @return the list
+     */
     List<UserEntity> findAllByOrderByFirstNameAsc();
+
     /**
      * Find by email or username optional.
      *

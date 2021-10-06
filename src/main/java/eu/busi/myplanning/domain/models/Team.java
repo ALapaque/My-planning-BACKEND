@@ -22,10 +22,16 @@ public class Team implements AbstractEntity<Long>, Serializable {
     @Column(nullable = false, length = 60)
     private String name;
 
+    /**
+     * contains the agendas of the team
+     */
     @OneToMany(mappedBy = "team", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnoreProperties({"team", "sharedTeams"})
     private List<Agenda> agendas = new ArrayList<>();
 
+    /**
+     * contains the users of the team
+     */
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
     @JoinTable(name = "users_has_teams",
             joinColumns = @JoinColumn(name = "idTeam"),
@@ -33,10 +39,16 @@ public class Team implements AbstractEntity<Long>, Serializable {
     @JsonIgnoreProperties("teams")
     private List<UserEntity> users = new ArrayList<>();
 
+    /**
+     * contains the agendas shared to the team
+     */
     @ManyToMany(mappedBy = "sharedTeams", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
     @JsonIgnoreProperties({"team", "sharedTeams"})
     private List<Agenda> sharedAgendas = new ArrayList<>();
 
+    /**
+     * Instantiates a new Team.
+     */
     public Team() {
     }
 

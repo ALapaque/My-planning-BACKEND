@@ -19,11 +19,13 @@ public class Agenda implements AbstractEntity<Long>, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private Boolean byDefault = false;
 
-    @Column(length = 60)
+    @Column(length = 60, nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String color = "#1ed4d4";
 
     /**
@@ -51,6 +53,7 @@ public class Agenda implements AbstractEntity<Long>, Serializable {
             inverseJoinColumns = @JoinColumn(name = "idUser"))
     @JsonIgnoreProperties({"sharedAgendas", "agenda", "agendas"})
     List<UserEntity> sharedUsers = null;
+
     /**
      * shared teams of this agenda
      */
@@ -60,6 +63,7 @@ public class Agenda implements AbstractEntity<Long>, Serializable {
             inverseJoinColumns = @JoinColumn(name = "idTeam", nullable = true))
     @JsonIgnoreProperties({"sharedAgendas", "agenda", "agendas"})
     List<Team> sharedTeams = null;
+
     /**
      * events linked to the agenda
      */
@@ -76,9 +80,17 @@ public class Agenda implements AbstractEntity<Long>, Serializable {
     @JsonIgnoreProperties({"sharedAgendas", "agenda", "agendas"})
     private List<Event> sharedEvents = new ArrayList<>();
 
+    /**
+     * Instantiates a new Agenda.
+     */
     public Agenda() {
     }
 
+    /**
+     * this generate a default agenda with the default variable for the name and a default color
+     *
+     * @return the agenda
+     */
     public static Agenda defaultAgenda() {
         Agenda defaultAgenda = new Agenda();
 
@@ -89,6 +101,10 @@ public class Agenda implements AbstractEntity<Long>, Serializable {
         return defaultAgenda;
     }
 
+    /**
+     * Gets id
+     * @return
+     */
     @Override
     public Long getId() {
         return id;
@@ -103,10 +119,20 @@ public class Agenda implements AbstractEntity<Long>, Serializable {
         this.id = id;
     }
 
+    /**
+     * Gets by default.
+     *
+     * @return the by default
+     */
     public Boolean getByDefault() {
         return byDefault;
     }
 
+    /**
+     * Sets by default.
+     *
+     * @param byDefault the by default
+     */
     public void setByDefault(Boolean byDefault) {
         this.byDefault = byDefault;
     }
@@ -129,10 +155,20 @@ public class Agenda implements AbstractEntity<Long>, Serializable {
         this.name = name;
     }
 
+    /**
+     * Gets color.
+     *
+     * @return the color
+     */
     public String getColor() {
         return color;
     }
 
+    /**
+     * Sets color.
+     *
+     * @param color the color
+     */
     public void setColor(String color) {
         this.color = color;
     }

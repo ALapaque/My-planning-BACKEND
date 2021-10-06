@@ -12,5 +12,11 @@ import java.util.List;
  */
 @Repository
 public interface TeamRepository extends JpaRepository<Team, Long> {
+    /**
+     * Find team by users is in order by name asc list.
+     *
+     * @param users the users
+     * @return the list
+     */
     List<Team> findTeamByUsersIsInOrderByNameAsc(List<UserEntity> users);
 }

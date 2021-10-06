@@ -20,15 +20,29 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * The type Authority service.
+ */
 @Service
 @Transactional
 public class AuthorityServiceImpl implements AuthorityService {
     private final AuthorityRepository repository;
 
+    /**
+     * Instantiates a new Authority service.
+     *
+     * @param repository the repository
+     */
     public AuthorityServiceImpl(AuthorityRepository repository) {
         this.repository = repository;
     }
 
+    /**
+     * save an authority
+     * @param entity the entity
+     * @return
+     * @throws NotSavedException
+     */
     @Override
     public AuthorityDTO save(AuthorityDTO entity) throws NotSavedException {
         try {
@@ -43,6 +57,12 @@ public class AuthorityServiceImpl implements AuthorityService {
         }
     }
 
+    /**
+     * save a list of authorities
+     * @param entities the entities
+     * @return
+     * @throws NotSavedException
+     */
     @Override
     public List<AuthorityDTO> save(List<AuthorityDTO> entities) throws NotSavedException {
         try {
@@ -61,6 +81,12 @@ public class AuthorityServiceImpl implements AuthorityService {
         }
     }
 
+    /**
+     * delete an authority by id
+     * @param id the id
+     * @return
+     * @throws NotDeletedException
+     */
     @Override
     public boolean deleteById(Long id) throws NotDeletedException {
         try {
@@ -72,6 +98,12 @@ public class AuthorityServiceImpl implements AuthorityService {
         }
     }
 
+    /**
+     * find an authority by id
+     * @param id the id
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public Optional<AuthorityDTO> findById(Long id) throws NotFoundException {
         try {
@@ -83,6 +115,10 @@ public class AuthorityServiceImpl implements AuthorityService {
         }
     }
 
+    /**
+     * find all authorities
+     * @return
+     */
     @Override
     public List<AuthorityDTO> findAll() {
         return repository
@@ -92,6 +128,11 @@ public class AuthorityServiceImpl implements AuthorityService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * find all from a pageable object
+     * @param pageable the pageable
+     * @return
+     */
     @Override
     public Page<AuthorityDTO> findAll(Pageable pageable) {
         Page<Authority> entityPage = repository.findAll(pageable);
@@ -104,6 +145,13 @@ public class AuthorityServiceImpl implements AuthorityService {
         return new PageImpl<>(entities, pageable, entityPage.getTotalElements());
     }
 
+    /**
+     * update an authority
+     * @param entity the entity
+     * @param id     the id
+     * @return
+     * @throws NotUpdatedException
+     */
     @Override
     public AuthorityDTO update(AuthorityDTO entity, Long id) throws NotUpdatedException {
         try {

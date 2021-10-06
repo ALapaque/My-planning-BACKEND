@@ -31,6 +31,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * The type Event service.
+ */
 @Service
 @Transactional
 public class EventServiceImpl implements EventService {
@@ -38,14 +41,30 @@ public class EventServiceImpl implements EventService {
     private final AgendaRepository agendaRepository;
     private final UserRepository userRepository;
 
+    /**
+     * initialize the default zoneId used by the application
+     */
     private ZoneId zoneId = ZoneId.of("Europe/Brussels");
 
+    /**
+     * Instantiates a new Event service.
+     *
+     * @param repository       the repository
+     * @param agendaRepository the agenda repository
+     * @param userRepository   the user repository
+     */
     public EventServiceImpl(EventRepository repository, AgendaRepository agendaRepository, UserRepository userRepository) {
         this.repository = repository;
         this.agendaRepository = agendaRepository;
         this.userRepository = userRepository;
     }
 
+    /**
+     * save an event
+     * @param entity the entity
+     * @return
+     * @throws NotSavedException
+     */
     @Override
     public EventDTO save(EventDTO entity) throws NotSavedException {
         try {
@@ -60,6 +79,12 @@ public class EventServiceImpl implements EventService {
         }
     }
 
+    /**
+     * save a list of events
+     * @param entities the entities
+     * @return
+     * @throws NotSavedException
+     */
     @Override
     public List<EventDTO> save(List<EventDTO> entities) throws NotSavedException {
         try {
@@ -78,6 +103,12 @@ public class EventServiceImpl implements EventService {
         }
     }
 
+    /**
+     * delete an event by an id
+     * @param id the id
+     * @return
+     * @throws NotDeletedException
+     */
     @Override
     public boolean deleteById(Long id) throws NotDeletedException {
         try {
@@ -89,6 +120,12 @@ public class EventServiceImpl implements EventService {
         }
     }
 
+    /**
+     * find an event by an id
+     * @param id the id
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public Optional<EventDTO> findById(Long id) throws NotFoundException {
         try {
@@ -100,6 +137,11 @@ public class EventServiceImpl implements EventService {
         }
     }
 
+    /**
+     * find all events
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public List<EventDTO> findAll() throws NotFoundException {
         try {
@@ -113,6 +155,12 @@ public class EventServiceImpl implements EventService {
         }
     }
 
+    /**
+     * find all events from a pageable object
+     * @param pageable the pageable
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public Page<EventDTO> findAll(Pageable pageable) throws NotFoundException {
         try {
@@ -129,6 +177,13 @@ public class EventServiceImpl implements EventService {
         }
     }
 
+    /**
+     * update and event
+     * @param entity the entity
+     * @param id     the id
+     * @return
+     * @throws NotUpdatedException
+     */
     @Override
     public EventDTO update(EventDTO entity, Long id) throws NotUpdatedException {
         try {
@@ -173,6 +228,15 @@ public class EventServiceImpl implements EventService {
         }
     }
 
+    /**
+     * will return event from a given type and between a start and end date
+     * @param id    the id
+     * @param type  the type
+     * @param start the start
+     * @param end   the end
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public List<EventDTO> findEventsByUserAndTypeAndStartAndEnd(Long id, EventType type, Instant start, Instant end) throws NotFoundException {
         try {
@@ -198,16 +262,27 @@ public class EventServiceImpl implements EventService {
         }
     }
 
+    /**
+     * will find events which are
+     * @param agendaIds the agenda ids
+     * @param startDate the start date
+     * @param endDate   the end date
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public List<EventDTO> findEventsByAgendasAndStartAndEnd(List<Long> agendaIds, Instant startDate, Instant endDate) throws NotFoundException {
         try {
             List<Agenda> agendas = agendaRepository.findAllById(agendaIds);
+
+            // this will find events of an agendas comparing the startDate
             List<Event> eventsBetweenStartDate = repository.findDistinctByAgendaIsInAndStartDateIsBetween(
                     agendas,
                     startDate,
                     endDate
             );
 
+            // this will find events of an agendas comparing the endDate
             List<Event> eventsBetweenEndDate = repository.findDistinctByAgendaIsInAndEndDateIsBetween(
                     agendas,
                     startDate,

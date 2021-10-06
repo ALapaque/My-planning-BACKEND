@@ -21,17 +21,32 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * The type Card service.
+ */
 @Service
 @Transactional
 public class CardServiceImpl implements CardService {
     private final CardRepository repository;
     private final UserRepository userRepository;
 
+    /**
+     * Instantiates a new Card service.
+     *
+     * @param repository     the repository
+     * @param userRepository the user repository
+     */
     public CardServiceImpl(CardRepository repository, UserRepository userRepository) {
         this.repository = repository;
         this.userRepository = userRepository;
     }
 
+    /**
+     * save a card
+     * @param entity the entity
+     * @return
+     * @throws NotSavedException
+     */
     @Override
     public CardDTO save(CardDTO entity) throws NotSavedException {
         try {
@@ -46,6 +61,12 @@ public class CardServiceImpl implements CardService {
         }
     }
 
+    /**
+     * save a list of cards
+     * @param entities the entities
+     * @return
+     * @throws NotSavedException
+     */
     @Override
     public List<CardDTO> save(List<CardDTO> entities) throws NotSavedException {
         try {
@@ -64,6 +85,12 @@ public class CardServiceImpl implements CardService {
         }
     }
 
+    /**
+     * delete a card by an id
+     * @param id the id
+     * @return
+     * @throws NotDeletedException
+     */
     @Override
     public boolean deleteById(Long id) throws NotDeletedException {
         try {
@@ -75,6 +102,12 @@ public class CardServiceImpl implements CardService {
         }
     }
 
+    /**
+     * find a card by an id
+     * @param id the id
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public Optional<CardDTO> findById(Long id) throws NotFoundException {
         try {
@@ -86,6 +119,11 @@ public class CardServiceImpl implements CardService {
         }
     }
 
+    /**
+     * find all cards
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public List<CardDTO> findAll() throws NotFoundException {
         try {
@@ -99,6 +137,12 @@ public class CardServiceImpl implements CardService {
         }
     }
 
+    /**
+     * find cards from a pageable object
+     * @param pageable the pageable
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public Page<CardDTO> findAll(Pageable pageable) throws NotFoundException {
         try {
@@ -115,6 +159,13 @@ public class CardServiceImpl implements CardService {
         }
     }
 
+    /**
+     * update a card
+     * @param entity the entity
+     * @param id     the id
+     * @return
+     * @throws NotUpdatedException
+     */
     @Override
     public CardDTO update(CardDTO entity, Long id) throws NotUpdatedException {
         try {
@@ -135,6 +186,12 @@ public class CardServiceImpl implements CardService {
         }
     }
 
+    /**
+     * find cards used by a user
+     * @param id
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public List<CardDTO> findCardsByUserId(Long id) throws NotFoundException {
         try {

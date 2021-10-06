@@ -9,6 +9,21 @@ import java.util.List;
  * The interface Agenda service.
  */
 public interface AgendaService extends GenericService<AgendaDTO, Long> {
+    /**
+     * Find by user list.
+     *
+     * @param id the id
+     * @return the list
+     * @throws NotFoundException the not found exception
+     */
     List<AgendaDTO> findByUser(Long id) throws NotFoundException;
+
+    /**
+     * Find shared agendas by user list.
+     *
+     * @param id the id
+     * @return the list
+     * @throws NotFoundException the not found exception
+     */
     List<AgendaDTO> findSharedAgendasByUser(Long id) throws NotFoundException;
 }

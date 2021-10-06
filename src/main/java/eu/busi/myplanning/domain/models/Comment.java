@@ -18,20 +18,28 @@ public class Comment extends DateAudit implements AbstractEntity<Long>, Serializ
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Column()
+    @Column(nullable = false)
     private String content;
 
+    /**
+     * this contains the redactor of the comment
+     */
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idUser", referencedColumnName = "id")
     @JsonIgnoreProperties("comments")
     private UserEntity user;
 
+    /**
+     * this is the event where the comment has been posted
+     */
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idEvent", referencedColumnName = "id")
     @JsonIgnoreProperties("events")
     private Event event;
 
+    /**
+     * Instantiates a new Comment.
+     */
     public Comment() {
     }
 

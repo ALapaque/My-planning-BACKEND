@@ -32,11 +32,23 @@ public class AgendaServiceImpl implements AgendaService {
     private final AgendaRepository repository;
     private final UserRepository userRepository;
 
+    /**
+     * Instantiates a new Agenda service.
+     *
+     * @param repository     the repository
+     * @param userRepository the user repository
+     */
     public AgendaServiceImpl(AgendaRepository repository, UserRepository userRepository) {
         this.repository = repository;
         this.userRepository = userRepository;
     }
 
+    /**
+     * save an agenda
+     * @param entity the entity
+     * @return
+     * @throws NotSavedException
+     */
     @Override
     public AgendaDTO save(AgendaDTO entity) throws NotSavedException {
         try {
@@ -51,6 +63,12 @@ public class AgendaServiceImpl implements AgendaService {
         }
     }
 
+    /**
+     * save a list of agendas
+     * @param entities the entities
+     * @return
+     * @throws NotSavedException
+     */
     @Override
     public List<AgendaDTO> save(List<AgendaDTO> entities) throws NotSavedException {
         try {
@@ -69,6 +87,12 @@ public class AgendaServiceImpl implements AgendaService {
         }
     }
 
+    /**
+     * delete an agenda
+     * @param id the id
+     * @return
+     * @throws NotDeletedException
+     */
     @Override
     public boolean deleteById(Long id) throws NotDeletedException {
         try {
@@ -80,6 +104,12 @@ public class AgendaServiceImpl implements AgendaService {
         }
     }
 
+    /**
+     * find an agenda by id
+     * @param id the id
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public Optional<AgendaDTO> findById(Long id) throws NotFoundException {
         try {
@@ -91,6 +121,11 @@ public class AgendaServiceImpl implements AgendaService {
         }
     }
 
+    /**
+     * find all agendas
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public List<AgendaDTO> findAll() throws NotFoundException {
         try {
@@ -104,6 +139,12 @@ public class AgendaServiceImpl implements AgendaService {
         }
     }
 
+    /**
+     * find all agendas from a pageable object
+     * @param pageable the pageable
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public Page<AgendaDTO> findAll(Pageable pageable) throws NotFoundException {
         try {
@@ -120,6 +161,13 @@ public class AgendaServiceImpl implements AgendaService {
         }
     }
 
+    /**
+     * update an agenda
+     * @param entity the entity
+     * @param id     the id
+     * @return
+     * @throws NotUpdatedException
+     */
     @Override
     public AgendaDTO update(AgendaDTO entity, Long id) throws NotUpdatedException {
         try {
@@ -159,6 +207,12 @@ public class AgendaServiceImpl implements AgendaService {
         }
     }
 
+    /**
+     * find agendas by a user
+     * @param id the id
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public List<AgendaDTO> findByUser(Long id) throws NotFoundException {
         try {
@@ -176,6 +230,12 @@ public class AgendaServiceImpl implements AgendaService {
         }
     }
 
+    /**
+     * find shared agendas by a user
+     * @param id the id
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public List<AgendaDTO> findSharedAgendasByUser(Long id) throws NotFoundException {
         try {

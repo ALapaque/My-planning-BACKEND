@@ -20,15 +20,29 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * The type Comment service.
+ */
 @Service
 @Transactional
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository repository;
 
+    /**
+     * Instantiates a new Comment service.
+     *
+     * @param repository the repository
+     */
     public CommentServiceImpl(CommentRepository repository) {
         this.repository = repository;
     }
 
+    /**
+     * save a comment
+     * @param entity the entity
+     * @return
+     * @throws NotSavedException
+     */
     @Override
     public CommentDTO save(CommentDTO entity) throws NotSavedException {
         try {
@@ -43,6 +57,12 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
+    /**
+     * save a list of comment
+     * @param entities the entities
+     * @return
+     * @throws NotSavedException
+     */
     @Override
     public List<CommentDTO> save(List<CommentDTO> entities) throws NotSavedException {
         try {
@@ -61,6 +81,12 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
+    /**
+     * delete a comment by an id
+     * @param id the id
+     * @return
+     * @throws NotDeletedException
+     */
     @Override
     public boolean deleteById(Long id) throws NotDeletedException {
         try {
@@ -72,6 +98,12 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
+    /**
+     * find a comment from an id
+     * @param id the id
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public Optional<CommentDTO> findById(Long id) throws NotFoundException {
         try {
@@ -83,6 +115,11 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
+    /**
+     * find all comments
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public List<CommentDTO> findAll() throws NotFoundException {
         try {
@@ -96,6 +133,12 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
+    /**
+     * find all comments from a pageable object
+     * @param pageable the pageable
+     * @return
+     * @throws NotFoundException
+     */
     public Page<CommentDTO> findAll(Pageable pageable) throws NotFoundException {
         try {
             Page<Comment> entityPage = repository.findAll(pageable);
@@ -111,6 +154,13 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
+    /**
+     * update a comment
+     * @param entity the entity
+     * @param id     the id
+     * @return
+     * @throws NotUpdatedException
+     */
     @Override
     public CommentDTO update(CommentDTO entity, Long id) throws NotUpdatedException {
         try {

@@ -19,7 +19,7 @@ public class Authority implements AbstractEntity<Long>, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true,length = 60)
+    @Column(unique = true, length = 60, nullable = false)
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -29,6 +29,9 @@ public class Authority implements AbstractEntity<Long>, Serializable {
     @JsonIgnoreProperties("authorities")
     private List<Role> roles = new ArrayList<>();
 
+    /**
+     * Instantiates a new Authority.
+     */
     public Authority() {
     }
 

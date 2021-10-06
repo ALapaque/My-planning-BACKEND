@@ -16,9 +16,18 @@ public interface AgendaRepository extends JpaRepository<Agenda, Long> {
     /**
      * Find agenda by user list.
      *
-     * @param user the user
+     * @param user  the user
+     * @param teams the teams
      * @return the list
      */
     List<Agenda> findDistinctByUserOrTeamIsInOrderByByDefaultDescNameAsc(UserEntity user, List<Team> teams);
+
+    /**
+     * Find distinct by shared users is in or shared teams is in order by name asc list.
+     *
+     * @param users the users
+     * @param teams the teams
+     * @return the list
+     */
     List<Agenda> findDistinctBySharedUsersIsInOrSharedTeamsIsInOrderByNameAsc(List<UserEntity> users, List<Team> teams);
 }

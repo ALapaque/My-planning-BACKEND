@@ -19,7 +19,7 @@ public class Role implements AbstractEntity<Long>, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true,length = 60)
+    @Column(unique = true, length = 60, nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
@@ -33,6 +33,9 @@ public class Role implements AbstractEntity<Long>, Serializable {
     @JsonIgnoreProperties("roles")
     private List<Authority> authorities = new ArrayList<>();
 
+    /**
+     * Instantiates a new Role.
+     */
     public Role() {
     }
 

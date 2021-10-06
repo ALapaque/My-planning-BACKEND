@@ -19,6 +19,12 @@ public class MyUserDetailService implements UserDetailsService {
     @Autowired
     private UserRepository _userRepository;
 
+    /**
+     * used by the JWT filter in order to find a user from an email or a username
+     * @param emailOrUsername
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String emailOrUsername) throws UsernameNotFoundException {
         UserEntity userFound = _userRepository.findByEmailOrUsername(emailOrUsername, emailOrUsername)

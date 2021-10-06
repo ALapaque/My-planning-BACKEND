@@ -24,17 +24,32 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * The type Team service.
+ */
 @Service
 @Transactional
 public class TeamServiceImpl implements TeamService {
     private final TeamRepository repository;
     private final UserRepository userRepository;
 
+    /**
+     * Instantiates a new Team service.
+     *
+     * @param repository     the repository
+     * @param userRepository the user repository
+     */
     public TeamServiceImpl(TeamRepository repository, UserRepository userRepository) {
         this.repository = repository;
         this.userRepository = userRepository;
     }
 
+    /**
+     * save a team
+     * @param entity the entity
+     * @return
+     * @throws NotSavedException
+     */
     @Override
     public TeamDTO save(TeamDTO entity) throws NotSavedException {
         try {
@@ -52,6 +67,12 @@ public class TeamServiceImpl implements TeamService {
         }
     }
 
+    /**
+     * save a list of teams
+     * @param entities the entities
+     * @return
+     * @throws NotSavedException
+     */
     @Override
     public List<TeamDTO> save(List<TeamDTO> entities) throws NotSavedException {
         try {
@@ -70,6 +91,12 @@ public class TeamServiceImpl implements TeamService {
         }
     }
 
+    /**
+     * delete a team by its id
+     * @param id the id
+     * @return
+     * @throws NotDeletedException
+     */
     @Override
     public boolean deleteById(Long id) throws NotDeletedException {
         try {
@@ -81,6 +108,12 @@ public class TeamServiceImpl implements TeamService {
         }
     }
 
+    /**
+     * find a team by an id
+     * @param id the id
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public Optional<TeamDTO> findById(Long id) throws NotFoundException {
         try {
@@ -92,6 +125,11 @@ public class TeamServiceImpl implements TeamService {
         }
     }
 
+    /**
+     * find teams of a user
+     * @param id the id
+     * @return
+     */
     @Override
     public List<TeamDTO> findByUser(Long id) {
         try {
@@ -109,6 +147,11 @@ public class TeamServiceImpl implements TeamService {
         }
     }
 
+    /**
+     * find all teams
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public List<TeamDTO> findAll() throws NotFoundException {
         try {
@@ -122,6 +165,12 @@ public class TeamServiceImpl implements TeamService {
         }
     }
 
+    /**
+     * find all teams from a pageable object
+     * @param pageable the pageable
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public Page<TeamDTO> findAll(Pageable pageable) throws NotFoundException {
         try {
@@ -138,6 +187,13 @@ public class TeamServiceImpl implements TeamService {
         }
     }
 
+    /**
+     * update a team
+     * @param entity the entity
+     * @param id     the id
+     * @return
+     * @throws NotUpdatedException
+     */
     @Override
     public TeamDTO update(TeamDTO entity, Long id) throws NotUpdatedException {
         try {

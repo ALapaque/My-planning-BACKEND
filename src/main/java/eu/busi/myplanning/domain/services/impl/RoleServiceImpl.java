@@ -20,15 +20,29 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * The type Role service.
+ */
 @Service
 @Transactional
 public class RoleServiceImpl implements RoleService {
     private final RoleRepository repository;
 
+    /**
+     * Instantiates a new Role service.
+     *
+     * @param repository the repository
+     */
     public RoleServiceImpl(RoleRepository repository) {
         this.repository = repository;
     }
 
+    /**
+     * save a role
+     * @param entity the entity
+     * @return
+     * @throws NotSavedException
+     */
     @Override
     public RoleDTO save(RoleDTO entity) throws NotSavedException {
         try {
@@ -43,6 +57,12 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
+    /**
+     * save a list of roles
+     * @param entities the entities
+     * @return
+     * @throws NotSavedException
+     */
     @Override
     public List<RoleDTO> save(List<RoleDTO> entities) throws NotSavedException {
         try {
@@ -61,6 +81,12 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
+    /**
+     * delete a role by an id
+     * @param id the id
+     * @return
+     * @throws NotDeletedException
+     */
     @Override
     public boolean deleteById(Long id) throws NotDeletedException {
         try {
@@ -72,6 +98,12 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
+    /**
+     * find a role by an id
+     * @param id the id
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public Optional<RoleDTO> findById(Long id) throws NotFoundException {
         try {
@@ -83,6 +115,11 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
+    /**
+     * find all roles
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public List<RoleDTO> findAll() throws NotFoundException {
         try {
@@ -96,6 +133,12 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
+    /**
+     * find all roles from a pageable object
+     * @param pageable the pageable
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public Page<RoleDTO> findAll(Pageable pageable) throws NotFoundException {
         try {
@@ -112,6 +155,13 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
+    /**
+     * update a role
+     * @param entity the entity
+     * @param id     the id
+     * @return
+     * @throws NotUpdatedException
+     */
     @Override
     public RoleDTO update(RoleDTO entity, Long id) throws NotUpdatedException {
         try {
