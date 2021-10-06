@@ -31,6 +31,12 @@ public class JwtUtil {
     private final String SECRET_KEY = "secret";
     private final ObjectMapper objectMapper;
 
+    /**
+     * Instantiates a new Jwt util.
+     *
+     * @param _userRepository the user repository
+     * @param objectMapper    the object mapper
+     */
     public JwtUtil(UserRepository _userRepository, ObjectMapper objectMapper) {
         this._userRepository = _userRepository;
         this.objectMapper = objectMapper;
@@ -39,8 +45,8 @@ public class JwtUtil {
     /**
      * this method will extract the username contained in the token
      *
-     * @param token
-     * @return
+     * @param token the token
+     * @return string
      */
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -49,8 +55,8 @@ public class JwtUtil {
     /**
      * this method will extract the expiration date contained in the token
      *
-     * @param token
-     * @return
+     * @param token the token
+     * @return date
      */
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
@@ -59,10 +65,10 @@ public class JwtUtil {
     /**
      * this method will extract the claimer contained in the token
      *
-     * @param token
-     * @param claimsResolver
-     * @param <T>
-     * @return
+     * @param <T>            the type parameter
+     * @param token          the token
+     * @param claimsResolver the claims resolver
+     * @return t
      */
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
@@ -72,9 +78,9 @@ public class JwtUtil {
     /**
      * this method will check if the token is valid
      *
-     * @param token
-     * @param userDetails
-     * @return
+     * @param token       the token
+     * @param userDetails the user details
+     * @return boolean
      */
     public Boolean validateToken(String token, UserDetails userDetails) {
         return (extractUsername(token).equals(userDetails.getUsername()) && !isTokenExpired(token));
@@ -83,8 +89,9 @@ public class JwtUtil {
     /**
      * this method will generate a token
      *
-     * @param userDetails
-     * @return
+     * @param userDetails the user details
+     * @return string
+     * @throws JsonProcessingException the json processing exception
      */
     public String generateToken(UserDetails userDetails) throws JsonProcessingException {
         Map<String, Object> claims = new HashMap<>();
