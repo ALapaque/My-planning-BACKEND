@@ -1434,6 +1434,8 @@ components:
           type: string
         password:
           type: string
+        role:
+          $ref: '#/components/schemas/RoleLightDTO'
 
     JwtAuthenticationRequest:
       type: object

@@ -3,6 +3,7 @@ package eu.busi.myplanning.utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.busi.myplanning.api.models.UserDTO;
+import eu.busi.myplanning.api.models.UserLightDTO;
 import eu.busi.myplanning.domain.mappers.UserMapper;
 import eu.busi.myplanning.domain.models.UserEntity;
 import eu.busi.myplanning.domain.repositories.UserRepository;
@@ -98,7 +99,7 @@ public class JwtUtil {
         Optional<UserEntity> user = _userRepository.findByUsername(userDetails.getUsername());
 
         if (user.isPresent()) {
-            UserDTO userDTO = UserMapper.INSTANCE.asDTO(user.get());
+            UserLightDTO userDTO = UserMapper.INSTANCE.asLightDto(user.get());
             claims.put("user", this.objectMapper.writeValueAsString(userDTO));
             claims.put("authorities", userDTO.getRole().getAuthorities().toArray());
         }

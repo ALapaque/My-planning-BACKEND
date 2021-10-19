@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
  * AgendaLightDTO
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-19T17:35:08.008872800+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-10-19T20:08:30.189584700+02:00[Europe/Paris]")
 public class AgendaLightDTO   {
   @JsonProperty("id")
   private Long id = null;

@@ -23,7 +23,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedHeaders("*")
-                .allowedOrigins("http://localhost:4200", "https://amaury.must.be", "http://amaury.must.be", "https://alapaque.github.io/", "http://alapaque.github.io/")
+                .allowedOrigins("http://192.168.10.172:4201/", "http://localhost:4200", "https://amaury.must.be", "http://amaury.must.be", "https://alapaque.github.io/", "http://alapaque.github.io/")
                 .allowedMethods("HEAD", "OPTIONS", "GET", "POST", "PUT", "PATCH", "DELETE")
                 .maxAge(MAX_AGE_SECS);
     }

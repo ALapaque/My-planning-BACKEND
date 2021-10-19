@@ -3,6 +3,7 @@ package eu.busi.myplanning.api.models;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import eu.busi.myplanning.api.models.RoleLightDTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
@@ -13,7 +14,7 @@ import javax.validation.constraints.*;
  * UserLightDTO
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-09-19T17:35:08.008872800+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-10-19T20:08:30.189584700+02:00[Europe/Paris]")
 public class UserLightDTO   {
   @JsonProperty("id")
   private Long id = null;
@@ -35,6 +36,9 @@ public class UserLightDTO   {
 
   @JsonProperty("password")
   private String password = null;
+
+  @JsonProperty("role")
+  private RoleLightDTO role = null;
 
   public UserLightDTO id(Long id) {
     this.id = id;
@@ -169,6 +173,26 @@ public class UserLightDTO   {
     this.password = password;
   }
 
+  public UserLightDTO role(RoleLightDTO role) {
+    this.role = role;
+    return this;
+  }
+
+  /**
+   * Get role
+   * @return role
+  **/
+  @ApiModelProperty(value = "")
+  
+    @Valid
+    public RoleLightDTO getRole() {
+    return role;
+  }
+
+  public void setRole(RoleLightDTO role) {
+    this.role = role;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -185,12 +209,13 @@ public class UserLightDTO   {
         Objects.equals(this.lastName, userLightDTO.lastName) &&
         Objects.equals(this.username, userLightDTO.username) &&
         Objects.equals(this.email, userLightDTO.email) &&
-        Objects.equals(this.password, userLightDTO.password);
+        Objects.equals(this.password, userLightDTO.password) &&
+        Objects.equals(this.role, userLightDTO.role);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, organization, lastName, username, email, password);
+    return Objects.hash(id, firstName, organization, lastName, username, email, password, role);
   }
 
   @Override
@@ -205,6 +230,7 @@ public class UserLightDTO   {
     sb.append("    username: ").append(toIndentedString(username)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
+    sb.append("    role: ").append(toIndentedString(role)).append("\n");
     sb.append("}");
     return sb.toString();
   }
