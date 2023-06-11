@@ -5,10 +5,13 @@ management:
         include: '*'
 logging:
   level:
+    root: DEBUG
     org:
       hibernate:
         SQL: DEBUG
       springframework:
+        web: DEBUG
+        tomcat: DEBUG
         jdbc:
           core:
             JdbcTemplate: DEBUG
