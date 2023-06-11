@@ -23,16 +23,16 @@ spring:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
     time-zone: GMT
-    jpa:
-      generate-ddl: true
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: validate
+    properties:
       hibernate:
-        ddl-auto: validate
-      properties:
-        hibernate:
-          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-          format_sql: true
-      show-sql: true
-    sql:
-      init:
-        encoding: UTF-8
-        mode: never
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        format_sql: true
+    show-sql: true
+  sql:
+    init:
+      encoding: UTF-8
+      mode: never
