@@ -9,7 +9,6 @@ logging:
       hibernate:
         SQL: DEBUG
       springframework:
-        web: DEBUG
         jdbc:
           core:
             JdbcTemplate: DEBUG
