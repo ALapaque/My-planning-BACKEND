@@ -31,5 +31,3 @@ spring:
       init:
         encoding: UTF-8
         mode: always
-swagger:
-  invokerPackage: eu.busi.myplanning.invoker

@@ -147,6 +147,7 @@
                             <generateSupportingFiles>false</generateSupportingFiles>
                             <apiPackage>eu.busi.myplanning.api.controllers</apiPackage>
                             <modelPackage>eu.busi.myplanning.api.models</modelPackage>
+                            <invokerPackage>eu.busi.myplanning.api</invokerPackage>
                             <configOptions>
                                 <interfaceOnly>true</interfaceOnly>
                                 <defaultInterfaces>false</defaultInterfaces>
