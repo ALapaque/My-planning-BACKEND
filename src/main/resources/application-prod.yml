@@ -30,4 +30,4 @@ spring:
     sql:
       init:
         encoding: UTF-8
-        mode: always
+        mode: never

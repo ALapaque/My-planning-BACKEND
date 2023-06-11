@@ -17,7 +17,7 @@ import javax.validation.constraints.*;
  * TeamDTO
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-10-19T20:08:30.189584700+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-11T17:10:17.226883800+02:00[Europe/Paris]")
 public class TeamDTO   {
   @JsonProperty("id")
   private Long id = null;
