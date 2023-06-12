@@ -143,9 +143,9 @@
 
 ```properties
 spring_profiles_active=prod
-PROD_DB_HOST=containers-us-west-201.railway.app
+PROD_DB_HOST=
 PROD_DB_PORT=8004
-PROD_DB_NAME=railway
-PROD_DB_PASSWORD=OXWNSHx6qHfBSAV9NLuC
-PROD_DB_USERNAME=root
+PROD_DB_NAME=
+PROD_DB_PASSWORD=
+PROD_DB_USERNAME=
 ```
